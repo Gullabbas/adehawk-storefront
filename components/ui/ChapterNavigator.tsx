@@ -50,14 +50,6 @@ export const ChapterNavigator: React.FC = () => {
 
   return (
     <>
-      {/* Thin scroll progress line under the header */}
-      <div className="fixed top-[69px] sm:top-[77px] left-0 right-0 h-[1.5px] bg-transparent z-[501] pointer-events-none">
-        <motion.div
-          className="h-full bg-cognac origin-left"
-          style={{ transform: `scaleX(${scrollProgress})` }}
-        />
-      </div>
-
       {/* Right-edge chapter navigator */}
       <nav
         aria-label="Chapter Navigator"

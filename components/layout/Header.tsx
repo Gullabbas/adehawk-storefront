@@ -19,33 +19,23 @@ export const Header: React.FC = () => {
   const { openSearch, isMenuOpen, toggleMenu, closeMenu } = useUIStore();
 
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Track scroll direction & depth
+  // Track scroll depth and global scroll progress
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 40);
 
-      if (currentScrollY > 60) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-
-      // Hide on scroll down, show on scroll up
-      if (currentScrollY > lastScrollY && currentScrollY > 150) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
+      const total = document.body.scrollHeight - window.innerHeight;
+      const progress = total > 0 ? Math.min(1, Math.max(0, currentScrollY / total)) : 0;
+      setScrollProgress(progress);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -62,9 +52,7 @@ export const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-[500] transition-transform duration-500 ease-luxury ${
-          isVisible ? 'translate-y-0' : '-translate-y-full'
-        }`}
+        className="fixed top-0 left-0 right-0 z-[500] translate-y-0 transition-all duration-500 ease-luxury"
       >
         {/* Top Announcement Bar */}
         <div className="bg-espresso text-ivory/90 text-[11px] font-sans uppercase tracking-kicker py-2 px-4 text-center border-b border-ivory/10">
@@ -73,9 +61,9 @@ export const Header: React.FC = () => {
 
         {/* Main Header Bar */}
         <nav
-          className={`w-full transition-all duration-400 border-b ${
+          className={`relative w-full transition-all duration-400 border-b ${
             isScrolled || !isHome
-              ? 'bg-espresso/95 backdrop-blur-md border-ivory/10 text-ivory py-3 shadow-lg'
+              ? 'bg-espresso/85 backdrop-blur-md border-ivory/15 text-ivory py-3 shadow-[0_10px_30px_rgba(0,0,0,0.35)]'
               : 'bg-espresso/60 backdrop-blur-sm border-ivory/10 text-ivory py-4'
           }`}
         >
@@ -186,6 +174,14 @@ export const Header: React.FC = () => {
             </div>
           </div>
         </nav>
+
+        {/* Global Scroll Progress Bar along the bottom of the Header */}
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-transparent pointer-events-none overflow-hidden">
+          <div
+            className="h-full bg-cognac origin-left transition-transform duration-100 ease-out"
+            style={{ transform: `scaleX(${scrollProgress})` }}
+          />
+        </div>
       </header>
 
       {/* Full-Screen Animated Mobile Menu */}

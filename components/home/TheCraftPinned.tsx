@@ -118,57 +118,85 @@ export const TheCraftPinned: React.FC = () => {
       // Pin distance: 420vh desktop, 300vh mobile
       const pinDistance = isMobile ? '+=300%' : '+=420%';
 
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: 'top top',
-        end: pinDistance,
-        pin: true,
-        pinSpacing: true,
-        scrub: 1.2,
-        onUpdate: (self) => {
-          const p = self.progress;
-          const stepIndex = Math.min(4, Math.floor(p * 5));
-          setActiveStep(stepIndex + 1);
+      const scrubTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: pinDistance,
+          pin: true,
+          pinSpacing: true,
+          scrub: 1.2,
+          onUpdate: (self) => {
+            const p = self.progress;
+            const stepIndex = Math.min(4, Math.floor(p * 5));
+            setActiveStep(stepIndex + 1);
 
-          // Update radial cognac light position
-          setRadialPos({
-            x: 50 + Math.sin(p * Math.PI * 2) * 15,
-            y: 50 + Math.cos(p * Math.PI * 2) * 15,
-          });
-
-          // Scrubbed zoom and pan based on active chapter
-          const target = CHAPTERS[stepIndex];
-          if (heroImageRef.current) {
-            heroImageRef.current.style.transformOrigin = target.origin;
-            gsap.to(heroImageRef.current, {
-              scale: target.scale,
-              duration: 0.6,
-              ease: 'power2.out',
-              overwrite: 'auto',
+            // Update radial cognac light position
+            setRadialPos({
+              x: 50 + Math.sin(p * Math.PI * 2) * 15,
+              y: 50 + Math.cos(p * Math.PI * 2) * 15,
             });
-          }
-
-          // In step 5, slide in dark brown companion briefcase from right
-          if (companionImageRef.current) {
-            if (p >= 0.8) {
-              const compProgress = (p - 0.8) / 0.2;
-              gsap.to(companionImageRef.current, {
-                opacity: compProgress,
-                x: (1 - compProgress) * 120,
-                duration: 0.4,
-                overwrite: 'auto',
-              });
-            } else {
-              gsap.to(companionImageRef.current, {
-                opacity: 0,
-                x: 120,
-                duration: 0.3,
-                overwrite: 'auto',
-              });
-            }
-          }
+          },
         },
       });
+
+      if (heroImageRef.current) {
+        // Continuous choreographed keyframes for Chapters 01 -> 02 -> 03 -> 04 -> 05
+        // Chapter 1 (0.00 - 0.20): Full view at rest
+        scrubTl.to(heroImageRef.current, {
+          scale: 1.0,
+          xPercent: 0,
+          yPercent: 0,
+          duration: 0.2,
+          ease: 'power1.inOut',
+        });
+
+        // Chapter 2 (0.20 - 0.40): Smooth pan & zoom to Natural Grain
+        scrubTl.to(heroImageRef.current, {
+          scale: 1.45,
+          xPercent: 0,
+          yPercent: -14,
+          duration: 0.2,
+          ease: 'power1.inOut',
+        });
+
+        // Chapter 3 (0.40 - 0.60): Smooth glide to Reinforced Seam & Stitching
+        scrubTl.to(heroImageRef.current, {
+          scale: 1.5,
+          xPercent: 18,
+          yPercent: -22,
+          duration: 0.2,
+          ease: 'power1.inOut',
+        });
+
+        // Chapter 4 (0.60 - 0.80): Smooth zoom to Brass Hardware & Rolled Handle
+        scrubTl.to(heroImageRef.current, {
+          scale: 1.55,
+          xPercent: 0,
+          yPercent: 22,
+          duration: 0.2,
+          ease: 'power1.inOut',
+        });
+
+        // Chapter 5 (0.80 - 1.00): Camera glides back out to full view
+        scrubTl.to(heroImageRef.current, {
+          scale: 1.0,
+          xPercent: -12,
+          yPercent: 0,
+          duration: 0.2,
+          ease: 'power1.inOut',
+        });
+      }
+
+      // Step 5 companion object slides in from the right
+      if (companionImageRef.current) {
+        scrubTl.fromTo(
+          companionImageRef.current,
+          { opacity: 0, x: 120 },
+          { opacity: 1, x: 0, duration: 0.2, ease: 'power1.out' },
+          0.8
+        );
+      }
     }, containerRef);
 
     return () => ctx.revert();
@@ -241,13 +269,13 @@ export const TheCraftPinned: React.FC = () => {
             aria-hidden="true"
           />
 
-          {/* Primary Hero Object: Black Leather Executive Briefcase (Unaltered, blends seamlessly) */}
+          {/* Primary Hero Object: Black Leather Executive Briefcase (Transparent Studio Cutout) */}
           <div
             ref={heroImageRef}
             className="relative w-full h-full z-10 will-change-transform transition-transform duration-500 ease-out flex items-center justify-center"
           >
             <Image
-              src="/assets/products/black-leather-executive-briefcase.jpg"
+              src="/assets/products/black-leather-executive-briefcase-transparent.png"
               alt="Black Leather Executive Briefcase - Artisanal Craftsmanship"
               fill
               priority

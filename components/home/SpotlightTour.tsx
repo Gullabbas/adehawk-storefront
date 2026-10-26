@@ -36,7 +36,7 @@ const TOUR_STOPS: TourStop[] = [
     image: '/assets/products/dark-brown-leather-executive-briefcase.webp',
     x: 18,
     y: 52,
-    scale: 1.85,
+    scale: 1.08,
   },
   {
     id: 'spot-2',
@@ -48,7 +48,7 @@ const TOUR_STOPS: TourStop[] = [
     image: '/assets/products/premium-brown-leather-executive-briefcase.webp',
     x: 36,
     y: 46,
-    scale: 1.8,
+    scale: 1.08,
   },
   {
     id: 'spot-3',
@@ -60,7 +60,7 @@ const TOUR_STOPS: TourStop[] = [
     image: '/assets/products/premium-black-leather-executive-briefcase.webp',
     x: 50,
     y: 48,
-    scale: 1.8,
+    scale: 1.08,
   },
   {
     id: 'spot-4',
@@ -72,7 +72,7 @@ const TOUR_STOPS: TourStop[] = [
     image: '/assets/products/black-leather-executive-briefcase.jpg',
     x: 66,
     y: 56,
-    scale: 1.85,
+    scale: 1.08,
   },
   {
     id: 'spot-5',
@@ -84,7 +84,7 @@ const TOUR_STOPS: TourStop[] = [
     image: '/assets/products/taupe-grey-leather-laptop-sleeve-bag.webp',
     x: 82,
     y: 62,
-    scale: 1.9,
+    scale: 1.08,
   },
 ];
 
@@ -318,24 +318,26 @@ export const SpotlightTour: React.FC = () => {
           ref={cameraRef}
           className="relative w-full h-full will-change-transform transition-all"
         >
-          {/* Lifestyle Image (Authentic pixels unaltered) */}
+          {/* Lifestyle Image (Uncompressed authentic resolution preserved) */}
           <Image
             src="/assets/products/shop-the-look-bags.webp"
             alt="Adehawk Executive Leather Goods Collection"
             fill
             priority
+            quality={95}
+            unoptimized={true}
             sizes="100vw"
             className="object-cover"
           />
 
-          {/* Soft Radial Spotlight Vignette capped at 55% dimming */}
+          {/* Soft Subtle Radial Spotlight Vignette (Keeps products bright & high-contrast) */}
           <div
             ref={vignetteRef}
             className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ease-out ${
               isOverview ? 'opacity-0' : 'opacity-100'
             }`}
             style={{
-              background: `radial-gradient(circle 260px at ${currentStop.x}% ${currentStop.y}%, rgba(0,0,0,0) 0%, rgba(18, 16, 14, 0.55) 100%)`,
+              background: `radial-gradient(circle 380px at ${currentStop.x}% ${currentStop.y}%, rgba(0,0,0,0) 0%, rgba(18, 16, 14, 0.28) 100%)`,
             }}
           />
 
@@ -424,14 +426,15 @@ export const SpotlightTour: React.FC = () => {
               }}
             >
               <div className="flex gap-4 sm:gap-5 items-center">
-                {/* Catalog Product Image (Unaltered authentic image) */}
-                <div className="relative w-20 h-24 sm:w-24 sm:h-28 rounded-xl bg-ivory/10 border border-ivory/10 shrink-0 overflow-hidden flex items-center justify-center">
+                {/* Catalog Product Image (Crystal-Clear High-Resolution Product Asset) */}
+                <div className="relative w-24 h-28 sm:w-28 sm:h-32 rounded-xl bg-ivory/10 border border-ivory/15 shrink-0 overflow-hidden flex items-center justify-center p-1.5 shadow-inner">
                   <Image
                     src={currentStop.image}
                     alt={currentStop.title}
                     fill
-                    sizes="112px"
-                    className="object-contain p-2"
+                    unoptimized={true}
+                    sizes="140px"
+                    className="object-contain"
                   />
                 </div>
 

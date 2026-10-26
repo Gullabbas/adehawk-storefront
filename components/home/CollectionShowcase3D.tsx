@@ -151,7 +151,7 @@ export const CollectionShowcase3D: React.FC = () => {
       id="collection-section"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full min-h-[100svh] bg-espresso text-ivory flex flex-col justify-between py-16 sm:py-24 overflow-hidden select-none rounded-t-[32px] border-t border-ivory/15 shadow-[0_-20px_50px_rgba(0,0,0,0.3)]"
+      className="relative w-full h-[100svh] min-h-[640px] max-h-[100svh] bg-espresso text-ivory flex flex-col justify-between pt-8 sm:pt-12 pb-5 sm:pb-7 overflow-hidden select-none rounded-t-[32px] border-t border-ivory/15 shadow-[0_-20px_50px_rgba(0,0,0,0.3)]"
     >
       {/* Film Grain on Dark Surface */}
       <div
@@ -205,14 +205,14 @@ export const CollectionShowcase3D: React.FC = () => {
       {/* 3D Curved Arc Stage Container */}
       <div
         ref={stageRef}
-        className="relative z-10 w-full flex-1 flex items-center justify-center py-6 sm:py-10"
+        className="relative z-10 w-full flex-1 flex items-center justify-center py-2"
         style={{ perspective: '1200px' }}
       >
         <div
-          className="relative w-full max-w-5xl h-[420px] sm:h-[500px] md:h-[560px] flex items-center justify-center will-change-transform transition-transform duration-500 ease-out"
+          className="relative w-full max-w-4xl h-[44vh] max-h-[430px] flex items-center justify-center will-change-transform transition-transform duration-500 ease-out"
           style={{
             transform: `rotateY(${mouseTilt.x * 0.4}deg) rotateX(${mouseTilt.y * 0.4}deg) ${
-              isHoveringActive ? 'scale(1.03)' : 'scale(1)'
+              isHoveringActive ? 'scale(1.02)' : 'scale(1)'
             } ${isTransitioningRoute ? 'scale(1.8) opacity-0' : ''}`,
             transformStyle: 'preserve-3d',
           }}
@@ -225,10 +225,10 @@ export const CollectionShowcase3D: React.FC = () => {
             if (!isVisible) return null;
 
             // Compute 3D coverflow arc coordinates
-            const rotateY = offset * -36; // rotate on Y
-            const translateX = offset * 260; // spread apart
-            const translateZ = -Math.abs(offset) * 160 + (isActive ? 80 : 0); // recede in Z
-            const scale = isActive ? 1.05 : 0.82;
+            const rotateY = offset * -32; // rotate on Y
+            const translateX = offset * 240; // spread apart
+            const translateZ = -Math.abs(offset) * 140 + (isActive ? 60 : 0); // recede in Z
+            const scale = isActive ? 1.02 : 0.82;
             const opacity = isActive ? 1.0 : Math.max(0.45, 1 - Math.abs(offset) * 0.3);
 
             return (
@@ -237,10 +237,10 @@ export const CollectionShowcase3D: React.FC = () => {
                 onClick={() => handleCardClick(idx, col.handle)}
                 onMouseEnter={() => isActive && setIsHoveringActive(true)}
                 onMouseLeave={() => isActive && setIsHoveringActive(false)}
-                className={`absolute w-[280px] sm:w-[360px] md:w-[36vw] md:max-w-[560px] aspect-[4/5] rounded-[28px] overflow-hidden border transition-all duration-700 ease-luxury cursor-pointer shadow-2xl ${
+                className={`absolute w-[240px] sm:w-[280px] md:w-[320px] lg:w-[350px] h-[40vh] max-h-[400px] aspect-[4/5] rounded-[24px] overflow-hidden border transition-all duration-700 ease-luxury cursor-pointer shadow-2xl ${
                   isActive
-                    ? 'border-ivory/30 shadow-[0_25px_60px_rgba(0,0,0,0.65)] ring-1 ring-ivory/20'
-                    : 'border-ivory/10 shadow-[0_15px_40px_rgba(0,0,0,0.4)] hover:border-ivory/25'
+                    ? 'border-ivory/30 shadow-[0_20px_50px_rgba(0,0,0,0.65)] ring-1 ring-ivory/20'
+                    : 'border-ivory/10 shadow-[0_12px_35px_rgba(0,0,0,0.4)] hover:border-ivory/25'
                 }`}
                 style={{
                   transform: `translate3d(${translateX}px, 0, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
@@ -254,26 +254,26 @@ export const CollectionShowcase3D: React.FC = () => {
                     src={col.image}
                     alt={col.title}
                     fill
-                    sizes="(max-width: 640px) 240px, (max-width: 1024px) 300px, 340px"
+                    sizes="(max-width: 640px) 240px, (max-width: 1024px) 300px, 350px"
                     className="object-cover"
                   />
                   {/* Subtle legibility gradient at bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Card Meta Content */}
-                <div className="absolute bottom-6 left-6 right-6 text-ivory space-y-1 z-10 pointer-events-none">
-                  <span className="text-[10px] uppercase tracking-kicker text-cognac font-sans font-medium block">
+                <div className="absolute bottom-4 left-5 right-5 text-ivory space-y-0.5 z-10 pointer-events-none">
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-kicker text-cognac font-sans font-medium block">
                     {col.subtitle}
                   </span>
-                  <h3 className="font-serif text-2xl font-light leading-snug">
+                  <h3 className="font-serif text-xl sm:text-2xl font-light leading-snug">
                     {col.title}
                   </h3>
-                  <div className="flex justify-between items-center text-xs text-ivory/80 pt-1">
-                    <span className="font-mono text-[11px] bg-black/40 px-2 py-0.5 rounded-full border border-ivory/15">
+                  <div className="flex justify-between items-center text-xs text-ivory/80 pt-0.5">
+                    <span className="font-mono text-[10px] bg-black/50 px-2 py-0.5 rounded-full border border-ivory/15">
                       {col.count} Pieces
                     </span>
-                    <span className="uppercase tracking-widest text-[10px] text-ivory/70">
+                    <span className="uppercase tracking-widest text-[9px] text-ivory/70">
                       {isActive ? 'Click to View →' : 'Rotate'}
                     </span>
                   </div>
@@ -284,16 +284,12 @@ export const CollectionShowcase3D: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Floating Glass Info Chip & Magnetic CTA */}
-      <div className="relative z-20 max-w-xl mx-auto px-4 w-full flex justify-center">
-        <GlassPanel
-          variant="dark"
-          rounded="full"
-          className="px-6 sm:px-8 py-3.5 flex items-center justify-between gap-6 shadow-2xl"
-        >
+      {/* Bottom Floating Glass Info Chip & Magical Luminous CTA */}
+      <div className="relative z-20 max-w-lg mx-auto px-4 w-full flex justify-center pb-1">
+        <div className="px-5 sm:px-7 py-2.5 sm:py-3 flex items-center justify-between gap-5 sm:gap-7 rounded-full border border-ivory/20 shadow-2xl bg-espresso/80 backdrop-blur-xl">
           <div className="flex items-center gap-3">
             <span className="w-2 h-2 rounded-full bg-cognac animate-pulse" />
-            <span className="font-serif text-lg text-ivory font-normal">
+            <span className="font-serif text-base sm:text-lg text-ivory font-normal">
               {activeCol.title}
             </span>
             <span className="text-xs font-mono text-ivory/60 border-l border-ivory/15 pl-3">
@@ -301,16 +297,16 @@ export const CollectionShowcase3D: React.FC = () => {
             </span>
           </div>
 
-          <Button
+          <Link
             href={`/collections/${activeCol.handle}`}
-            variant="dark"
-            size="sm"
-            magnetic
-            icon="arrow-right"
+            className="relative group overflow-hidden px-5 py-2 rounded-full text-[11px] uppercase tracking-widest font-sans font-semibold text-ivory bg-gradient-to-r from-cognac via-[#B86B35] to-cognac border border-ivory/30 shadow-[0_0_20px_rgba(162,88,42,0.45)] hover:shadow-[0_0_28px_rgba(217,160,102,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 cursor-pointer"
           >
-            View Collection
-          </Button>
-        </GlassPanel>
+            {/* Liquid Shimmer Light Sweep */}
+            <span className="absolute inset-0 w-1/2 h-full bg-white/25 skew-x-[-20deg] -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-out pointer-events-none" />
+            <span>View Collection</span>
+            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </Link>
+        </div>
       </div>
 
       {/* Hidden SEO & Accessibility DOM Links */}

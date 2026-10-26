@@ -131,15 +131,19 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
 
       // 2. Measure Header Logo for 1px accurate handoff
       const getHeaderLogoRect = () => {
-        const headerLogo = document.querySelector('header a img');
+        const headerLogo = document.querySelector('header a[aria-label="Adehawk Leather Goods Home"]');
         if (headerLogo) {
-          return headerLogo.getBoundingClientRect();
+          const rect = headerLogo.getBoundingClientRect();
+          if (rect.width > 0 && rect.height > 0) return rect;
         }
+        const isSm = window.innerWidth >= 640;
+        const w = isSm ? 128 : 112;
+        const h = isSm ? 48 : 40;
         return {
-          left: window.innerWidth / 2 - 64,
-          top: 36,
-          width: 128,
-          height: 48,
+          left: (window.innerWidth - w) / 2,
+          top: 38,
+          width: w,
+          height: h,
         };
       };
 
@@ -151,7 +155,7 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
           end: '+=130%',
           pin: true,
           pinSpacing: true,
-          scrub: 1.5,
+          scrub: 1.2,
           anticipatePin: 1,
           onUpdate: (self) => {
             const p = self.progress;
@@ -179,25 +183,25 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
               heroWrapper.style.transform = p >= 0.95 ? 'none' : `scale(${scaleVal})`;
             }
 
-            // Header fade in as user approaches end of intro
+            // Header fade in as user scrolls down
             const h = document.querySelector('header') as HTMLElement | null;
-            const logo = document.querySelector('header a img') as HTMLElement | null;
+            const logo = document.querySelector('header a[aria-label="Adehawk Leather Goods Home"]') as HTMLElement | null;
 
             if (h) {
-              if (p > 0.45) {
+              if (p > 0.35) {
                 h.style.visibility = 'visible';
-                h.style.opacity = String(Math.min(1, (p - 0.45) / 0.5));
+                h.style.opacity = String(Math.min(1, (p - 0.35) / 0.55));
               } else {
                 h.style.visibility = 'hidden';
                 h.style.opacity = '0';
               }
             }
 
-            // Real header logo takes over at 0.98
+            // Real header logo cross-fade handoff between 0.88 and 1.0
             if (logo) {
-              if (p >= 0.98) {
+              if (p >= 0.92) {
                 logo.style.visibility = 'visible';
-                logo.style.opacity = '1';
+                logo.style.opacity = String(Math.min(1, (p - 0.92) / 0.08));
                 if (onIntroComplete) onIntroComplete(true);
               } else {
                 logo.style.visibility = 'hidden';
@@ -215,35 +219,47 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
       const currentRect = logoWrapperRef.current.getBoundingClientRect();
       const targetRect = getHeaderLogoRect();
 
-      const deltaX = targetRect.left + targetRect.width / 2 - (currentRect.left + currentRect.width / 2);
+      // Ensure deltaX centers cleanly
+      const deltaX = (window.innerWidth / 2) - (currentRect.left + currentRect.width / 2);
       const deltaY = targetRect.top + targetRect.height / 2 - (currentRect.top + currentRect.height / 2);
       const targetScale = targetRect.width / currentRect.width;
 
-      // 0.00 - 0.40: Fade out cues & tagline
+      // 0.00 - 0.35: Fade out cues & tagline
       if (taglineRef.current && cueRef.current) {
         scrollTl.to(
           [taglineRef.current, cueRef.current],
           {
             opacity: 0,
             y: -15,
-            duration: 0.35,
+            duration: 0.3,
             ease: 'power2.in',
           },
           0
         );
       }
 
-      // Logo travels to exact header coordinates
+      // Logo travels directly to exact center header coordinates and scales
       scrollTl.to(
         logoWrapperRef.current,
         {
           x: deltaX,
           y: deltaY,
           scale: targetScale,
-          duration: 0.9,
+          duration: 0.85,
           ease: 'power2.inOut',
         },
         0.05
+      );
+
+      // Smooth cross-fade out of the intro logo at the very end as header logo takes over
+      scrollTl.to(
+        logoWrapperRef.current,
+        {
+          opacity: 0,
+          duration: 0.15,
+          ease: 'power1.out',
+        },
+        0.85
       );
 
       // Intro background dissolves smoothly
