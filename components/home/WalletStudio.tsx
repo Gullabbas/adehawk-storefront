@@ -121,10 +121,17 @@ export const WalletStudio: React.FC = () => {
   const stageRef = useRef<HTMLDivElement>(null);
   const walletImgRef = useRef<HTMLDivElement>(null);
   const filmStripRef = useRef<HTMLDivElement>(null);
+  const revealTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { addItem, openCart } = useCartStore();
 
   const currentModel = WALLET_MODELS.find(m => m.id === selectedModelId) || WALLET_MODELS[0];
   const currentVariant = currentModel.variants[selectedVariantIndex] || currentModel.variants[0];
+
+  useEffect(() => {
+    return () => {
+      if (revealTimeoutRef.current) clearTimeout(revealTimeoutRef.current);
+    };
+  }, []);
 
   // Pointer tilt physics for the wallet product stage
   const handlePointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
@@ -163,6 +170,10 @@ export const WalletStudio: React.FC = () => {
     const nextVariant = currentModel.variants[index];
     if (!nextVariant) return;
 
+    if (revealTimeoutRef.current) {
+      clearTimeout(revealTimeoutRef.current);
+    }
+
     if (event && stageRef.current) {
       const stageRect = stageRef.current.getBoundingClientRect();
       const clickX = ((event.clientX - stageRect.left) / stageRect.width) * 100;
@@ -176,13 +187,15 @@ export const WalletStudio: React.FC = () => {
     setSelectedVariantIndex(index);
 
     // Timeout to clear revealing layer after animation
-    setTimeout(() => {
+    revealTimeoutRef.current = setTimeout(() => {
       setRevealingImage(null);
-    }, 800);
+      revealTimeoutRef.current = null;
+    }, 750);
   };
 
   const handleModelChange = (modelId: 'ultra-slim' | 'thick') => {
     if (modelId === selectedModelId) return;
+    if (revealTimeoutRef.current) clearTimeout(revealTimeoutRef.current);
     setSelectedModelId(modelId);
     setSelectedVariantIndex(0);
     setRevealingImage(null);
@@ -271,7 +284,7 @@ export const WalletStudio: React.FC = () => {
   return (
     <section
       id="wallets-section"
-      className="relative bg-ivory text-ink py-24 sm:py-32 overflow-hidden border-t border-ink/10 transition-colors duration-700"
+      className="relative bg-ivory text-ink py-24 sm:py-32 overflow-hidden border-t border-ink/10 rounded-t-[32px] shadow-[0_-25px_60px_rgba(0,0,0,0.12)] transition-colors duration-700"
       style={{
         backgroundColor: '#FBF9F5',
       }}

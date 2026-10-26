@@ -181,15 +181,12 @@ export const AnimatedIcon: React.FC<AnimatedIconProps> = ({
         strokeLinejoin="round"
         className={className}
       >
-        <motion.line
-          x1="5"
-          y1="12"
-          x2="19"
-          y2="12"
+        <motion.path
+          d="M5 12h14"
           animate={
             isHovered && !shouldReduceMotion
-              ? { x2: [19, 21, 19], transition: { duration: 0.3 } }
-              : { x2: 19 }
+              ? { scaleX: [1, 1.15, 1], originX: 0, transition: { duration: 0.3 } }
+              : { scaleX: 1 }
           }
         />
         <motion.polyline
@@ -218,15 +215,12 @@ export const AnimatedIcon: React.FC<AnimatedIconProps> = ({
         strokeLinejoin="round"
         className={className}
       >
-        <motion.line
-          x1="19"
-          y1="12"
-          x2="5"
-          y2="12"
+        <motion.path
+          d="M19 12H5"
           animate={
             isHovered && !shouldReduceMotion
-              ? { x2: [5, 3, 5], transition: { duration: 0.3 } }
-              : { x2: 5 }
+              ? { scaleX: [1, 1.15, 1], originX: 1, transition: { duration: 0.3 } }
+              : { scaleX: 1 }
           }
         />
         <motion.polyline
@@ -260,8 +254,7 @@ export const AnimatedIcon: React.FC<AnimatedIconProps> = ({
             : { rotate: 0 }
         }
       >
-        <line x1="12" y1="5" x2="12" y2="19" />
-        <line x1="5" y1="12" x2="19" y2="12" />
+        <path d="M12 5v14M5 12h14" />
       </motion.svg>
     );
   }
@@ -285,8 +278,7 @@ export const AnimatedIcon: React.FC<AnimatedIconProps> = ({
             : { rotate: 0, scale: 1 }
         }
       >
-        <line x1="18" y1="6" x2="6" y2="18" />
-        <line x1="6" y1="6" x2="18" y2="18" />
+        <path d="M18 6L6 18M6 6l12 12" />
       </motion.svg>
     );
   }
@@ -305,31 +297,25 @@ export const AnimatedIcon: React.FC<AnimatedIconProps> = ({
         strokeLinejoin="round"
         className={className}
       >
-        <motion.line
-          x1="4"
-          y1="8"
-          x2="20"
-          y2="8"
+        <motion.path
+          d="M4 8h16"
           animate={
             isActive && !shouldReduceMotion
               ? { rotate: 45, y: 4, originX: 0.5, originY: 0.5 }
               : isHovered && !shouldReduceMotion
-              ? { x2: 17 }
-              : { x2: 20 }
+              ? { scaleX: 0.85, originX: 0 }
+              : { scaleX: 1, rotate: 0, y: 0 }
           }
           transition={{ duration: 0.25 }}
         />
-        <motion.line
-          x1="4"
-          y1="16"
-          x2="20"
-          y2="16"
+        <motion.path
+          d="M4 16h16"
           animate={
             isActive && !shouldReduceMotion
               ? { rotate: -45, y: -4, originX: 0.5, originY: 0.5 }
               : isHovered && !shouldReduceMotion
-              ? { x1: 7 }
-              : { x1: 4 }
+              ? { scaleX: 0.85, originX: 1 }
+              : { scaleX: 1, rotate: 0, y: 0 }
           }
           transition={{ duration: 0.25 }}
         />

@@ -61,6 +61,7 @@ export const HeroStage: React.FC<HeroStageProps> = ({ isIntroComplete = true }) 
   } = useHeroController({
     onTransitionUpdate: handleTransitionUpdate,
     onAutoplayProgress: handleAutoplayProgress,
+    isIntroComplete,
   });
 
   const currentSlide = HERO_CONFIG.slides[index];
@@ -162,7 +163,7 @@ export const HeroStage: React.FC<HeroStageProps> = ({ isIntroComplete = true }) 
         }}
       >
         {/* The Liquid-Glass Floating Card */}
-        <div className="w-full max-w-[calc(100vw-32px)] sm:max-w-[560px] lg:max-w-[520px] rounded-[24px] bg-[rgba(18,14,12,0.52)] backdrop-blur-[24px] backdrop-saturate-[140%] border border-[rgba(255,255,255,0.16)] p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.16)] space-y-4 pointer-events-auto">
+        <div className="w-full max-w-[calc(100vw-32px)] sm:max-w-[560px] lg:max-w-[520px] rounded-[24px] bg-[rgba(18,14,12,0.52)] backdrop-blur-[24px] backdrop-saturate-[140%] border border-[rgba(255,255,255,0.16)] p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.16)] space-y-4 pointer-events-auto overflow-hidden">
           {/* Animated Kicker in High-Contrast Warm Cognac Gold */}
           <div className="overflow-hidden">
             <AnimatePresence mode="wait">
@@ -180,15 +181,19 @@ export const HeroStage: React.FC<HeroStageProps> = ({ isIntroComplete = true }) 
           </div>
 
           {/* Masked Headline Lines */}
-          <div className="overflow-hidden">
+          <div className="relative overflow-hidden min-h-[3.6rem] sm:min-h-[5.5rem] flex items-center">
             <AnimatePresence mode="wait">
               <motion.h1
                 key={`headline-${index}`}
                 initial={{ y: '110%', opacity: 0 }}
-                animate={{ y: '0%', opacity: 1 }}
-                exit={{ y: '-110%', opacity: 0 }}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif text-[clamp(2rem,3.6vw,3.75rem)] font-light leading-[1.05] text-ivory tracking-tight drop-shadow-md"
+                animate={{ y: '0%', opacity: 1, visibility: 'visible' }}
+                exit={{
+                  y: '-110%',
+                  opacity: 0,
+                  transitionEnd: { display: 'none', visibility: 'hidden' },
+                }}
+                transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+                className="font-serif text-[clamp(2rem,3.6vw,3.75rem)] font-light leading-[1.05] text-ivory tracking-tight drop-shadow-md select-none"
               >
                 {currentSlide.headline}
               </motion.h1>

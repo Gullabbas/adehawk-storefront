@@ -25,21 +25,59 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
   const glowRef = useRef<HTMLDivElement>(null);
 
   const [isSkipped, setIsSkipped] = useState(false);
+  const [showDebug, setShowDebug] = useState(false);
+  const [debugData, setDebugData] = useState<{ scrollY: number; progress: number; triggers: string[] }>({
+    scrollY: 0,
+    progress: 0,
+    triggers: [],
+  });
 
   useEffect(() => {
     // Check deep-link or scroll restoration or reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const hasScrolled = window.scrollY > 80;
     const hasHash = window.location.hash.length > 0;
+    const isDebug = window.location.search.includes('debug=1');
+    if (isDebug) setShowDebug(true);
 
-    if (prefersReducedMotion || hasScrolled || hasHash) {
+    // Disable browser scroll restoration on home so reload starts cleanly at top
+    if (typeof window !== 'undefined' && 'scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
+    if (!hasHash && window.scrollY > 0) {
+      window.scrollTo(0, 0);
+    }
+
+    if (prefersReducedMotion || hasHash) {
       setIsSkipped(true);
       if (onIntroProgress) onIntroProgress(1.0);
       if (onIntroComplete) onIntroComplete(true);
+      const realHeader = document.querySelector('header') as HTMLElement | null;
+      const realHeaderLogo = document.querySelector('header a img') as HTMLElement | null;
+      if (realHeader) {
+        realHeader.style.visibility = 'visible';
+        realHeader.style.opacity = '1';
+      }
+      if (realHeaderLogo) {
+        realHeaderLogo.style.visibility = 'visible';
+        realHeaderLogo.style.opacity = '1';
+      }
       return;
     }
 
     if (!containerRef.current || !logoWrapperRef.current) return;
+
+    // Initially hide header & header logo to prevent duplicate logo or peek
+    const realHeader = document.querySelector('header') as HTMLElement | null;
+    const realHeaderLogo = document.querySelector('header a img') as HTMLElement | null;
+    if (realHeader) {
+      realHeader.style.visibility = 'hidden';
+      realHeader.style.opacity = '0';
+    }
+    if (realHeaderLogo) {
+      realHeaderLogo.style.visibility = 'hidden';
+      realHeaderLogo.style.opacity = '0';
+    }
 
     const ctx = gsap.context(() => {
       // 1. Initial Entrance Animation (0 - 2.4s)
@@ -56,7 +94,7 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
         {
           clipPath: 'inset(0% 0 0 0)',
           scale: 1.0,
-          duration: 1.6,
+          duration: 1.4,
           ease: 'expo.out',
         }
       );
@@ -105,12 +143,6 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
         };
       };
 
-      // Hide real header logo initially
-      const realHeaderLogo = document.querySelector('header a img') as HTMLElement | null;
-      if (realHeaderLogo) {
-        realHeaderLogo.style.opacity = '0';
-      }
-
       // 3. ScrollTrigger Pinning & Scrub (130vh)
       const scrollTl = gsap.timeline({
         scrollTrigger: {
@@ -118,29 +150,60 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
           start: 'top top',
           end: '+=130%',
           pin: true,
+          pinSpacing: true,
           scrub: 1.5,
           anticipatePin: 1,
           onUpdate: (self) => {
             const p = self.progress;
             if (onIntroProgress) onIntroProgress(p);
 
-            // Circular expansion of background/site
-            const homeMask = document.getElementById('home-reveal-mask');
-            if (homeMask) {
-              const radius = p * 150;
-              homeMask.style.clipPath = `circle(${radius}% at 50% 50%)`;
-              const blurVal = Math.max(0, (1 - p) * 14);
-              const scaleVal = 1.25 - p * 0.25;
-              homeMask.style.filter = blurVal > 0.5 ? `blur(${blurVal}px)` : 'none';
-              homeMask.style.transform = `scale(${scaleVal})`;
+            if (isDebug) {
+              const allTriggers = ScrollTrigger.getAll().map(
+                (t) => `${t.trigger?.id || 'trigger'}: ${(t.progress * 100).toFixed(0)}%`
+              );
+              setDebugData({
+                scrollY: window.scrollY,
+                progress: Number(p.toFixed(3)),
+                triggers: allTriggers,
+              });
             }
 
-            if (p >= 0.98) {
-              if (realHeaderLogo) realHeaderLogo.style.opacity = '1';
-              if (onIntroComplete) onIntroComplete(true);
-            } else {
-              if (realHeaderLogo) realHeaderLogo.style.opacity = '0';
-              if (onIntroComplete) onIntroComplete(false);
+            // Circular expansion of background / hero
+            const heroWrapper = document.getElementById('hero-reveal-wrapper');
+            if (heroWrapper) {
+              const radius = p * 150;
+              heroWrapper.style.clipPath = p >= 0.95 ? 'none' : `circle(${radius}% at 50% 50%)`;
+              const blurVal = Math.max(0, (1 - p) * 14);
+              const scaleVal = 1.25 - p * 0.25;
+              heroWrapper.style.filter = blurVal > 0.5 ? `blur(${blurVal}px)` : 'none';
+              heroWrapper.style.transform = p >= 0.95 ? 'none' : `scale(${scaleVal})`;
+            }
+
+            // Header fade in as user approaches end of intro
+            const h = document.querySelector('header') as HTMLElement | null;
+            const logo = document.querySelector('header a img') as HTMLElement | null;
+
+            if (h) {
+              if (p > 0.45) {
+                h.style.visibility = 'visible';
+                h.style.opacity = String(Math.min(1, (p - 0.45) / 0.5));
+              } else {
+                h.style.visibility = 'hidden';
+                h.style.opacity = '0';
+              }
+            }
+
+            // Real header logo takes over at 0.98
+            if (logo) {
+              if (p >= 0.98) {
+                logo.style.visibility = 'visible';
+                logo.style.opacity = '1';
+                if (onIntroComplete) onIntroComplete(true);
+              } else {
+                logo.style.visibility = 'hidden';
+                logo.style.opacity = '0';
+                if (onIntroComplete) onIntroComplete(false);
+              }
             }
           },
         },
@@ -158,30 +221,41 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
 
       // 0.00 - 0.40: Fade out cues & tagline
       if (taglineRef.current && cueRef.current) {
-        scrollTl.to([taglineRef.current, cueRef.current], {
-          opacity: 0,
-          y: -15,
-          duration: 0.35,
-          ease: 'power2.in',
-        }, 0);
+        scrollTl.to(
+          [taglineRef.current, cueRef.current],
+          {
+            opacity: 0,
+            y: -15,
+            duration: 0.35,
+            ease: 'power2.in',
+          },
+          0
+        );
       }
 
-      // Logo travel to header position
-      scrollTl.to(logoWrapperRef.current, {
-        x: deltaX,
-        y: deltaY,
-        scale: targetScale,
-        duration: 0.9,
-        ease: 'power2.inOut',
-      }, 0.05);
+      // Logo travels to exact header coordinates
+      scrollTl.to(
+        logoWrapperRef.current,
+        {
+          x: deltaX,
+          y: deltaY,
+          scale: targetScale,
+          duration: 0.9,
+          ease: 'power2.inOut',
+        },
+        0.05
+      );
 
-      // Intro background dissolves
-      scrollTl.to(containerRef.current, {
-        backgroundColor: 'rgba(22, 19, 17, 0)',
-        duration: 0.95,
-        ease: 'none',
-      }, 0.05);
-
+      // Intro background dissolves smoothly
+      scrollTl.to(
+        containerRef.current,
+        {
+          backgroundColor: 'rgba(22, 19, 17, 0)',
+          duration: 0.95,
+          ease: 'none',
+        },
+        0.05
+      );
     }, containerRef);
 
     return () => ctx.revert();
@@ -197,15 +271,15 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
         <style dangerouslySetInnerHTML={{ __html: '#intro-scene-wrapper { display: none !important; }' }} />
       </noscript>
 
-      <div
+      <section
         id="intro-scene-wrapper"
         ref={containerRef}
-        className="fixed inset-0 z-[650] w-full h-[100svh] bg-espresso flex flex-col items-center justify-center select-none overflow-hidden will-change-transform pointer-events-none"
+        className="relative w-full h-[100svh] bg-espresso flex flex-col items-center justify-center select-none overflow-hidden z-[50]"
       >
         {/* Soft Ambient Radial Cognac Glow BEHIND Logo */}
         <div
           ref={glowRef}
-          className="absolute w-[450px] h-[450px] rounded-full bg-cognac blur-[90px] pointer-events-none opacity-0 will-change-transform"
+          className="absolute w-[450px] h-[450px] rounded-full bg-cognac blur-[90px] pointer-events-none opacity-0"
           aria-hidden="true"
         />
 
@@ -245,7 +319,23 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
             <div className="w-full h-1/2 bg-ivory animate-bounce" />
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Dev Overlay (?debug=1) */}
+      {showDebug && (
+        <div className="fixed bottom-4 right-4 z-[9999] bg-black/90 text-green-400 p-3 font-mono text-xs rounded-xl border border-green-500/40 shadow-2xl pointer-events-none max-w-xs">
+          <div>ScrollY: {debugData.scrollY}px</div>
+          <div>Intro Progress: {(debugData.progress * 100).toFixed(1)}%</div>
+          <div className="border-t border-green-500/30 mt-2 pt-1">
+            Active Triggers:
+            {debugData.triggers.map((t, idx) => (
+              <div key={idx} className="text-[10px] text-green-300">
+                • {t}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </>
   );
 };

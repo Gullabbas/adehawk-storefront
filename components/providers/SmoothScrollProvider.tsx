@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
 }
 
 export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -38,7 +39,7 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({
     // Sync Lenis scroll to ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
 
-    // Sync GSAP ticker to Lenis raf
+    // Sync GSAP ticker to Lenis raf with lagSmoothing(0)
     const updateTicker = (time: number) => {
       lenis.raf(time * 1000);
     };
@@ -46,7 +47,28 @@ export const SmoothScrollProvider: React.FC<{ children: React.ReactNode }> = ({
     gsap.ticker.add(updateTicker);
     gsap.ticker.lagSmoothing(0);
 
+    // Re-measure after fonts are ready
+    if (typeof document !== 'undefined' && document.fonts) {
+      document.fonts.ready.then(() => {
+        ScrollTrigger.refresh();
+      });
+    }
+
+    // Window resize handler (debounced 150ms)
+    let resizeTimer: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('orientationchange', handleResize, { passive: true });
+
     return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
       lenisRef.current = null;

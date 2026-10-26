@@ -94,8 +94,9 @@ export const CollectionShowcase3D: React.FC = () => {
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: 'top top',
-        end: '+=280%',
+        end: '+=260%',
         pin: true,
+        pinSpacing: true,
         scrub: 1.2,
         onUpdate: (self) => {
           const progress = self.progress;
@@ -150,7 +151,7 @@ export const CollectionShowcase3D: React.FC = () => {
       id="collection-section"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full min-h-[100svh] bg-espresso text-ivory flex flex-col justify-between py-16 sm:py-24 overflow-hidden select-none"
+      className="relative w-full min-h-[100svh] bg-espresso text-ivory flex flex-col justify-between py-16 sm:py-24 overflow-hidden select-none rounded-t-[32px] border-t border-ivory/15 shadow-[0_-20px_50px_rgba(0,0,0,0.3)]"
     >
       {/* Film Grain on Dark Surface */}
       <div
@@ -161,14 +162,14 @@ export const CollectionShowcase3D: React.FC = () => {
         aria-hidden="true"
       />
 
-      {/* Kinetic Background Title */}
+      {/* Kinetic Background Title at 6% opacity */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-0"
         aria-hidden="true"
       >
         <span
           key={activeCol.title}
-          className="font-serif text-[clamp(4.5rem,18vw,20rem)] font-light leading-none text-ivory/[0.04] tracking-tight uppercase transition-all duration-700 ease-luxury transform will-change-transform"
+          className="font-serif text-[clamp(4.5rem,18vw,20rem)] font-light leading-none text-ivory/[0.06] tracking-tight uppercase transition-all duration-700 ease-luxury transform will-change-transform select-none"
           style={{
             transform: `translate3d(${mouseTilt.x * -2}px, ${mouseTilt.y * -2}px, 0)`,
           }}
@@ -208,7 +209,7 @@ export const CollectionShowcase3D: React.FC = () => {
         style={{ perspective: '1200px' }}
       >
         <div
-          className="relative w-full max-w-4xl h-[380px] sm:h-[460px] md:h-[520px] flex items-center justify-center will-change-transform transition-transform duration-500 ease-out"
+          className="relative w-full max-w-5xl h-[420px] sm:h-[500px] md:h-[560px] flex items-center justify-center will-change-transform transition-transform duration-500 ease-out"
           style={{
             transform: `rotateY(${mouseTilt.x * 0.4}deg) rotateX(${mouseTilt.y * 0.4}deg) ${
               isHoveringActive ? 'scale(1.03)' : 'scale(1)'
@@ -225,7 +226,7 @@ export const CollectionShowcase3D: React.FC = () => {
 
             // Compute 3D coverflow arc coordinates
             const rotateY = offset * -36; // rotate on Y
-            const translateX = offset * 220; // spread apart
+            const translateX = offset * 260; // spread apart
             const translateZ = -Math.abs(offset) * 160 + (isActive ? 80 : 0); // recede in Z
             const scale = isActive ? 1.05 : 0.82;
             const opacity = isActive ? 1.0 : Math.max(0.45, 1 - Math.abs(offset) * 0.3);
@@ -236,7 +237,7 @@ export const CollectionShowcase3D: React.FC = () => {
                 onClick={() => handleCardClick(idx, col.handle)}
                 onMouseEnter={() => isActive && setIsHoveringActive(true)}
                 onMouseLeave={() => isActive && setIsHoveringActive(false)}
-                className={`absolute w-[240px] sm:w-[300px] md:w-[340px] aspect-[4/5] rounded-[24px] overflow-hidden border transition-all duration-700 ease-luxury cursor-pointer shadow-2xl ${
+                className={`absolute w-[280px] sm:w-[360px] md:w-[36vw] md:max-w-[560px] aspect-[4/5] rounded-[28px] overflow-hidden border transition-all duration-700 ease-luxury cursor-pointer shadow-2xl ${
                   isActive
                     ? 'border-ivory/30 shadow-[0_25px_60px_rgba(0,0,0,0.65)] ring-1 ring-ivory/20'
                     : 'border-ivory/10 shadow-[0_15px_40px_rgba(0,0,0,0.4)] hover:border-ivory/25'

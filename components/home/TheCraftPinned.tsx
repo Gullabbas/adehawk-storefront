@@ -58,7 +58,53 @@ export const TheCraftPinned: React.FC = () => {
   const companionImageRef = useRef<HTMLDivElement>(null);
 
   const [activeStep, setActiveStep] = useState(1);
+  const [bgColor, setBgColor] = useState('#FCFDFF'); // Default to sampled median edge color
   const [radialPos, setRadialPos] = useState({ x: 50, y: 50 });
+
+  // Dynamically sample border pixels on load to ensure 100% seamless background blend
+  useEffect(() => {
+    const img = new window.Image();
+    img.crossOrigin = 'anonymous';
+    img.src = '/assets/products/black-leather-executive-briefcase.jpg';
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth || 800;
+        canvas.height = img.naturalHeight || 1000;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        ctx.drawImage(img, 0, 0);
+
+        const w = canvas.width;
+        const h = canvas.height;
+        const samples: [number, number, number][] = [];
+
+        // Sample top and bottom rows
+        for (let x = 0; x < w; x += 20) {
+          const t = ctx.getImageData(x, 0, 1, 1).data;
+          samples.push([t[0], t[1], t[2]]);
+          const b = ctx.getImageData(x, h - 1, 1, 1).data;
+          samples.push([b[0], b[1], b[2]]);
+        }
+        // Sample left and right columns
+        for (let y = 0; y < h; y += 20) {
+          const l = ctx.getImageData(0, y, 1, 1).data;
+          samples.push([l[0], l[1], l[2]]);
+          const r = ctx.getImageData(w - 1, y, 1, 1).data;
+          samples.push([r[0], r[1], r[2]]);
+        }
+
+        const rs = samples.map((s) => s[0]).sort((a, b) => a - b);
+        const gs = samples.map((s) => s[1]).sort((a, b) => a - b);
+        const bs = samples.map((s) => s[2]).sort((a, b) => a - b);
+        const mid = Math.floor(samples.length / 2);
+        setBgColor(`rgb(${rs[mid]}, ${gs[mid]}, ${bs[mid]})`);
+      } catch {
+        // Fallback to sampled #FCFDFF
+        setBgColor('#FCFDFF');
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current || !heroImageRef.current) return;
@@ -69,13 +115,15 @@ export const TheCraftPinned: React.FC = () => {
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      const pinDistance = isMobile ? '+=320%' : '+=480%';
+      // Pin distance: 420vh desktop, 300vh mobile
+      const pinDistance = isMobile ? '+=300%' : '+=420%';
 
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: 'top top',
         end: pinDistance,
         pin: true,
+        pinSpacing: true,
         scrub: 1.2,
         onUpdate: (self) => {
           const p = self.progress;
@@ -132,20 +180,12 @@ export const TheCraftPinned: React.FC = () => {
     <section
       id="craft-section"
       ref={containerRef}
-      className="relative w-full min-h-[100svh] bg-espresso text-ivory flex flex-col justify-between py-16 sm:py-20 overflow-hidden select-none"
+      style={{ backgroundColor: bgColor }}
+      className="relative w-full min-h-[100svh] text-ink flex flex-col justify-between py-16 sm:py-20 overflow-hidden select-none rounded-t-[32px] border-t border-ink/10 shadow-[0_-20px_50px_rgba(0,0,0,0.12)] transition-colors duration-500"
     >
-      {/* 3.5% Subtle Film Grain */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.035] bg-repeat z-0"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-        aria-hidden="true"
-      />
-
       {/* Floating Ambient Cognac Light Drift BEHIND Product */}
       <div
-        className="absolute w-[600px] h-[600px] rounded-full bg-cognac blur-[130px] opacity-[0.08] pointer-events-none z-0 transition-all duration-700 ease-out"
+        className="absolute w-[500px] h-[500px] rounded-full bg-cognac blur-[140px] opacity-[0.08] pointer-events-none z-0 transition-all duration-700 ease-out"
         style={{
           left: `${radialPos.x}%`,
           top: `${radialPos.y}%`,
@@ -154,23 +194,42 @@ export const TheCraftPinned: React.FC = () => {
         aria-hidden="true"
       />
 
-      {/* Left-Edge 5-Chapter Indicator */}
+      {/* Top Header */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-end">
+        <div>
+          <span className="text-xs uppercase tracking-kicker text-cognac font-sans font-medium block mb-1">
+            The Craft · Chapter 0{activeStep} of 05
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-ink tracking-tight">
+            Crafted for the Journey
+          </h2>
+        </div>
+
+        {/* Step Indicator Pill */}
+        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-ink/5 border border-ink/10">
+          <span className="font-mono text-xs font-semibold text-cognac">0{activeStep}</span>
+          <span className="text-ink/30 text-xs">/</span>
+          <span className="font-mono text-xs text-ink/50">05</span>
+        </div>
+      </div>
+
+      {/* Left-Edge 5-Chapter Vertical Rail (Desktop) */}
       <div className="absolute left-6 sm:left-12 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col items-center space-y-4">
         <span className="font-mono text-xs text-cognac font-bold tracking-widest">
           0{activeStep}
         </span>
-        <div className="w-[2px] h-32 bg-ivory/15 rounded-full relative overflow-hidden">
+        <div className="w-[2px] h-32 bg-ink/10 rounded-full relative overflow-hidden">
           <div
             className="w-full bg-cognac transition-all duration-300 rounded-full"
             style={{ height: `${(activeStep / 5) * 100}%` }}
           />
         </div>
-        <span className="font-mono text-xs text-ivory/40 tracking-widest">
+        <span className="font-mono text-xs text-ink/40 tracking-widest">
           05
         </span>
       </div>
 
-      {/* Center Stage: The Hero Briefcase Canvas */}
+      {/* Center Stage: Seamless Hero Briefcase Gallery Canvas */}
       <div
         ref={stageRef}
         className="relative z-10 flex-1 flex items-center justify-center p-4 sm:p-8"
@@ -178,18 +237,18 @@ export const TheCraftPinned: React.FC = () => {
         <div className="relative w-[300px] sm:w-[420px] md:w-[480px] aspect-[4/5] flex items-center justify-center">
           {/* Soft Contact Shadow Placed BEHIND the Product */}
           <div
-            className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[80%] h-8 bg-black/60 blur-xl rounded-full z-0"
+            className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[85%] h-8 bg-ink/15 blur-xl rounded-full z-0"
             aria-hidden="true"
           />
 
-          {/* Primary Hero Object: Black Leather Executive Briefcase (Unaltered Pixels) */}
+          {/* Primary Hero Object: Black Leather Executive Briefcase (Unaltered, blends seamlessly) */}
           <div
             ref={heroImageRef}
             className="relative w-full h-full z-10 will-change-transform transition-transform duration-500 ease-out flex items-center justify-center"
           >
             <Image
               src="/assets/products/black-leather-executive-briefcase.jpg"
-              alt="Black Leather Executive Briefcase"
+              alt="Black Leather Executive Briefcase - Artisanal Craftsmanship"
               fill
               priority
               sizes="(max-width: 768px) 300px, 480px"
@@ -207,9 +266,9 @@ export const TheCraftPinned: React.FC = () => {
               >
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cognac opacity-75" />
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-cognac" />
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-cognac shadow-[0_0_10px_#8E4A23]" />
                 </span>
-                <span className="px-2.5 py-1 bg-espresso/90 backdrop-blur-md border border-ivory/20 rounded-md text-[10px] uppercase tracking-widest text-ivory font-mono whitespace-nowrap shadow-xl">
+                <span className="px-2.5 py-1 bg-ivory/95 border border-ink/15 rounded-md text-[10px] uppercase tracking-widest text-ink font-mono font-medium whitespace-nowrap shadow-lg">
                   {curChapter.callout.label}
                 </span>
               </div>
@@ -223,7 +282,7 @@ export const TheCraftPinned: React.FC = () => {
           >
             <Image
               src="/assets/products/dark-brown-leather-executive-briefcase.webp"
-              alt="Dark Brown Leather Executive Briefcase"
+              alt="Dark Brown Leather Executive Briefcase Companion"
               fill
               sizes="(max-width: 768px) 260px, 400px"
               className="object-contain drop-shadow-2xl"
@@ -232,18 +291,18 @@ export const TheCraftPinned: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Pinned Typography & Magnetic CTA */}
-      <div className="relative z-20 max-w-3xl mx-auto px-6 text-center space-y-4">
-        <span className="text-xs uppercase tracking-kicker text-cognac font-sans font-medium block">
-          Chapter 0{activeStep} · Crafted with Character
+      {/* Bottom Pinned Typography & Magnetic CTA - Dark Espresso Text on Light Gallery Surface */}
+      <div className="relative z-20 max-w-3xl mx-auto px-6 text-center space-y-3">
+        <span className="text-[11px] uppercase tracking-kicker text-cognac font-sans font-semibold block">
+          Chapter 0{activeStep} · Character & Form
         </span>
 
-        {/* Apple-Style Text Reveal */}
-        <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl font-light text-ivory leading-tight transition-all duration-500">
+        {/* High-Contrast Chapter Heading (18.9:1 contrast against #FCFDFF) */}
+        <h3 className="font-serif text-2xl sm:text-4xl md:text-5xl font-light text-ink leading-tight transition-all duration-500">
           {curChapter.title}
-        </h2>
+        </h3>
 
-        <p className="text-xs sm:text-sm text-ivory/70 max-w-lg mx-auto font-sans leading-relaxed">
+        <p className="text-xs sm:text-sm text-ink-muted max-w-lg mx-auto font-sans leading-relaxed">
           {curChapter.body}
         </p>
 

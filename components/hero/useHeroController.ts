@@ -11,6 +11,7 @@ interface UseHeroControllerProps {
   onSlideChange?: (newIndex: number) => void;
   onAutoplayProgress?: (progress: number) => void;
   onTextTransition?: (outIndex: number, inIndex: number) => void;
+  isIntroComplete?: boolean;
 }
 
 export function useHeroController({
@@ -18,6 +19,7 @@ export function useHeroController({
   onSlideChange,
   onAutoplayProgress,
   onTextTransition,
+  isIntroComplete = true,
 }: UseHeroControllerProps = {}) {
   const [index, setIndex] = useState(0);
   const [nextIndex, setNextIndex] = useState(1);
@@ -395,14 +397,16 @@ export function useHeroController({
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, [startAutoplay]);
 
-  // Initial autoplay start
+  // Initial autoplay start (engages once intro complete)
   useEffect(() => {
-    startAutoplay();
+    if (isIntroComplete) {
+      startAutoplay();
+    }
     return () => {
       if (autoplayTweenRef.current) autoplayTweenRef.current.kill();
       if (transitionTimelineRef.current) transitionTimelineRef.current.kill();
     };
-  }, [startAutoplay]);
+  }, [isIntroComplete, startAutoplay]);
 
   return {
     index,

@@ -120,8 +120,9 @@ export const SpotlightTour: React.FC = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: '+=380%',
+          end: '+=340%',
           pin: true,
+          pinSpacing: true,
           scrub: 1.2,
           anticipatePin: 1,
           onUpdate: (self) => {
@@ -309,7 +310,7 @@ export const SpotlightTour: React.FC = () => {
       id="lookbook-section"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="relative w-full h-screen bg-espresso text-ivory overflow-hidden select-none"
+      className="relative w-full h-screen bg-espresso text-ivory overflow-hidden select-none rounded-t-[32px] border-t border-ivory/15 shadow-[0_-25px_60px_rgba(0,0,0,0.35)]"
     >
       {/* Viewport Frame with Camera Zoom */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -327,14 +328,14 @@ export const SpotlightTour: React.FC = () => {
             className="object-cover"
           />
 
-          {/* Soft Radial Spotlight Vignette (Dims rest of scene, follows active product) */}
+          {/* Soft Radial Spotlight Vignette capped at 55% dimming */}
           <div
             ref={vignetteRef}
             className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ease-out ${
               isOverview ? 'opacity-0' : 'opacity-100'
             }`}
             style={{
-              background: `radial-gradient(circle 240px at ${currentStop.x}% ${currentStop.y}%, rgba(0,0,0,0) 0%, rgba(18, 16, 14, 0.72) 100%)`,
+              background: `radial-gradient(circle 260px at ${currentStop.x}% ${currentStop.y}%, rgba(0,0,0,0) 0%, rgba(18, 16, 14, 0.55) 100%)`,
             }}
           />
 
@@ -411,7 +412,7 @@ export const SpotlightTour: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute bottom-6 left-4 right-4 sm:left-12 sm:right-auto sm:max-w-md z-30"
+            className="absolute bottom-6 left-4 right-4 sm:left-12 sm:right-auto sm:w-[420px] sm:min-w-[360px] z-30"
           >
             <div
               className="p-5 sm:p-6 rounded-2xl border border-white/20 shadow-2xl overflow-hidden"

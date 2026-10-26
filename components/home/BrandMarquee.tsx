@@ -121,11 +121,11 @@ export const BrandMarquee: React.FC = () => {
             const scale = 1 + factor * 0.08;
             span.style.transform = `translate3d(0, -${lift}px, 0) scale(${scale})`;
             span.style.color = factor > 0.4 ? '#FBF9F5' : 'transparent';
-            span.style.webkitTextStroke = factor > 0.4 ? 'none' : '1px rgba(251, 249, 245, 0.45)';
+            span.style.webkitTextStroke = factor > 0.4 ? 'none' : '1.5px rgba(251, 249, 245, 1.0)';
           } else {
             span.style.transform = 'translate3d(0, 0, 0) scale(1)';
             span.style.color = 'transparent';
-            span.style.webkitTextStroke = '1px rgba(251, 249, 245, 0.45)';
+            span.style.webkitTextStroke = '1.5px rgba(251, 249, 245, 0.70)';
           }
         });
       }
@@ -158,7 +158,7 @@ export const BrandMarquee: React.FC = () => {
       if (s) {
         s.style.transform = 'translate3d(0, 0, 0) scale(1)';
         s.style.color = 'transparent';
-        s.style.webkitTextStroke = '1px rgba(251, 249, 245, 0.45)';
+        s.style.webkitTextStroke = '1.5px rgba(251, 249, 245, 0.70)';
       }
     });
   };
@@ -224,7 +224,7 @@ export const BrandMarquee: React.FC = () => {
               aria-hidden="true"
               className="inline-block font-serif text-[clamp(2.75rem,7vw,7.5rem)] font-light leading-none tracking-tight text-transparent transition-transform duration-300 ease-out will-change-transform"
               style={{
-                WebkitTextStroke: '1px rgba(251, 249, 245, 0.45)',
+                WebkitTextStroke: '1.5px rgba(251, 249, 245, 0.70)',
               }}
             >
               {char === ' ' ? '\u00A0' : char}

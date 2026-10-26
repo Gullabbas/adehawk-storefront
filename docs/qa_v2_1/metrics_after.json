@@ -1,0 +1,47 @@
+{
+  "desktop": {
+    "viewport": "1440x900",
+    "docHeight": 18709,
+    "budgetRatio": 20.8,
+    "framesSampled": 61,
+    "blankFramesCount": 0,
+    "fps": {
+      "p50": 33.3,
+      "p95": 133.4,
+      "longTasksCount": 571
+    },
+    "consoleErrors": []
+  },
+  "tablet": {
+    "viewport": "1024x768",
+    "docHeight": 16714,
+    "budgetRatio": 21.8,
+    "framesSampled": 54,
+    "blankFramesCount": 0,
+    "fps": {
+      "p50": 33.3,
+      "p95": 116.6,
+      "longTasksCount": 327
+    },
+    "consoleErrors": []
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "docHeight": 14735,
+    "budgetRatio": 15.5,
+    "framesSampled": 48,
+    "blankFramesCount": 0,
+    "fps": {
+      "p50": 49.9,
+      "p95": 116.7,
+      "longTasksCount": 495
+    },
+    "consoleErrors": []
+  },
+  "roundTripTest": {
+    "initialTriggers": 0,
+    "finalTriggers": 0,
+    "delta": 0,
+    "pass": true
+  }
+}
