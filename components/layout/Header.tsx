@@ -20,12 +20,20 @@ export const Header: React.FC = () => {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isHeaderLogoVisible, setIsHeaderLogoVisible] = useState(!isHome);
 
   // Track scroll depth and global scroll progress
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 40);
+
+      if (isHome) {
+        // On home, header logo is hidden on first load and appears after scrolling past 320px
+        setIsHeaderLogoVisible(currentScrollY >= 320);
+      } else {
+        setIsHeaderLogoVisible(true);
+      }
 
       const total = document.body.scrollHeight - window.innerHeight;
       const progress = total > 0 ? Math.min(1, Math.max(0, currentScrollY / total)) : 0;
@@ -35,7 +43,7 @@ export const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHome]);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -64,7 +72,7 @@ export const Header: React.FC = () => {
           className={`relative w-full transition-all duration-400 border-b ${
             isScrolled || !isHome
               ? 'bg-espresso/85 backdrop-blur-md border-ivory/15 text-ivory py-3 shadow-[0_10px_30px_rgba(0,0,0,0.35)]'
-              : 'bg-espresso/60 backdrop-blur-sm border-ivory/10 text-ivory py-4'
+              : 'bg-transparent border-transparent text-ivory py-4'
           }`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -100,10 +108,12 @@ export const Header: React.FC = () => {
               </button>
             </div>
 
-            {/* Center Logo */}
+            {/* Center Logo (Hidden on initial home load; appears when scrolling logo reaches header) */}
             <Link
               href="/"
-              className="flex items-center justify-center transition-transform hover:scale-105 duration-300"
+              className={`flex items-center justify-center transition-all duration-300 hover:scale-105 ${
+                isHeaderLogoVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
               aria-label="Adehawk Leather Goods Home"
             >
               <div className="relative w-28 sm:w-32 h-10 sm:h-12">

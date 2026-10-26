@@ -22,8 +22,8 @@ export default async function HomePage() {
       {/* 2. Right-edge Chapter Navigator & Scroll Progress line under header */}
       <ChapterNavigator />
 
-      {/* 3. Hero Stage with reveal transition (isolated from downstream pinned sections) */}
-      <div id="hero-reveal-wrapper" className="relative w-full overflow-hidden">
+      {/* 3. Hero Stage (Top of document flow directly under the intro overlay) */}
+      <div id="hero-section" className="relative w-full overflow-hidden">
         <Hero />
       </div>
 
