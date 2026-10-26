@@ -380,12 +380,51 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Copyright */}
+        {/* Bottom Copyright & Designer Attribution */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-ivory/50 font-sans">
           <p>Copyright © 2026 ADEHAWK LEATHER GOODS all rights reserved.</p>
-          <p className="tracking-widest uppercase text-[10px]">
-            Pure Handmade Leather Goods · Secure Checkout
-          </p>
+
+          <div className="flex flex-col items-center md:items-end gap-1.5">
+            <p className="tracking-widest uppercase text-[10px] text-ivory/70">
+              Designed by:{' '}
+              <a
+                href="https://fiverr.com/muhammadraza707"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ivory font-semibold hover:text-cognac underline underline-offset-4 decoration-cognac/50 hover:decoration-cognac transition-colors cursor-pointer"
+                aria-label="Designed by Muhammad Raza on Fiverr"
+              >
+                MUHAMMAD RAZA
+              </a>
+            </p>
+
+            {/* Social Icons in same text size */}
+            <div className="flex items-center gap-3 text-ivory/60">
+              <a
+                href="https://www.linkedin.com/in/muhammadraza707/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-cognac transition-colors p-1"
+                aria-label="Muhammad Raza LinkedIn Profile"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.53 1.53 0 0 0 1.54-1.54 1.54 1.54 0 0 0-1.54-1.54A1.54 1.54 0 0 0 4.92 7.2a1.54 1.54 0 0 0 1.54 1.56m1.39 9.74v-8.37H5.07v8.37h2.78z" />
+                </svg>
+              </a>
+
+              <a
+                href="https://www.behance.net/muhammadrazaa707"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-cognac transition-colors p-1"
+                aria-label="Muhammad Raza Behance Profile"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-4.084 0-6.625-2.827-6.625-6.845 0-4.148 2.656-6.885 6.452-6.885 4.316 0 6.166 3.094 5.753 7.086h-9.351c.071 2.309 1.487 3.992 3.864 3.992 1.637 0 2.879-.769 3.486-1.928l1.522 1.58zm-8.835-5.321h6.541c-.059-1.748-1.042-3.159-2.997-3.159-1.979 0-3.188 1.405-3.544 3.159zm-8.891 7.321h-6v-14h6.568c2.899 0 4.932 1.41 4.932 4.025 0 1.633-.827 2.868-2.158 3.492 1.704.57 2.658 2.059 2.658 3.935 0 2.836-2.179 4.548-6 4.548zm-3.327-8.238h3.048c1.554 0 2.457-.68 2.457-1.938 0-1.218-.903-1.87-2.457-1.87h-3.048v3.808zm0 6.289h3.359c1.69 0 2.709-.77 2.709-2.175 0-1.365-1.019-2.164-2.709-2.164h-3.359v4.339z" />
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Giant Kinetic Proximity Wordmark with 0.9s Trailing Wave */}
