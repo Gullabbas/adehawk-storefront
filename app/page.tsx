@@ -16,18 +16,19 @@ export default async function HomePage() {
 
   return (
     <div className="relative w-full bg-espresso min-h-screen">
-      {/* 1. Intro: Logo First, Scroll Reveal */}
-      <IntroScene />
+      {/* 1. Intro + Hero Container: Pinned during intro scrub so slider DOES NOT scroll while intro dissolves */}
+      <div id="intro-hero-wrapper" className="relative w-full">
+        {/* The Hero Slider: Sits at the top of the page */}
+        <Hero />
+
+        {/* Intro Overlay: Full-viewport layer covering Hero until dissolved */}
+        <IntroScene />
+      </div>
 
       {/* 2. Right-edge Chapter Navigator & Scroll Progress line under header */}
       <ChapterNavigator />
 
-      {/* 3. Hero Stage (Top of document flow directly under the intro overlay) */}
-      <div id="hero-section" className="relative w-full overflow-hidden">
-        <Hero />
-      </div>
-
-      {/* 4. Interactive Dual-Track Fluid Brand Marquee */}
+      {/* 3. Interactive Dual-Track Fluid Brand Marquee */}
       <BrandMarquee />
 
       {/* 5. 3D Coverflow Collection Showcase (Pinned 260vh, direct child in document flow) */}

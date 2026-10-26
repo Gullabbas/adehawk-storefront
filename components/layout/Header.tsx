@@ -20,20 +20,12 @@ export const Header: React.FC = () => {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isHeaderLogoVisible, setIsHeaderLogoVisible] = useState(!isHome);
 
   // Track scroll depth and global scroll progress
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       setIsScrolled(currentScrollY > 40);
-
-      if (isHome) {
-        // On home, header logo is hidden on first load and appears after scrolling past 320px
-        setIsHeaderLogoVisible(currentScrollY >= 320);
-      } else {
-        setIsHeaderLogoVisible(true);
-      }
 
       const total = document.body.scrollHeight - window.innerHeight;
       const progress = total > 0 ? Math.min(1, Math.max(0, currentScrollY / total)) : 0;
@@ -43,7 +35,7 @@ export const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isHome]);
+  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -75,7 +67,7 @@ export const Header: React.FC = () => {
               : 'bg-transparent border-transparent text-ivory py-4'
           }`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between min-h-[44px] sm:min-h-[48px]">
             {/* Left Nav (Desktop) */}
             <div className="hidden md:flex items-center space-x-8">
               {navLinks.map(link => {
@@ -108,25 +100,29 @@ export const Header: React.FC = () => {
               </button>
             </div>
 
-            {/* Center Logo (Hidden on initial home load; appears when scrolling logo reaches header) */}
-            <Link
-              href="/"
-              className={`flex items-center justify-center transition-all duration-300 hover:scale-105 ${
-                isHeaderLogoVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
-              }`}
-              aria-label="Adehawk Leather Goods Home"
-            >
-              <div className="relative w-28 sm:w-32 h-10 sm:h-12">
-                <Image
-                  src="/assets/brand/logo.png"
-                  alt="ADEHAWK LEATHER GOODS"
-                  fill
-                  priority
-                  sizes="(max-width: 640px) 112px, 128px"
-                  className="object-contain"
-                />
-              </div>
-            </Link>
+            {/* True Dead-Center Logo (Guaranteed at 50% screen center across all viewports) */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center pointer-events-auto">
+              <Link
+                href="/"
+                className="flex items-center justify-center transition-opacity duration-200 hover:scale-105"
+                style={{
+                  opacity: isHome ? 0 : 1,
+                  pointerEvents: isHome ? 'none' : 'auto',
+                }}
+                aria-label="Adehawk Leather Goods Home"
+              >
+                <div className="relative w-[54px] sm:w-[64px] h-[40px] sm:h-[48px]">
+                  <Image
+                    src="/assets/brand/logo.png"
+                    alt="ADEHAWK LEATHER GOODS"
+                    fill
+                    priority
+                    sizes="(max-width: 640px) 54px, 64px"
+                    className="object-contain"
+                  />
+                </div>
+              </Link>
+            </div>
 
             {/* Right Utility Icons */}
             <div className="flex items-center space-x-2 sm:space-x-5">
