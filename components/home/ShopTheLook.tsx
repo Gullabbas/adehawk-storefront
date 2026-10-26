@@ -26,7 +26,7 @@ const HOTSPOTS: Hotspot[] = [
     title: 'Black Leather Executive Briefcase',
     price: 90,
     handle: 'black-leather-executive-briefcase',
-    image: '/assets/products/Black Leather Executive Briefcase.jpg',
+    image: '/assets/products/black-leather-executive-briefcase.jpg',
     category: 'Executive Briefcase',
   },
   {
@@ -36,7 +36,7 @@ const HOTSPOTS: Hotspot[] = [
     title: 'Cowhide Leather Duffle Bag',
     price: 130,
     handle: 'cowhide-leather-duffle-bag',
-    image: '/assets/products/Cowhide Leather Duffle Bag.webp',
+    image: '/assets/products/cowhide-leather-duffle-bag.webp',
     category: 'Travel Weekender',
   },
   {
@@ -46,7 +46,7 @@ const HOTSPOTS: Hotspot[] = [
     title: 'Brown Leather Laptop Sleeve Bag',
     price: 80,
     handle: 'brown-leather-laptop-sleeve-bag',
-    image: '/assets/products/Brown Leather Laptop Sleeve Bag.webp',
+    image: '/assets/products/brown-leather-laptop-sleeve-bag.webp',
     category: 'Laptop Protection',
   },
 ];
@@ -73,7 +73,7 @@ export const ShopTheLook: React.FC = () => {
         {/* Interactive Canvas */}
         <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full bg-ivory-subtle border border-ink/10 shadow-2xl overflow-hidden">
           <Image
-            src="/assets/products/Shop the Look bags.webp"
+            src="/assets/products/shop-the-look-bags.webp"
             alt="Adehawk Leather Goods - Shop the Look Collection"
             fill
             sizes="100vw"

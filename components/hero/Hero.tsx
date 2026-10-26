@@ -51,6 +51,7 @@ export const Hero: React.FC = () => {
 
   return (
     <section
+      id="hero-section"
       ref={heroRef}
       className="relative w-full h-[100svh] bg-espresso overflow-hidden"
     >

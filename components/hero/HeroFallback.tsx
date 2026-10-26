@@ -77,7 +77,7 @@ export const HeroFallback: React.FC<HeroFallbackProps> = ({
                 src={slide.desktopImage}
                 alt={slide.headline}
                 fill
-                priority={idx === 0}
+                priority
                 sizes="100vw"
                 className="object-cover"
               />

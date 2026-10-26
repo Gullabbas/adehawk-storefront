@@ -1,13 +1,25 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AnimatedIcon } from '@/components/ui/AnimatedIcon';
 import { Button } from '@/components/ui/Button';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const LETTERS = ['A', 'D', 'E', 'H', 'A', 'W', 'K'];
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const footerRef = useRef<HTMLElement>(null);
+  const linksGridRef = useRef<HTMLDivElement>(null);
+  const wordmarkContainerRef = useRef<HTMLDivElement>(null);
+  const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const lastInteractionTime = useRef<number>(Date.now());
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,8 +34,125 @@ export const Footer: React.FC = () => {
     }, 800);
   };
 
+  // Kinetic proximity wave physics on the wordmark
+  const handlePointerInteraction = useCallback((clientX: number, clientY: number) => {
+    lastInteractionTime.current = Date.now();
+    const radius = 180;
+
+    letterRefs.current.forEach((span) => {
+      if (!span) return;
+      const rect = span.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const dist = Math.hypot(clientX - centerX, clientY - centerY);
+
+      if (dist < radius) {
+        const factor = Math.max(0, 1 - dist / radius);
+        const smooth = Math.pow(factor, 1.5);
+
+        gsap.to(span, {
+          opacity: 0.08 + smooth * 0.92,
+          y: -10 * smooth,
+          color: '#FFFFFF',
+          textShadow: `0 0 30px rgba(255, 255, 255, ${0.35 * smooth})`,
+          duration: 0.18,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      } else {
+        // Slow 0.9s trail return
+        gsap.to(span, {
+          opacity: 0.08,
+          y: 0,
+          textShadow: '0 0 0px rgba(255, 255, 255, 0)',
+          duration: 0.9,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      }
+    });
+  }, []);
+
+  const handlePointerLeave = useCallback(() => {
+    letterRefs.current.forEach((span) => {
+      if (!span) return;
+      gsap.to(span, {
+        opacity: 0.08,
+        y: 0,
+        textShadow: '0 0 0px rgba(255, 255, 255, 0)',
+        duration: 0.9,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+    });
+  }, []);
+
+  // Idle wave animation every 6 seconds if no interaction
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const interval = setInterval(() => {
+      const now = Date.now();
+      if (now - lastInteractionTime.current > 4500) {
+        letterRefs.current.forEach((span, idx) => {
+          if (!span) return;
+          gsap.timeline()
+            .to(span, {
+              opacity: 0.85,
+              y: -8,
+              textShadow: '0 0 25px rgba(255, 255, 255, 0.3)',
+              duration: 0.45,
+              delay: idx * 0.1,
+              ease: 'power2.out',
+            })
+            .to(span, {
+              opacity: 0.08,
+              y: 0,
+              textShadow: '0 0 0px rgba(255, 255, 255, 0)',
+              duration: 0.9,
+              ease: 'power2.out',
+            });
+        });
+      }
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Curtain reveal & staggered links on scroll entry
+  useEffect(() => {
+    if (!footerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      if (linksGridRef.current) {
+        const columns = linksGridRef.current.children;
+        gsap.fromTo(
+          columns,
+          { opacity: 0, y: 35 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: linksGridRef.current,
+              start: 'top 90%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <footer className="bg-espresso text-ivory pt-20 pb-12 border-t border-ivory/10 overflow-hidden relative">
+    <footer
+      ref={footerRef}
+      className="relative z-0 bg-espresso text-ivory pt-20 pb-12 border-t border-ivory/10 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Top Newsletter & Ethos Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-ivory/10">
@@ -73,7 +202,7 @@ export const Footer: React.FC = () => {
             </h4>
             {status === 'success' ? (
               <div className="p-4 bg-cognac/20 border border-cognac/40 text-ivory text-sm font-sans">
-                ✓ Welcome to Adehawk. Your journey with authentic British leather begins now.
+                ✓ Welcome to Adehawk. Your journey with authentic handmade leather begins now.
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="space-y-2 max-w-md">
@@ -81,7 +210,7 @@ export const Footer: React.FC = () => {
                   <input
                     type="email"
                     value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
                     aria-label="Email address for newsletter"
                     className="flex-1 bg-espresso-surface border border-ivory/15 px-4 py-3 text-sm text-ivory placeholder:text-ivory/40 outline-none focus:border-cognac transition-colors"
@@ -108,8 +237,11 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Links Navigation Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-b border-ivory/10 text-xs uppercase tracking-kicker font-sans">
+        {/* Links Navigation Grid with Entry Stagger */}
+        <div
+          ref={linksGridRef}
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-b border-ivory/10 text-xs uppercase tracking-kicker font-sans"
+        >
           {/* Quick Links */}
           <div className="space-y-4">
             <span className="text-ivory font-semibold block text-sm">Quick Links</span>
@@ -248,7 +380,7 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Copyright & Large Brand Watermark */}
+        {/* Bottom Copyright */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-ivory/50 font-sans">
           <p>Copyright © 2026 ADEHAWK LEATHER GOODS all rights reserved.</p>
           <p className="tracking-widest uppercase text-[10px]">
@@ -256,14 +388,37 @@ export const Footer: React.FC = () => {
           </p>
         </div>
 
-        {/* Giant Subtle Wordmark Reveal */}
+        {/* Giant Kinetic Proximity Wordmark with 0.9s Trailing Wave */}
         <div
-          className="w-full text-center select-none pointer-events-none mt-12 overflow-hidden"
-          aria-hidden="true"
+          ref={wordmarkContainerRef}
+          onPointerMove={(e) => handlePointerInteraction(e.clientX, e.clientY)}
+          onPointerLeave={handlePointerLeave}
+          onTouchMove={(e) => {
+            const touch = e.touches[0];
+            if (touch) handlePointerInteraction(touch.clientX, touch.clientY);
+          }}
+          onTouchEnd={handlePointerLeave}
+          className="w-full text-center select-none mt-12 py-6 overflow-hidden cursor-default"
+          aria-label="ADEHAWK"
         >
-          <span className="font-serif text-[clamp(3.5rem,15vw,14rem)] leading-none font-bold text-ivory/[0.04] tracking-tight block uppercase">
-            ADEHAWK
-          </span>
+          <div className="inline-flex items-center justify-center gap-1 sm:gap-2">
+            {LETTERS.map((char, index) => (
+              <span
+                key={index}
+                ref={(el) => {
+                  letterRefs.current[index] = el;
+                }}
+                className="font-serif text-[clamp(3.5rem,15vw,14rem)] leading-none font-bold uppercase transition-transform inline-block select-none will-change-transform"
+                style={{
+                  opacity: 0.08,
+                  color: '#FFFFFF',
+                  letterSpacing: '0.02em',
+                }}
+              >
+                {char}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </footer>

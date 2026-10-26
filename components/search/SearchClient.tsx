@@ -98,7 +98,7 @@ export const SearchClient: React.FC = () => {
                 { title: 'Executive Bags', handle: 'business-work-bags' },
                 { title: 'Travel Duffels', handle: 'bags' },
                 { title: 'Wallets & Sets', handle: 'wallets' },
-                { title: 'English Belts', handle: 'belts' },
+                { title: 'Belts', handle: 'belts' },
               ].map(item => (
                 <Link
                   key={item.handle}

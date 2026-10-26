@@ -128,7 +128,7 @@ export const CraftedForTheJourney: React.FC = () => {
               className="absolute left-0 top-6 w-[65%] aspect-square bg-ivory-subtle shadow-xl border border-ink/10 overflow-hidden z-10"
             >
               <Image
-                src="/assets/products/CRAFTED FOR THE JOURNEY.webp"
+                src="/assets/products/crafted-for-the-journey.webp"
                 alt="Crafted for the Journey"
                 fill
                 sizes="(max-width: 1024px) 70vw, 380px"
@@ -142,7 +142,7 @@ export const CraftedForTheJourney: React.FC = () => {
               className="absolute right-0 bottom-4 w-[60%] aspect-[4/5] bg-ivory-subtle shadow-2xl border border-ink/10 overflow-hidden z-20"
             >
               <Image
-                src="/assets/products/Cowhide Leather Duffle Bag.webp"
+                src="/assets/products/cowhide-leather-duffle-bag.webp"
                 alt="Handmade Cowhide Travel Duffle Bag"
                 fill
                 sizes="(max-width: 1024px) 60vw, 340px"

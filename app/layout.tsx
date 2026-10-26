@@ -30,13 +30,13 @@ export const metadata: Metadata = {
     template: '%s | ADEHAWK LEATHER GOODS',
   },
   description:
-    'Artisanal handmade leather goods crafted in Great Britain. Executive briefcases, travel duffels, ultra-slim wallets, and solid English bridle belts.',
+    'Pure handmade leather goods. Executive briefcases, travel duffels, ultra-slim wallets, and classic leather belts.',
   keywords: [
     'Handmade leather goods',
-    'Leather briefcases UK',
+    'Leather briefcases',
     'Executive leather bag',
     'Handcrafted leather wallet',
-    'English bridle leather belt',
+    'Classic leather belt',
     'Luxury weekender duffle bag',
   ],
   authors: [{ name: 'ADEHAWK LEATHER GOODS' }],
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     siteName: 'ADEHAWK LEATHER GOODS',
     title: 'ADEHAWK | Pure Handmade Leather Goods',
     description:
-      'Artisanal handmade leather goods crafted in Great Britain. Timeless by design, crafted for everyday, designed to last.',
+      'Pure handmade leather goods. Timeless by design, crafted for everyday, designed to last.',
     images: [
       {
         url: '/assets/products/collection.webp',
@@ -70,7 +70,7 @@ const organizationSchema = {
   name: 'ADEHAWK LEATHER GOODS',
   url: 'https://adehawk.com',
   logo: 'https://adehawk.com/assets/brand/logo.png',
-  description: 'Pure Handmade Leather Products crafted in Great Britain.',
+  description: 'Pure Handmade Leather Products.',
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'GB',

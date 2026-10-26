@@ -142,7 +142,7 @@ export const SearchOverlay: React.FC = () => {
                       {[
                         { title: 'Executive Bags', href: '/collections/business-work-bags' },
                         { title: 'Signature Wallets', href: '/collections/wallets' },
-                        { title: 'English Belts', href: '/collections/belts' },
+                        { title: 'Belts', href: '/collections/belts' },
                         { title: 'Travel Duffels', href: '/collections/bags' },
                       ].map(col => (
                         <Link

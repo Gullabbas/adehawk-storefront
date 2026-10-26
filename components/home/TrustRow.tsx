@@ -40,7 +40,7 @@ export const TrustRow: React.FC = () => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   return (
-    <section className="bg-ivory py-16 sm:py-24 border-b border-ink/10">
+    <section id="trust-section" className="bg-ivory py-16 sm:py-24 border-b border-ink/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 divide-y sm:divide-y-0 sm:divide-x divide-ink/10">
           {TRUST_POINTS.map((item, idx) => (

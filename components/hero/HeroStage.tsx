@@ -18,9 +18,10 @@ const HeroGL = dynamic(
 
 interface HeroStageProps {
   onLcpReady?: () => void;
+  isIntroComplete?: boolean;
 }
 
-export const HeroStage: React.FC<HeroStageProps> = () => {
+export const HeroStage: React.FC<HeroStageProps> = ({ isIntroComplete = true }) => {
   const [isGlReady, setIsGlReady] = useState(false);
   const [isGlDowngraded, setIsGlDowngraded] = useState(false);
   const [autoplayProgress, setAutoplayProgress] = useState(0);
@@ -73,7 +74,7 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
     setMouseOffset({ x, y });
   };
 
-  // Cursor states
+  // Cursor states: Set 'drag' label over stage
   const handleMouseEnter = () => {
     setCursor('drag', 'Drag');
   };
@@ -133,9 +134,9 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
         />
       )}
 
-      {/* 2. Text Legibility Bottom Scrim (Strictly restricted to bottom 40%, 40% max opacity) */}
+      {/* 2. Text Legibility Bottom Scrim */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-[45%] pointer-events-none bg-gradient-to-t from-black/50 via-black/25 to-transparent"
+        className="absolute bottom-0 left-0 right-0 h-[45%] pointer-events-none bg-gradient-to-t from-black/60 via-black/30 to-transparent"
         aria-hidden="true"
       />
 
@@ -144,22 +145,25 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
         className="hidden md:block absolute bottom-8 left-12 select-none pointer-events-none font-serif text-[clamp(8rem,16vw,16rem)] font-light leading-none text-transparent stroke-numeral"
         aria-hidden="true"
         style={{
-          WebkitTextStroke: '1px rgba(251, 249, 245, 0.15)',
+          WebkitTextStroke: '1px rgba(251, 249, 245, 0.12)',
         }}
       >
         0{index + 1}
       </div>
 
-      {/* 4. Text Choreography Container */}
+      {/* 4. Text Choreography in Liquid-Glass Panel */}
       <div
-        className="absolute inset-0 pointer-events-none flex flex-col justify-end p-6 sm:p-12 md:p-16 lg:p-20 z-10"
+        className={`absolute inset-0 pointer-events-none flex flex-col justify-end p-4 sm:p-8 md:p-12 lg:p-16 z-20 ${
+          currentSlide.panelAnchor === 'bottom-right' ? 'items-end' : 'items-start'
+        }`}
         style={{
           transform: `translate3d(${mouseOffset.x}px, ${mouseOffset.y}px, 0)`,
-          transition: 'transform 0.12s cubic-bezier(0.22, 1, 0.36, 1)',
+          transition: 'transform 0.15s cubic-bezier(0.22, 1, 0.36, 1)',
         }}
       >
-        <div className="max-w-4xl space-y-4">
-          {/* Animated Kicker */}
+        {/* The Liquid-Glass Floating Card */}
+        <div className="w-full max-w-[calc(100vw-32px)] sm:max-w-[560px] lg:max-w-[520px] rounded-[24px] bg-[rgba(18,14,12,0.52)] backdrop-blur-[24px] backdrop-saturate-[140%] border border-[rgba(255,255,255,0.16)] p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.16)] space-y-4 pointer-events-auto">
+          {/* Animated Kicker in High-Contrast Warm Cognac Gold */}
           <div className="overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.p
@@ -168,7 +172,7 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
                 animate={{ opacity: 1, letterSpacing: '0.28em' }}
                 exit={{ opacity: 0, letterSpacing: '0.45em' }}
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="text-xs sm:text-sm font-sans uppercase font-medium text-cognac tracking-kicker"
+                className="text-xs sm:text-sm font-sans uppercase font-medium text-[#D9A066] tracking-kicker"
               >
                 {currentSlide.kicker}
               </motion.p>
@@ -184,7 +188,7 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
                 animate={{ y: '0%', opacity: 1 }}
                 exit={{ y: '-110%', opacity: 0 }}
                 transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif text-[clamp(2.75rem,7vw,7.5rem)] font-light leading-[1.02] text-ivory tracking-tight drop-shadow-sm max-w-3xl"
+                className="font-serif text-[clamp(2rem,3.6vw,3.75rem)] font-light leading-[1.05] text-ivory tracking-tight drop-shadow-md"
               >
                 {currentSlide.headline}
               </motion.h1>
@@ -194,15 +198,15 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
           {/* CTA & Counter Row */}
           <motion.div
             key={`cta-${index}`}
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.55, duration: 0.6 }}
-            className="pt-2 flex items-center gap-8 pointer-events-auto"
+            className="pt-2 flex items-center justify-between gap-4"
           >
             <Button
               href={currentSlide.ctaHref}
               variant="dark"
-              size="lg"
+              size="md"
               magnetic
               icon="arrow-right"
             >
@@ -210,7 +214,7 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
             </Button>
 
             {/* Digit-Roll Counter */}
-            <div className="flex items-center text-xs font-sans tracking-widest text-ivory/80">
+            <div className="flex items-center text-xs font-sans tracking-widest text-ivory/80 bg-black/30 px-3 py-1.5 rounded-full border border-ivory/15">
               <span className="font-semibold text-ivory">0{index + 1}</span>
               <span className="mx-2 text-ivory/40">—</span>
               <span className="text-ivory/50">0{HERO_CONFIG.slides.length}</span>
@@ -219,21 +223,25 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
         </div>
       </div>
 
-      {/* 5. Desktop Right-Side Vertical Rail */}
-      <div className="hidden lg:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col space-y-8 z-20 pointer-events-auto">
+      {/* 5. Desktop Right-Side Vertical Rail: Glass Chips */}
+      <div className="hidden lg:flex absolute right-10 top-1/2 -translate-y-1/2 flex-col space-y-4 z-20 pointer-events-auto">
         {HERO_CONFIG.slides.map((s, idx) => {
           const isActive = idx === index;
           return (
             <button
               key={s.id}
               onClick={() => go(idx, idx > index ? 1 : -1)}
-              className="group flex items-center space-x-4 text-left cursor-pointer"
+              className={`group flex items-center space-x-3 px-4 py-2.5 rounded-full backdrop-blur-[20px] border transition-all duration-300 cursor-pointer text-left ${
+                isActive
+                  ? 'bg-espresso/80 border-ivory/30 shadow-lg scale-105'
+                  : 'bg-espresso/45 border-ivory/10 hover:border-ivory/20'
+              }`}
               aria-label={`Go to slide ${idx + 1}: ${s.label}`}
             >
-              <div className="relative w-8 h-[2px] bg-ivory/20 overflow-hidden">
+              <div className="relative w-6 h-[2px] bg-ivory/20 overflow-hidden rounded-full">
                 {isActive && (
                   <motion.div
-                    className="absolute inset-0 bg-ivory"
+                    className="absolute inset-0 bg-[#D9A066]"
                     style={{
                       transformOrigin: 'left',
                       scaleX: autoplayProgress,
@@ -242,8 +250,8 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
                 )}
               </div>
               <span
-                className={`text-xs uppercase tracking-kicker font-sans transition-colors duration-300 ${
-                  isActive ? 'text-ivory font-medium' : 'text-ivory/40 group-hover:text-ivory/70'
+                className={`text-[11px] uppercase tracking-kicker font-sans transition-colors duration-300 ${
+                  isActive ? 'text-ivory font-semibold' : 'text-ivory/60 group-hover:text-ivory/90'
                 }`}
               >
                 {s.label}
@@ -254,7 +262,7 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
       </div>
 
       {/* 6. Mobile Horizontal 3-Segment Progress Bar */}
-      <div className="lg:hidden absolute bottom-4 left-6 right-6 flex items-center gap-2 z-20 pointer-events-none">
+      <div className="lg:hidden absolute bottom-3 left-4 right-4 flex items-center gap-2 z-20 pointer-events-none">
         {HERO_CONFIG.slides.map((s, idx) => {
           const isActive = idx === index;
           return (
@@ -277,12 +285,12 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
         })}
       </div>
 
-      {/* 7. Bottom-Right Controls: SVG Circular Ring Progress Next + Pause/Play Button */}
-      <div className="absolute bottom-6 right-6 sm:bottom-12 sm:right-12 z-20 flex items-center space-x-3 pointer-events-auto">
+      {/* 7. Bottom-Right Controls: Glass Ring Next + Pause/Play Button */}
+      <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 z-20 flex items-center space-x-3 pointer-events-auto">
         {/* Pause / Play Toggle (WCAG 2.2.2) */}
         <button
           onClick={togglePause}
-          className="w-10 h-10 rounded-full border border-ivory/25 bg-black/30 backdrop-blur-sm flex items-center justify-center text-ivory hover:border-ivory transition-colors cursor-pointer"
+          className="w-11 h-11 rounded-full border border-ivory/20 bg-espresso/60 backdrop-blur-[20px] flex items-center justify-center text-ivory hover:border-ivory transition-colors cursor-pointer shadow-lg"
           aria-label={isPaused ? 'Resume autoplay' : 'Pause autoplay'}
         >
           {isPaused ? (
@@ -300,11 +308,11 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
         {/* Circular Next Button with SVG Ring Progress */}
         <button
           onClick={next}
-          className="relative w-14 h-14 rounded-full flex items-center justify-center text-ivory group cursor-pointer"
+          className="relative w-14 h-14 rounded-full flex items-center justify-center text-ivory group cursor-pointer shadow-xl"
           aria-label="Next slide"
         >
-          {/* Background circle */}
-          <div className="absolute inset-0 rounded-full bg-black/30 backdrop-blur-sm border border-ivory/20 group-hover:border-ivory/60 transition-colors" />
+          {/* Background glass circle */}
+          <div className="absolute inset-0 rounded-full bg-espresso/60 backdrop-blur-[20px] border border-ivory/20 group-hover:border-ivory/50 transition-colors" />
 
           {/* SVG Ring Progress */}
           <svg
@@ -316,7 +324,7 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
               cy="28"
               r="24"
               fill="none"
-              stroke="rgba(251, 249, 245, 0.2)"
+              stroke="rgba(251, 249, 245, 0.15)"
               strokeWidth="2"
             />
             <circle
@@ -324,7 +332,7 @@ export const HeroStage: React.FC<HeroStageProps> = () => {
               cy="28"
               r="24"
               fill="none"
-              stroke="#8E4A23"
+              stroke="#D9A066"
               strokeWidth="2"
               strokeDasharray={150.8}
               strokeDashoffset={150.8 * (1 - autoplayProgress)}

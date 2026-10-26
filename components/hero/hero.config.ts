@@ -11,6 +11,7 @@ export interface HeroSlide {
   imageHeight: number;
   focalPoint: { x: number; y: number };
   themeBg: string;
+  panelAnchor: 'bottom-left' | 'bottom-right';
 }
 
 export const HERO_CONFIG = {
@@ -32,6 +33,7 @@ export const HERO_CONFIG = {
       imageHeight: 734,
       focalPoint: { x: 0.5, y: 0.45 },
       themeBg: '#161311',
+      panelAnchor: 'bottom-left' as const,
     },
     {
       id: 2,
@@ -40,12 +42,13 @@ export const HERO_CONFIG = {
       ctaText: 'Shop the Collection',
       ctaHref: '/collections/wallets',
       label: 'Everyday Luxury',
-      desktopImage: '/assets/products/Cowhide Leather Duffle Bag.webp',
-      mobileImage: '/assets/products/Cowhide Leather Duffle Bag.webp',
+      desktopImage: '/assets/products/cowhide-leather-duffle-bag.webp',
+      mobileImage: '/assets/products/cowhide-leather-duffle-bag.webp',
       imageWidth: 800,
       imageHeight: 1000,
       focalPoint: { x: 0.5, y: 0.5 },
       themeBg: '#1A1614',
+      panelAnchor: 'bottom-left' as const,
     },
     {
       id: 3,
@@ -54,12 +57,13 @@ export const HERO_CONFIG = {
       ctaText: 'Shop the Collection',
       ctaHref: '/collections/business-work-bags',
       label: 'Executive Workwear',
-      desktopImage: '/assets/products/Black Leather Executive Briefcase.jpg',
-      mobileImage: '/assets/products/Black Leather Executive Briefcase.jpg',
+      desktopImage: '/assets/products/black-leather-executive-briefcase.jpg',
+      mobileImage: '/assets/products/black-leather-executive-briefcase.jpg',
       imageWidth: 800,
       imageHeight: 1000,
       focalPoint: { x: 0.5, y: 0.5 },
       themeBg: '#12100E',
+      panelAnchor: 'bottom-left' as const,
     },
   ] as HeroSlide[],
 };

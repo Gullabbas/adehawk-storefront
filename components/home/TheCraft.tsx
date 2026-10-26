@@ -12,12 +12,12 @@ if (typeof window !== 'undefined') {
 
 const CRAFT_IMAGES = [
   {
-    src: '/assets/products/Dark Brown Leather Executive Briefcase.webp',
+    src: '/assets/products/dark-brown-leather-executive-briefcase.webp',
     caption: 'Full-Grain Pull-Up Leather',
     detail: 'Develops rich patina and amber tones with every journey.',
   },
   {
-    src: '/assets/products/Classic Brown Leather Belt.webp',
+    src: '/assets/products/classic-brown-leather-belt.webp',
     caption: 'Solid 4mm English Bridle',
     detail: 'Hand-beveled and burnished with natural organic beeswax.',
   },

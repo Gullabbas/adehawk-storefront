@@ -1,12 +1,12 @@
 import { commerce } from '@/lib/commerce';
+import { IntroScene } from '@/components/home/IntroScene';
+import { ChapterNavigator } from '@/components/ui/ChapterNavigator';
 import { Hero } from '@/components/hero/Hero';
 import { BrandMarquee } from '@/components/home/BrandMarquee';
-import { ShopByCollection } from '@/components/home/ShopByCollection';
-import { CraftedForTheJourney } from '@/components/home/CraftedForTheJourney';
-import { SignatureBagsRail } from '@/components/home/SignatureBagsRail';
-import { TheCraft } from '@/components/home/TheCraft';
-import { SignatureWalletsGrid } from '@/components/home/SignatureWalletsGrid';
-import { ShopTheLook } from '@/components/home/ShopTheLook';
+import { CollectionShowcase3D } from '@/components/home/CollectionShowcase3D';
+import { TheCraftPinned } from '@/components/home/TheCraftPinned';
+import { WalletStudio } from '@/components/home/WalletStudio';
+import { SpotlightTour } from '@/components/home/SpotlightTour';
 import { TrustRow } from '@/components/home/TrustRow';
 
 export const revalidate = 3600; // 1 hour cache
@@ -15,33 +15,59 @@ export default async function HomePage() {
   const products = await commerce.getProducts();
 
   return (
-    <div className="relative w-full bg-ivory">
-      {/* 1. Cinematic WebGL Hero Stage */}
-      <Hero />
+    <div className="relative w-full bg-espresso min-h-screen">
+      {/* 1. Intro: Logo First, Scroll Reveal (Replaces preloader on Home) */}
+      <IntroScene />
 
-      {/* 2. Fluid Brand Marquee */}
-      <BrandMarquee />
+      {/* 2. Right-edge Chapter Navigator & Scroll Progress line under header */}
+      <ChapterNavigator />
 
-      {/* 3. Shop by Collection (Pinned Horizontal Scroll) */}
-      <ShopByCollection />
+      {/* 3. Site Container with Circular Expansion Mask & De-Blur Driven by Intro */}
+      <div
+        id="home-reveal-mask"
+        className="relative w-full overflow-hidden origin-center will-change-transform"
+        style={{
+          clipPath: 'circle(150% at 50% 50%)',
+          filter: 'none',
+          transform: 'scale(1)',
+          transition: 'none',
+        }}
+      >
+        {/* Card 1: Cinematic WebGL Hero Stage */}
+        <div className="relative z-10">
+          <Hero />
+        </div>
 
-      {/* 4. The Art of Leather / Crafted for the Journey */}
-      <CraftedForTheJourney />
+        {/* Card 2: Interactive Dual-Track Fluid Brand Marquee */}
+        <div className="relative z-10">
+          <BrandMarquee />
+        </div>
 
-      {/* 5. Signature Bags Draggable Rail */}
-      <SignatureBagsRail products={products} />
+        {/* Card 3: 3D Coverflow Collection Showcase (Pinned 300vh) */}
+        <div className="relative z-20 -mt-6 rounded-t-[32px] overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.3)]">
+          <CollectionShowcase3D />
+        </div>
 
-      {/* 6. The Craft / Crafted with Character (Dark Espresso Pinned) */}
-      <TheCraft />
+        {/* Card 4: Apple-Style Pinned Storytelling on Briefcase (Pinned 500vh) */}
+        <div className="relative z-30 -mt-6 rounded-t-[32px] overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.35)]">
+          <TheCraftPinned />
+        </div>
 
-      {/* 7. Signature Wallets Grid with Dynamic Colour Swatches */}
-      <SignatureWalletsGrid products={products} />
+        {/* Card 5: Wallet Studio (Light, Tinted, Interactive Swatches & Film Strip) */}
+        <div className="relative z-40 -mt-8 rounded-t-[32px] overflow-hidden shadow-[0_-25px_60px_rgba(0,0,0,0.2)]">
+          <WalletStudio />
+        </div>
 
-      {/* 8. Interactive Shop the Look Hotspots */}
-      <ShopTheLook />
+        {/* Card 6: Shop the Look Guided Spotlight Tour (Pinned 380vh) */}
+        <div className="relative z-50 -mt-8 rounded-t-[32px] overflow-hidden shadow-[0_-25px_60px_rgba(0,0,0,0.35)]">
+          <SpotlightTour />
+        </div>
 
-      {/* 9. Brand Trust Row */}
-      <TrustRow />
+        {/* Card 7: Brand Assurances Trust Row */}
+        <div className="relative z-[60] -mt-8 rounded-t-[32px] overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.18)]">
+          <TrustRow />
+        </div>
+      </div>
     </div>
   );
 }

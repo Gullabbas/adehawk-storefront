@@ -2,12 +2,17 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Preloader: React.FC = () => {
   const [show, setShow] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    // Replaced on home page by IntroScene
+    if (pathname === '/') return;
+
     const hasShown = sessionStorage.getItem('adehawk_preloader_shown');
     if (!hasShown) {
       setShow(true);
@@ -17,7 +22,9 @@ export const Preloader: React.FC = () => {
       }, 1400);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [pathname]);
+
+  if (pathname === '/') return null;
 
   return (
     <AnimatePresence>
@@ -51,7 +58,7 @@ export const Preloader: React.FC = () => {
               transition={{ delay: 0.25, duration: 0.6 }}
               className="font-sans text-[11px] uppercase text-ivory tracking-kicker font-light"
             >
-              Handmade Leather Goods · Great Britain
+              Pure Handmade Leather Products
             </motion.p>
           </motion.div>
         </motion.div>

@@ -10,12 +10,24 @@ fs.mkdirSync(destBrandDir, { recursive: true });
 
 const files = fs.readdirSync(srcDir).filter(f => /\.(webp|jpg|jpeg|png)$/i.test(f));
 
+function toSlug(name) {
+  return name.toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9.]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace('-.', '.');
+}
+
 let copiedCount = 0;
 files.forEach(file => {
   const srcPath = path.join(srcDir, file);
-  // Also copy all into destProductsDir so products can refer to /assets/products/[filename]
-  const destPath = path.join(destProductsDir, file);
-  fs.copyFileSync(srcPath, destPath);
+  // Copy original filename
+  fs.copyFileSync(srcPath, path.join(destProductsDir, file));
+  
+  // Copy clean slug filename
+  const slug = toSlug(file);
+  fs.copyFileSync(srcPath, path.join(destProductsDir, slug));
+  
   copiedCount++;
 
   if (file === 'logo.png') {
@@ -23,4 +35,4 @@ files.forEach(file => {
   }
 });
 
-console.log(`Successfully copied ${copiedCount} assets byte-for-byte to public/assets/`);
+console.log(`Successfully copied ${copiedCount} assets with both raw and clean slug paths to public/assets/`);

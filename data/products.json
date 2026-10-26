@@ -15,18 +15,18 @@
     "featured": true,
     "bestSeller": true,
     "images": [
-      "/assets/products/Black Leather Executive Briefcase.jpg"
+      "/assets/products/black-leather-executive-briefcase.jpg"
     ],
     "colors": [
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Black Leather Executive Briefcase.jpg"
+        "image": "/assets/products/black-leather-executive-briefcase.jpg"
       },
       {
         "name": "Dark Brown",
         "hex": "#3E2A1E",
-        "image": "/assets/products/Dark Brown Leather Executive Briefcase.webp"
+        "image": "/assets/products/dark-brown-leather-executive-briefcase.webp"
       }
     ],
     "description": "A masterpiece of understated sophistication. Handcrafted from premium full-grain cowhide leather, designed for business executives and professionals who demand timeless aesthetics and reliable daily durability.",
@@ -36,7 +36,7 @@
       "LaptopCompartment": "Padded sleeve fits up to 15.6\" laptop",
       "Hardware": "Antiqued solid brass fittings & dual zip closure",
       "Strap": "Detachable & adjustable leather shoulder strap",
-      "Origin": "Handcrafted in UK Workshop"
+      "Origin": "Handcrafted"
     },
     "features": [
       "Padded interior compartment for 15.6-inch laptop and tablet",
@@ -61,18 +61,18 @@
     "featured": false,
     "bestSeller": true,
     "images": [
-      "/assets/products/Dark Brown Leather Executive Briefcase.webp"
+      "/assets/products/dark-brown-leather-executive-briefcase.webp"
     ],
     "colors": [
       {
         "name": "Dark Brown",
         "hex": "#3E2A1E",
-        "image": "/assets/products/Dark Brown Leather Executive Briefcase.webp"
+        "image": "/assets/products/dark-brown-leather-executive-briefcase.webp"
       },
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Black Leather Executive Briefcase.jpg"
+        "image": "/assets/products/black-leather-executive-briefcase.jpg"
       }
     ],
     "description": "Imbued with rich mahogany undertones, the Dark Brown Leather Executive Briefcase merges classic boardroom prestige with contemporary organizational utility.",
@@ -106,18 +106,18 @@
     "featured": true,
     "bestSeller": false,
     "images": [
-      "/assets/products/Premium Black Leather Executive Briefcase.webp"
+      "/assets/products/premium-black-leather-executive-briefcase.webp"
     ],
     "colors": [
       {
         "name": "Premium Black",
         "hex": "#11100F",
-        "image": "/assets/products/Premium Black Leather Executive Briefcase.webp"
+        "image": "/assets/products/premium-black-leather-executive-briefcase.webp"
       },
       {
         "name": "Premium Brown",
         "hex": "#4A3324",
-        "image": "/assets/products/Premium Brown Leather Executive Briefcase.webp"
+        "image": "/assets/products/premium-brown-leather-executive-briefcase.webp"
       }
     ],
     "description": "The pinnacle of our executive range. Built with hand-selected top-tier leather, heavy-gauge stitching, and bespoke brass hardware for distinguished presence.",
@@ -150,18 +150,18 @@
     "featured": false,
     "bestSeller": false,
     "images": [
-      "/assets/products/Premium Brown Leather Executive Briefcase.webp"
+      "/assets/products/premium-brown-leather-executive-briefcase.webp"
     ],
     "colors": [
       {
         "name": "Premium Brown",
         "hex": "#4A3324",
-        "image": "/assets/products/Premium Brown Leather Executive Briefcase.webp"
+        "image": "/assets/products/premium-brown-leather-executive-briefcase.webp"
       },
       {
         "name": "Premium Black",
         "hex": "#11100F",
-        "image": "/assets/products/Premium Black Leather Executive Briefcase.webp"
+        "image": "/assets/products/premium-black-leather-executive-briefcase.webp"
       }
     ],
     "description": "Rich cognac and saddle brown hues accentuate the luxurious natural grain of this premium executive briefcase, engineered for lifetimes of commanding meetings.",
@@ -194,18 +194,18 @@
     "featured": true,
     "bestSeller": true,
     "images": [
-      "/assets/products/Cowhide Leather Duffle Bag.webp"
+      "/assets/products/cowhide-leather-duffle-bag.webp"
     ],
     "colors": [
       {
         "name": "Natural Cowhide Brown",
         "hex": "#583622",
-        "image": "/assets/products/Cowhide Leather Duffle Bag.webp"
+        "image": "/assets/products/cowhide-leather-duffle-bag.webp"
       },
       {
         "name": "Black & White Cowhide",
         "hex": "#2A2725",
-        "image": "/assets/products/Black and White Cowhide Leather Duffle Bag.webp"
+        "image": "/assets/products/black-and-white-cowhide-leather-duffle-bag.webp"
       }
     ],
     "description": "The definitive luxury weekender. Generously sized to carry everything required for weekend getaways, gym visits, and extended travel with effortless style.",
@@ -239,18 +239,18 @@
     "featured": false,
     "bestSeller": false,
     "images": [
-      "/assets/products/Black and White Cowhide Leather Duffle Bag.webp"
+      "/assets/products/black-and-white-cowhide-leather-duffle-bag.webp"
     ],
     "colors": [
       {
         "name": "Black & White Cowhide",
         "hex": "#2A2725",
-        "image": "/assets/products/Black and White Cowhide Leather Duffle Bag.webp"
+        "image": "/assets/products/black-and-white-cowhide-leather-duffle-bag.webp"
       },
       {
         "name": "Natural Cowhide Brown",
         "hex": "#583622",
-        "image": "/assets/products/Cowhide Leather Duffle Bag.webp"
+        "image": "/assets/products/cowhide-leather-duffle-bag.webp"
       }
     ],
     "description": "An iconic statement travel piece featuring organic black and white cowhide patterning paired with structured black leather trim and handles.",
@@ -283,13 +283,13 @@
     "featured": true,
     "bestSeller": false,
     "images": [
-      "/assets/products/Crazy Horse Leather Duffle Bag.webp"
+      "/assets/products/crazy-horse-leather-duffle-bag.webp"
     ],
     "colors": [
       {
         "name": "Crazy Horse Tan",
         "hex": "#8C5A37",
-        "image": "/assets/products/Crazy Horse Leather Duffle Bag.webp"
+        "image": "/assets/products/crazy-horse-leather-duffle-bag.webp"
       }
     ],
     "description": "Renowned for its rugged vintage charm, crazy horse leather absorbs scratches and creases to develop a one-of-a-kind vintage patina with each journey.",
@@ -322,13 +322,13 @@
     "featured": false,
     "bestSeller": false,
     "images": [
-      "/assets/products/Cow Mild Tan Brown Leather Travel Duffel Bag.webp"
+      "/assets/products/cow-mild-tan-brown-leather-travel-duffel-bag.webp"
     ],
     "colors": [
       {
         "name": "Mild Tan Brown",
         "hex": "#9E6641",
-        "image": "/assets/products/Cow Mild Tan Brown Leather Travel Duffel Bag.webp"
+        "image": "/assets/products/cow-mild-tan-brown-leather-travel-duffel-bag.webp"
       }
     ],
     "description": "Crafted from supple mild-tanned cowhide, this duffel provides immediate softness and flexibility without sacrificing structural resilience.",
@@ -361,13 +361,13 @@
     "featured": true,
     "bestSeller": true,
     "images": [
-      "/assets/products/Crazyhorse Leather Laptop Business Backpack - Travel Bag.webp"
+      "/assets/products/crazyhorse-leather-laptop-business-backpack-travel-bag.webp"
     ],
     "colors": [
       {
         "name": "Crazy Horse Brown",
         "hex": "#7A4B2E",
-        "image": "/assets/products/Crazyhorse Leather Laptop Business Backpack - Travel Bag.webp"
+        "image": "/assets/products/crazyhorse-leather-laptop-business-backpack-travel-bag.webp"
       }
     ],
     "description": "A versatile hybrid backpack engineered for the modern commuter and nomad. Combines rugged vintage leather architecture with ergonomic daily comfort.",
@@ -400,23 +400,23 @@
     "featured": false,
     "bestSeller": true,
     "images": [
-      "/assets/products/Black Leather Crossbody Side Bag.webp"
+      "/assets/products/black-leather-crossbody-side-bag.webp"
     ],
     "colors": [
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Black Leather Crossbody Side Bag.webp"
+        "image": "/assets/products/black-leather-crossbody-side-bag.webp"
       },
       {
         "name": "Maroon",
         "hex": "#581D26",
-        "image": "/assets/products/Maroon Leather Crossbody Side Bag.webp"
+        "image": "/assets/products/maroon-leather-crossbody-side-bag.webp"
       },
       {
         "name": "Cognac Croc",
         "hex": "#874D26",
-        "image": "/assets/products/Cognac Brown Croc-Embossed Leather Crossbody Side Bag.webp"
+        "image": "/assets/products/cognac-brown-croc-embossed-leather-crossbody-side-bag.webp"
       }
     ],
     "description": "Sleek, minimalist, and feather-light. Designed to keep phone, passport, wallet, and sunglasses securely accessible during city exploration.",
@@ -449,23 +449,23 @@
     "featured": false,
     "bestSeller": false,
     "images": [
-      "/assets/products/Maroon Leather Crossbody Side Bag.webp"
+      "/assets/products/maroon-leather-crossbody-side-bag.webp"
     ],
     "colors": [
       {
         "name": "Maroon",
         "hex": "#581D26",
-        "image": "/assets/products/Maroon Leather Crossbody Side Bag.webp"
+        "image": "/assets/products/maroon-leather-crossbody-side-bag.webp"
       },
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Black Leather Crossbody Side Bag.webp"
+        "image": "/assets/products/black-leather-crossbody-side-bag.webp"
       },
       {
         "name": "Cognac Croc",
         "hex": "#874D26",
-        "image": "/assets/products/Cognac Brown Croc-Embossed Leather Crossbody Side Bag.webp"
+        "image": "/assets/products/cognac-brown-croc-embossed-leather-crossbody-side-bag.webp"
       }
     ],
     "description": "An elegant pop of deep burgundy maroon leather that adds refined distinction to neutral autumn and winter tailoring.",
@@ -498,23 +498,23 @@
     "featured": true,
     "bestSeller": false,
     "images": [
-      "/assets/products/Cognac Brown Croc-Embossed Leather Crossbody Side Bag.webp"
+      "/assets/products/cognac-brown-croc-embossed-leather-crossbody-side-bag.webp"
     ],
     "colors": [
       {
         "name": "Cognac Croc",
         "hex": "#874D26",
-        "image": "/assets/products/Cognac Brown Croc-Embossed Leather Crossbody Side Bag.webp"
+        "image": "/assets/products/cognac-brown-croc-embossed-leather-crossbody-side-bag.webp"
       },
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Black Leather Crossbody Side Bag.webp"
+        "image": "/assets/products/black-leather-crossbody-side-bag.webp"
       },
       {
         "name": "Maroon",
         "hex": "#581D26",
-        "image": "/assets/products/Maroon Leather Crossbody Side Bag.webp"
+        "image": "/assets/products/maroon-leather-crossbody-side-bag.webp"
       }
     ],
     "description": "Exotic elegance without compromise. Precision heat-embossed crocodile grain on full-grain leather creates an opulent textural accent.",
@@ -546,18 +546,18 @@
     "featured": false,
     "bestSeller": true,
     "images": [
-      "/assets/products/Brown Leather Laptop Sleeve Bag.webp"
+      "/assets/products/brown-leather-laptop-sleeve-bag.webp"
     ],
     "colors": [
       {
         "name": "Brown",
         "hex": "#543725",
-        "image": "/assets/products/Brown Leather Laptop Sleeve Bag.webp"
+        "image": "/assets/products/brown-leather-laptop-sleeve-bag.webp"
       },
       {
         "name": "Taupe Grey",
         "hex": "#635D5A",
-        "image": "/assets/products/Taupe Grey Leather Laptop Sleeve Bag.webp"
+        "image": "/assets/products/taupe-grey-leather-laptop-sleeve-bag.webp"
       }
     ],
     "description": "A tailored envelope of luxury protection. Accommodates 13\" to 14\" ultrabooks and MacBooks with plush micro-fleece lining and exterior documents slot.",
@@ -590,18 +590,18 @@
     "featured": false,
     "bestSeller": false,
     "images": [
-      "/assets/products/Taupe Grey Leather Laptop Sleeve Bag.webp"
+      "/assets/products/taupe-grey-leather-laptop-sleeve-bag.webp"
     ],
     "colors": [
       {
         "name": "Taupe Grey",
         "hex": "#635D5A",
-        "image": "/assets/products/Taupe Grey Leather Laptop Sleeve Bag.webp"
+        "image": "/assets/products/taupe-grey-leather-laptop-sleeve-bag.webp"
       },
       {
         "name": "Brown",
         "hex": "#543725",
-        "image": "/assets/products/Brown Leather Laptop Sleeve Bag.webp"
+        "image": "/assets/products/brown-leather-laptop-sleeve-bag.webp"
       }
     ],
     "description": "Minimalist contemporary palette. The cool earthen tones of taupe grey leather deliver an understated, modern Scandinavian aesthetic.",
@@ -631,27 +631,27 @@
     "featured": true,
     "bestSeller": true,
     "images": [
-      "/assets/products/Classic Black Leather Belt.webp"
+      "/assets/products/classic-black-leather-belt.webp"
     ],
     "colors": [
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Classic Black Leather Belt.webp"
+        "image": "/assets/products/classic-black-leather-belt.webp"
       },
       {
         "name": "Brown",
         "hex": "#4A3222",
-        "image": "/assets/products/Classic Brown Leather Belt.webp"
+        "image": "/assets/products/classic-brown-leather-belt.webp"
       }
     ],
-    "description": "Cut from a solid 4mm thick strip of vegetable-tanned bridle leather. No fillers, no bonded cardboard — pure unyielding British leather craftsmanship.",
+    "description": "Cut from a solid 4mm thick strip of vegetable-tanned bridle leather. No fillers, no bonded cardboard — pure unyielding Artisan leather craftsmanship.",
     "specs": {
-      "Material": "100% Full Grain Vegetable-Tanned English Bridle Leather",
+      "Material": "100% Full Grain Vegetable-Tanned Genuine Leather",
       "Width": "35mm (1.38 inches) - versatile for dress and denim",
       "Thickness": "3.8mm - 4.2mm full hide",
       "Buckle": "Solid polished stainless steel / silver buckle",
-      "Origin": "Handcrafted in UK"
+      "Origin": "Handcrafted"
     },
     "features": [
       "Hand-beveled and burnished edges with natural beeswax",
@@ -674,18 +674,18 @@
     "featured": false,
     "bestSeller": true,
     "images": [
-      "/assets/products/Classic Brown Leather Belt.webp"
+      "/assets/products/classic-brown-leather-belt.webp"
     ],
     "colors": [
       {
         "name": "Brown",
         "hex": "#4A3222",
-        "image": "/assets/products/Classic Brown Leather Belt.webp"
+        "image": "/assets/products/classic-brown-leather-belt.webp"
       },
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Classic Black Leather Belt.webp"
+        "image": "/assets/products/classic-black-leather-belt.webp"
       }
     ],
     "description": "An indispensable wardrobe pillar. The deep cognac brown finish complements navy, grey, and earth-toned trousers with understated luxury.",
@@ -718,28 +718,28 @@
     "featured": false,
     "bestSeller": true,
     "images": [
-      "/assets/products/Ultra-Slim Black Leather Long Wallet & Keychain Gift Set.webp"
+      "/assets/products/ultra-slim-black-leather-long-wallet-and-keychain-gift-set.webp"
     ],
     "colors": [
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Ultra-Slim Black Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-black-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Brown",
         "hex": "#4A3324",
-        "image": "/assets/products/Ultra-Slim Brown Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-brown-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Olive Green",
         "hex": "#3E4B37",
-        "image": "/assets/products/Ultra-Slim Olive Green Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-olive-green-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Red",
         "hex": "#872323",
-        "image": "/assets/products/Ultra-Slim Red Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-red-leather-long-wallet-and-keychain-gift-set.webp"
       }
     ],
     "description": "Ultra-thin profile engineered to slide unnoticeably into suit jacket breast pockets. Accompanied by a matching handcrafted leather key loop in a luxury gift box.",
@@ -773,28 +773,28 @@
     "featured": false,
     "bestSeller": false,
     "images": [
-      "/assets/products/Ultra-Slim Brown Leather Long Wallet & Keychain Gift Set.webp"
+      "/assets/products/ultra-slim-brown-leather-long-wallet-and-keychain-gift-set.webp"
     ],
     "colors": [
       {
         "name": "Brown",
         "hex": "#4A3324",
-        "image": "/assets/products/Ultra-Slim Brown Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-brown-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Ultra-Slim Black Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-black-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Olive Green",
         "hex": "#3E4B37",
-        "image": "/assets/products/Ultra-Slim Olive Green Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-olive-green-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Red",
         "hex": "#872323",
-        "image": "/assets/products/Ultra-Slim Red Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-red-leather-long-wallet-and-keychain-gift-set.webp"
       }
     ],
     "description": "Earthy saddle brown tones elevate this ultra-slim silhouette. Hand-stitched with waxed linen thread for maximum seam resilience.",
@@ -827,28 +827,28 @@
     "featured": true,
     "bestSeller": false,
     "images": [
-      "/assets/products/Ultra-Slim Olive Green Leather Long Wallet & Keychain Gift Set.webp"
+      "/assets/products/ultra-slim-olive-green-leather-long-wallet-and-keychain-gift-set.webp"
     ],
     "colors": [
       {
         "name": "Olive Green",
         "hex": "#3E4B37",
-        "image": "/assets/products/Ultra-Slim Olive Green Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-olive-green-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Ultra-Slim Black Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-black-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Brown",
         "hex": "#4A3324",
-        "image": "/assets/products/Ultra-Slim Brown Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-brown-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Red",
         "hex": "#872323",
-        "image": "/assets/products/Ultra-Slim Red Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-red-leather-long-wallet-and-keychain-gift-set.webp"
       }
     ],
     "description": "An artisanal botanical shade of olive green. A unique, eye-catching luxury gift that stands out from typical black and tan leather accessories.",
@@ -881,28 +881,28 @@
     "featured": true,
     "bestSeller": true,
     "images": [
-      "/assets/products/Ultra-Slim Red Leather Long Wallet & Keychain Gift Set.webp"
+      "/assets/products/ultra-slim-red-leather-long-wallet-and-keychain-gift-set.webp"
     ],
     "colors": [
       {
         "name": "Red",
         "hex": "#872323",
-        "image": "/assets/products/Ultra-Slim Red Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-red-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Ultra-Slim Black Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-black-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Brown",
         "hex": "#4A3324",
-        "image": "/assets/products/Ultra-Slim Brown Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-brown-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Olive Green",
         "hex": "#3E4B37",
-        "image": "/assets/products/Ultra-Slim Olive Green Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/ultra-slim-olive-green-leather-long-wallet-and-keychain-gift-set.webp"
       }
     ],
     "description": "Rich scarlet crimson leather with deep visual depth. A passionate, confident statement piece paired with a matching artisan keychain.",
@@ -935,28 +935,28 @@
     "featured": false,
     "bestSeller": false,
     "images": [
-      "/assets/products/Thick Black Leather Long Wallet & Keychain Gift Set.webp"
+      "/assets/products/thick-black-leather-long-wallet-and-keychain-gift-set.webp"
     ],
     "colors": [
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Thick Black Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-black-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Brown",
         "hex": "#4A3324",
-        "image": "/assets/products/Thick Brown Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-brown-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Forest Green",
         "hex": "#263B2B",
-        "image": "/assets/products/Thick Forest Green Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-forest-green-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Red",
         "hex": "#872323",
-        "image": "/assets/products/Thick Red Genuine Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-red-genuine-leather-long-wallet-and-keychain-gift-set.webp"
       }
     ],
     "description": "Heavyweight construction for those who appreciate substance and tactile heft. Features additional credit card sleeves and a zippered coin compartment.",
@@ -989,28 +989,28 @@
     "featured": false,
     "bestSeller": true,
     "images": [
-      "/assets/products/Thick Brown Leather Long Wallet & Keychain Gift Set.webp"
+      "/assets/products/thick-brown-leather-long-wallet-and-keychain-gift-set.webp"
     ],
     "colors": [
       {
         "name": "Brown",
         "hex": "#4A3324",
-        "image": "/assets/products/Thick Brown Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-brown-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Thick Black Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-black-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Forest Green",
         "hex": "#263B2B",
-        "image": "/assets/products/Thick Forest Green Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-forest-green-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Red",
         "hex": "#872323",
-        "image": "/assets/products/Thick Red Genuine Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-red-genuine-leather-long-wallet-and-keychain-gift-set.webp"
       }
     ],
     "description": "Classic rustic brown with thick, tactile grain. Holds substantial cards, currencies, receipts, and coins in one organized heritage piece.",
@@ -1043,31 +1043,31 @@
     "featured": true,
     "bestSeller": false,
     "images": [
-      "/assets/products/Thick Forest Green Leather Long Wallet & Keychain Gift Set.webp"
+      "/assets/products/thick-forest-green-leather-long-wallet-and-keychain-gift-set.webp"
     ],
     "colors": [
       {
         "name": "Forest Green",
         "hex": "#263B2B",
-        "image": "/assets/products/Thick Forest Green Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-forest-green-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Thick Black Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-black-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Brown",
         "hex": "#4A3324",
-        "image": "/assets/products/Thick Brown Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-brown-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Red",
         "hex": "#872323",
-        "image": "/assets/products/Thick Red Genuine Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-red-genuine-leather-long-wallet-and-keychain-gift-set.webp"
       }
     ],
-    "description": "Deep British racing and forest green tones provide distinguished character. Complete with full zip security and matching leather keyring.",
+    "description": "Deep Artisan racing and forest green tones provide distinguished character. Complete with full zip security and matching leather keyring.",
     "specs": {
       "Material": "Heavy Full Grain Cowhide Leather",
       "WalletDimensions": "19.5cm x 10cm x 2cm",
@@ -1097,28 +1097,28 @@
     "featured": false,
     "bestSeller": false,
     "images": [
-      "/assets/products/Thick Red Genuine Leather Long Wallet & Keychain Gift Set.webp"
+      "/assets/products/thick-red-genuine-leather-long-wallet-and-keychain-gift-set.webp"
     ],
     "colors": [
       {
         "name": "Red",
         "hex": "#872323",
-        "image": "/assets/products/Thick Red Genuine Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-red-genuine-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Black",
         "hex": "#1C1B1A",
-        "image": "/assets/products/Thick Black Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-black-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Brown",
         "hex": "#4A3324",
-        "image": "/assets/products/Thick Brown Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-brown-leather-long-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Forest Green",
         "hex": "#263B2B",
-        "image": "/assets/products/Thick Forest Green Leather Long Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/thick-forest-green-leather-long-wallet-and-keychain-gift-set.webp"
       }
     ],
     "description": "Commanding crimson tone in our most robust long wallet format. Generous interior volume with high-grade solid brass zipper.",
@@ -1151,23 +1151,23 @@
     "featured": false,
     "bestSeller": true,
     "images": [
-      "/assets/products/Brown Leather Wallet & Keychain Gift Set.webp"
+      "/assets/products/brown-leather-wallet-and-keychain-gift-set.webp"
     ],
     "colors": [
       {
         "name": "Brown",
         "hex": "#543725",
-        "image": "/assets/products/Brown Leather Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/brown-leather-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Olive Green",
         "hex": "#3E4B37",
-        "image": "/assets/products/Olive Green Leather Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/olive-green-leather-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Red",
         "hex": "#872323",
-        "image": "/assets/products/Red Leather Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/red-leather-wallet-and-keychain-gift-set.webp"
       }
     ],
     "description": "The quintessential everyday carry gift. Compact pocket bifold wallet matched with a robust leather keychain, crafted for daily journeys.",
@@ -1200,23 +1200,23 @@
     "featured": false,
     "bestSeller": false,
     "images": [
-      "/assets/products/Olive Green Leather Wallet & Keychain Gift Set.webp"
+      "/assets/products/olive-green-leather-wallet-and-keychain-gift-set.webp"
     ],
     "colors": [
       {
         "name": "Olive Green",
         "hex": "#3E4B37",
-        "image": "/assets/products/Olive Green Leather Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/olive-green-leather-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Brown",
         "hex": "#543725",
-        "image": "/assets/products/Brown Leather Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/brown-leather-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Red",
         "hex": "#872323",
-        "image": "/assets/products/Red Leather Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/red-leather-wallet-and-keychain-gift-set.webp"
       }
     ],
     "description": "Understated olive green compact bifold set. Precision cut and hand-finished with natural wax for supple tactile satisfaction.",
@@ -1249,23 +1249,23 @@
     "featured": false,
     "bestSeller": false,
     "images": [
-      "/assets/products/Red Leather Wallet & Keychain Gift Set.webp"
+      "/assets/products/red-leather-wallet-and-keychain-gift-set.webp"
     ],
     "colors": [
       {
         "name": "Red",
         "hex": "#872323",
-        "image": "/assets/products/Red Leather Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/red-leather-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Brown",
         "hex": "#543725",
-        "image": "/assets/products/Brown Leather Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/brown-leather-wallet-and-keychain-gift-set.webp"
       },
       {
         "name": "Olive Green",
         "hex": "#3E4B37",
-        "image": "/assets/products/Olive Green Leather Wallet & Keychain Gift Set.webp"
+        "image": "/assets/products/olive-green-leather-wallet-and-keychain-gift-set.webp"
       }
     ],
     "description": "Vibrant red pocket wallet paired with matching leather loop keychain. Crafted from full grain leather that patinas beautifully over years of use.",
