@@ -1,0 +1,843 @@
+const fs = require('fs');
+
+const raw = JSON.parse(fs.readFileSync('data/shopify_products_raw.json', 'utf8'));
+const files = fs.readdirSync('.').filter(f => /\.(webp|jpg|jpeg|png)$/i.test(f));
+
+// Categorize and structure products
+const products = [
+  // 1. Executive Briefcases
+  {
+    id: 'bag-exec-black',
+    title: 'Black Leather Executive Briefcase',
+    handle: 'black-leather-executive-briefcase',
+    price: 90,
+    compareAtPrice: 110,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'business-work-bags', 'all'],
+    featured: true,
+    bestSeller: true,
+    images: ['/assets/products/Black Leather Executive Briefcase.jpg'],
+    colors: [
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Black Leather Executive Briefcase.jpg' },
+      { name: 'Dark Brown', hex: '#3E2A1E', image: '/assets/products/Dark Brown Leather Executive Briefcase.webp' }
+    ],
+    description: 'A masterpiece of understated sophistication. Handcrafted from premium full-grain cowhide leather, designed for business executives and professionals who demand timeless aesthetics and reliable daily durability.',
+    specs: {
+      Material: '100% Full Grain Cowhide Leather',
+      Dimensions: '40cm x 30cm x 9cm (L x H x W)',
+      LaptopCompartment: 'Padded sleeve fits up to 15.6" laptop',
+      Hardware: 'Antiqued solid brass fittings & dual zip closure',
+      Strap: 'Detachable & adjustable leather shoulder strap',
+      Origin: 'Handcrafted in UK Workshop'
+    },
+    features: [
+      'Padded interior compartment for 15.6-inch laptop and tablet',
+      'Dedicated organizer pockets for pens, business cards, and smartphone',
+      'Reinforced top leather handle with ergonomic grip',
+      'Water-resistant natural wax finish'
+    ]
+  },
+  {
+    id: 'bag-exec-dark-brown',
+    title: 'Dark Brown Leather Executive Briefcase',
+    handle: 'dark-brown-leather-executive-briefcase',
+    price: 90,
+    compareAtPrice: 110,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'business-work-bags', 'all'],
+    featured: false,
+    bestSeller: true,
+    images: ['/assets/products/Dark Brown Leather Executive Briefcase.webp'],
+    colors: [
+      { name: 'Dark Brown', hex: '#3E2A1E', image: '/assets/products/Dark Brown Leather Executive Briefcase.webp' },
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Black Leather Executive Briefcase.jpg' }
+    ],
+    description: 'Imbued with rich mahogany undertones, the Dark Brown Leather Executive Briefcase merges classic boardroom prestige with contemporary organizational utility.',
+    specs: {
+      Material: '100% Full Grain Cowhide Leather',
+      Dimensions: '40cm x 30cm x 9cm',
+      LaptopCompartment: 'Padded sleeve fits up to 15.6" laptop',
+      Hardware: 'Solid antique brass',
+      Strap: 'Adjustable leather shoulder strap included',
+      Origin: 'Handmade'
+    },
+    features: [
+      'Rich pull-up leather that develops unique patina over time',
+      'Spacious main zip compartment with slip pockets',
+      'Dual exterior slip pockets for quick boarding pass and document access'
+    ]
+  },
+  {
+    id: 'bag-exec-premium-black',
+    title: 'Premium Black Leather Executive Briefcase',
+    handle: 'premium-black-leather-executive-briefcase',
+    price: 110,
+    compareAtPrice: 135,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'business-work-bags', 'all'],
+    featured: true,
+    bestSeller: false,
+    images: ['/assets/products/Premium Black Leather Executive Briefcase.webp'],
+    colors: [
+      { name: 'Premium Black', hex: '#11100F', image: '/assets/products/Premium Black Leather Executive Briefcase.webp' },
+      { name: 'Premium Brown', hex: '#4A3324', image: '/assets/products/Premium Brown Leather Executive Briefcase.webp' }
+    ],
+    description: 'The pinnacle of our executive range. Built with hand-selected top-tier leather, heavy-gauge stitching, and bespoke brass hardware for distinguished presence.',
+    specs: {
+      Material: 'Ultra-Premium Full Grain Calfskin & Cowhide',
+      Dimensions: '42cm x 31cm x 10cm',
+      LaptopCompartment: 'Fits up to 16" MacBook Pro',
+      Hardware: 'Matte brushed gunmetal brass',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Dual main zippered compartments for distinct work and tech division',
+      'Luggage trolley strap on rear for effortless international travel',
+      'Microfiber suede lining to protect delicate devices'
+    ]
+  },
+  {
+    id: 'bag-exec-premium-brown',
+    title: 'Premium Brown Leather Executive Briefcase',
+    handle: 'premium-brown-leather-executive-briefcase',
+    price: 110,
+    compareAtPrice: 135,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'business-work-bags', 'all'],
+    featured: false,
+    bestSeller: false,
+    images: ['/assets/products/Premium Brown Leather Executive Briefcase.webp'],
+    colors: [
+      { name: 'Premium Brown', hex: '#4A3324', image: '/assets/products/Premium Brown Leather Executive Briefcase.webp' },
+      { name: 'Premium Black', hex: '#11100F', image: '/assets/products/Premium Black Leather Executive Briefcase.webp' }
+    ],
+    description: 'Rich cognac and saddle brown hues accentuate the luxurious natural grain of this premium executive briefcase, engineered for lifetimes of commanding meetings.',
+    specs: {
+      Material: 'Ultra-Premium Full Grain Leather',
+      Dimensions: '42cm x 31cm x 10cm',
+      LaptopCompartment: 'Fits up to 16" laptop',
+      Hardware: 'Matte brushed brass',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Hand-stitched leather zipper pulls',
+      'Internal zippered security pouch for passport and wallet',
+      'Solid bottom metal studs to prevent floor abrasion'
+    ]
+  },
+
+  // 2. Travel & Duffel Bags
+  {
+    id: 'bag-duffle-cowhide',
+    title: 'Cowhide Leather Duffle Bag',
+    handle: 'cowhide-leather-duffle-bag',
+    price: 130,
+    compareAtPrice: 160,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'travel-duffle-bags', 'all'],
+    featured: true,
+    bestSeller: true,
+    images: ['/assets/products/Cowhide Leather Duffle Bag.webp'],
+    colors: [
+      { name: 'Natural Cowhide Brown', hex: '#583622', image: '/assets/products/Cowhide Leather Duffle Bag.webp' },
+      { name: 'Black & White Cowhide', hex: '#2A2725', image: '/assets/products/Black and White Cowhide Leather Duffle Bag.webp' }
+    ],
+    description: 'The definitive luxury weekender. Generously sized to carry everything required for weekend getaways, gym visits, and extended travel with effortless style.',
+    specs: {
+      Material: 'Heavyweight Full Grain Cowhide Leather',
+      Dimensions: '52cm x 28cm x 26cm',
+      Capacity: '38 Litres',
+      Hardware: 'Reinforced dual-pull YKK brass zippers',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Cavernous main storage compartment accommodating 3-5 days of apparel',
+      'Side zip shoe pocket with ventilated metal grommets',
+      'Heavy-duty leather wrap-around carry handles with snap grip',
+      'Compliant with standard UK & European airline carry-on regulations'
+    ]
+  },
+  {
+    id: 'bag-duffle-black-white',
+    title: 'Black and White Cowhide Leather Duffle Bag',
+    handle: 'black-and-white-cowhide-leather-duffle-bag',
+    price: 130,
+    compareAtPrice: 160,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'travel-duffle-bags', 'all'],
+    featured: false,
+    bestSeller: false,
+    images: ['/assets/products/Black and White Cowhide Leather Duffle Bag.webp'],
+    colors: [
+      { name: 'Black & White Cowhide', hex: '#2A2725', image: '/assets/products/Black and White Cowhide Leather Duffle Bag.webp' },
+      { name: 'Natural Cowhide Brown', hex: '#583622', image: '/assets/products/Cowhide Leather Duffle Bag.webp' }
+    ],
+    description: 'An iconic statement travel piece featuring organic black and white cowhide patterning paired with structured black leather trim and handles.',
+    specs: {
+      Material: 'Genuine Cowhide with Natural Hair-on Pattern & Smooth Leather Trim',
+      Dimensions: '52cm x 28cm x 26cm',
+      Capacity: '38 Litres',
+      Hardware: 'Heavy-duty brass',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Each piece features a 100% unique, natural patterned grain silhouette',
+      'Reinforced bottom panel with brass protective feet',
+      'Detachable padded shoulder strap for comfortable long transit'
+    ]
+  },
+  {
+    id: 'bag-duffle-crazy-horse',
+    title: 'Crazy Horse Leather Duffle Bag',
+    handle: 'crazy-horse-leather-duffle-bag',
+    price: 100,
+    compareAtPrice: 125,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'travel-duffle-bags', 'all'],
+    featured: true,
+    bestSeller: false,
+    images: ['/assets/products/Crazy Horse Leather Duffle Bag.webp'],
+    colors: [
+      { name: 'Crazy Horse Tan', hex: '#8C5A37', image: '/assets/products/Crazy Horse Leather Duffle Bag.webp' }
+    ],
+    description: 'Renowned for its rugged vintage charm, crazy horse leather absorbs scratches and creases to develop a one-of-a-kind vintage patina with each journey.',
+    specs: {
+      Material: 'Waxed Crazy Horse Cowhide Leather',
+      Dimensions: '50cm x 26cm x 24cm',
+      Capacity: '32 Litres',
+      Hardware: 'Antiqued solid bronze fittings',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Rich wax-infused leather surface that self-heals with light buffing',
+      'Dual external quick-access pockets with buckle-snap fastenings',
+      'Reinforced stress points riveted by hand'
+    ]
+  },
+  {
+    id: 'bag-duffle-cow-mild-tan',
+    title: 'Cow Mild Tan Brown Leather Travel Duffel Bag',
+    handle: 'cow-mild-tan-brown-leather-travel-duffel-bag',
+    price: 90,
+    compareAtPrice: 115,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'travel-duffle-bags', 'all'],
+    featured: false,
+    bestSeller: false,
+    images: ['/assets/products/Cow Mild Tan Brown Leather Travel Duffel Bag.webp'],
+    colors: [
+      { name: 'Mild Tan Brown', hex: '#9E6641', image: '/assets/products/Cow Mild Tan Brown Leather Travel Duffel Bag.webp' }
+    ],
+    description: 'Crafted from supple mild-tanned cowhide, this duffel provides immediate softness and flexibility without sacrificing structural resilience.',
+    specs: {
+      Material: 'Mild Tanned Cowhide Leather',
+      Dimensions: '48cm x 26cm x 24cm',
+      Capacity: '30 Litres',
+      Hardware: 'Solid brass zips and rings',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Supple tumbled leather that packs down smoothly when empty',
+      'Deep external zip pocket for boarding passes, keys, and phone',
+      'Wide-mouth zipper opening for seamless packing and unpacking'
+    ]
+  },
+  {
+    id: 'bag-backpack-crazyhorse',
+    title: 'Crazyhorse Leather Laptop Business Backpack / Travel Bag',
+    handle: 'crazyhorse-leather-laptop-business-backpack-travel-bag',
+    price: 100,
+    compareAtPrice: 125,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'business-work-bags', 'all'],
+    featured: true,
+    bestSeller: true,
+    images: ['/assets/products/Crazyhorse Leather Laptop Business Backpack - Travel Bag.webp'],
+    colors: [
+      { name: 'Crazy Horse Brown', hex: '#7A4B2E', image: '/assets/products/Crazyhorse Leather Laptop Business Backpack - Travel Bag.webp' }
+    ],
+    description: 'A versatile hybrid backpack engineered for the modern commuter and nomad. Combines rugged vintage leather architecture with ergonomic daily comfort.',
+    specs: {
+      Material: 'Full Grain Crazy Horse Cow Leather',
+      Dimensions: '43cm x 31cm x 14cm',
+      LaptopFit: 'Dedicated padded sleeve fits up to 15.6" laptop',
+      Straps: 'Padded leather and breathable mesh shoulder straps',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Dual compartment layout separating tech essentials from garments',
+      'Anti-theft hidden zippered rear pocket against the wearer’s back',
+      'Reinforced top leather grab handle and luggage pass-through strap'
+    ]
+  },
+
+  // 3. Crossbody & Sleeves
+  {
+    id: 'bag-crossbody-black',
+    title: 'Black Leather Crossbody Side Bag',
+    handle: 'black-leather-crossbody-side-bag',
+    price: 60,
+    compareAtPrice: 75,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'crossbody-everyday-bags', 'all'],
+    featured: false,
+    bestSeller: true,
+    images: ['/assets/products/Black Leather Crossbody Side Bag.webp'],
+    colors: [
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Black Leather Crossbody Side Bag.webp' },
+      { name: 'Maroon', hex: '#581D26', image: '/assets/products/Maroon Leather Crossbody Side Bag.webp' },
+      { name: 'Cognac Croc', hex: '#874D26', image: '/assets/products/Cognac Brown Croc-Embossed Leather Crossbody Side Bag.webp' }
+    ],
+    description: 'Sleek, minimalist, and feather-light. Designed to keep phone, passport, wallet, and sunglasses securely accessible during city exploration.',
+    specs: {
+      Material: 'Full Grain Cowhide Leather',
+      Dimensions: '24cm x 18cm x 6cm',
+      StrapDrop: '35cm to 65cm adjustable',
+      Hardware: 'Satin black brass zippers',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Front quick-access zip pouch for phone and transit cards',
+      'Lined main compartment with internal key lanyard clip',
+      'Adjustable webbing-reinforced leather strap'
+    ]
+  },
+  {
+    id: 'bag-crossbody-maroon',
+    title: 'Maroon Leather Crossbody Side Bag',
+    handle: 'maroon-leather-crossbody-side-bag',
+    price: 60,
+    compareAtPrice: 75,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'crossbody-everyday-bags', 'all'],
+    featured: false,
+    bestSeller: false,
+    images: ['/assets/products/Maroon Leather Crossbody Side Bag.webp'],
+    colors: [
+      { name: 'Maroon', hex: '#581D26', image: '/assets/products/Maroon Leather Crossbody Side Bag.webp' },
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Black Leather Crossbody Side Bag.webp' },
+      { name: 'Cognac Croc', hex: '#874D26', image: '/assets/products/Cognac Brown Croc-Embossed Leather Crossbody Side Bag.webp' }
+    ],
+    description: 'An elegant pop of deep burgundy maroon leather that adds refined distinction to neutral autumn and winter tailoring.',
+    specs: {
+      Material: 'Full Grain Dyed Cowhide Leather',
+      Dimensions: '24cm x 18cm x 6cm',
+      Strap: 'Adjustable leather strap',
+      Hardware: 'Polished antique brass',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Supple drum-dyed leather with subtle matte sheen',
+      'Dual zippered security closures',
+      'Compact silhouette tailored to sit flush against the body'
+    ]
+  },
+  {
+    id: 'bag-crossbody-cognac-croc',
+    title: 'Cognac Brown Croc-Embossed Leather Crossbody Side Bag',
+    handle: 'cognac-brown-croc-embossed-leather-crossbody-side-bag',
+    price: 60,
+    compareAtPrice: 75,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'crossbody-everyday-bags', 'all'],
+    featured: true,
+    bestSeller: false,
+    images: ['/assets/products/Cognac Brown Croc-Embossed Leather Crossbody Side Bag.webp'],
+    colors: [
+      { name: 'Cognac Croc', hex: '#874D26', image: '/assets/products/Cognac Brown Croc-Embossed Leather Crossbody Side Bag.webp' },
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Black Leather Crossbody Side Bag.webp' },
+      { name: 'Maroon', hex: '#581D26', image: '/assets/products/Maroon Leather Crossbody Side Bag.webp' }
+    ],
+    description: 'Exotic elegance without compromise. Precision heat-embossed crocodile grain on full-grain leather creates an opulent textural accent.',
+    specs: {
+      Material: 'Croc-Embossed Full Grain Cowhide Leather',
+      Dimensions: '24cm x 18cm x 6cm',
+      Hardware: 'Gleaming gold-tone brass hardware',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Sculptural crocodile scale embossing with deep color tonal depth',
+      'Reinforced structured base to maintain immaculate shape',
+      'Internal slip pocket for credit cards and key fob'
+    ]
+  },
+  {
+    id: 'bag-sleeve-brown',
+    title: 'Brown Leather Laptop Sleeve Bag',
+    handle: 'brown-leather-laptop-sleeve-bag',
+    price: 80,
+    compareAtPrice: 95,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'business-work-bags', 'all'],
+    featured: false,
+    bestSeller: true,
+    images: ['/assets/products/Brown Leather Laptop Sleeve Bag.webp'],
+    colors: [
+      { name: 'Brown', hex: '#543725', image: '/assets/products/Brown Leather Laptop Sleeve Bag.webp' },
+      { name: 'Taupe Grey', hex: '#635D5A', image: '/assets/products/Taupe Grey Leather Laptop Sleeve Bag.webp' }
+    ],
+    description: 'A tailored envelope of luxury protection. Accommodates 13" to 14" ultrabooks and MacBooks with plush micro-fleece lining and exterior documents slot.',
+    specs: {
+      Material: 'Smooth Full Grain Cowhide',
+      Dimensions: '35cm x 25cm x 2cm',
+      Compatibility: 'Fits 13" - 14" MacBook Air, Pro, & Ultrabooks',
+      Hardware: 'Concealed magnetic snap closure',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Shock-absorbing high-density neoprene inner padding',
+      'Scratch-free microfiber lining cushions aluminum chassis',
+      'External slip sleeve for notebooks, iPad, and cables'
+    ]
+  },
+  {
+    id: 'bag-sleeve-taupe',
+    title: 'Taupe Grey Leather Laptop Sleeve Bag',
+    handle: 'taupe-grey-leather-laptop-sleeve-bag',
+    price: 80,
+    compareAtPrice: 95,
+    currency: 'GBP',
+    category: 'bags',
+    collectionHandles: ['bags', 'business-work-bags', 'all'],
+    featured: false,
+    bestSeller: false,
+    images: ['/assets/products/Taupe Grey Leather Laptop Sleeve Bag.webp'],
+    colors: [
+      { name: 'Taupe Grey', hex: '#635D5A', image: '/assets/products/Taupe Grey Leather Laptop Sleeve Bag.webp' },
+      { name: 'Brown', hex: '#543725', image: '/assets/products/Brown Leather Laptop Sleeve Bag.webp' }
+    ],
+    description: 'Minimalist contemporary palette. The cool earthen tones of taupe grey leather deliver an understated, modern Scandinavian aesthetic.',
+    specs: {
+      Material: 'Milled Grain Cowhide Leather',
+      Dimensions: '35cm x 25cm x 2cm',
+      Compatibility: 'Fits 13" - 14" laptops',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Beveled and edge-painted perimeter for durable finish',
+      'Ultra-slim form factor fits smoothly into larger briefcases or tote bags'
+    ]
+  },
+
+  // 4. Belts
+  {
+    id: 'belt-classic-black',
+    title: 'Classic Black Leather Belt',
+    handle: 'classic-black-leather-belt',
+    price: 30,
+    compareAtPrice: 40,
+    currency: 'GBP',
+    category: 'belts',
+    collectionHandles: ['belts', 'all'],
+    featured: true,
+    bestSeller: true,
+    images: ['/assets/products/Classic Black Leather Belt.webp'],
+    colors: [
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Classic Black Leather Belt.webp' },
+      { name: 'Brown', hex: '#4A3222', image: '/assets/products/Classic Brown Leather Belt.webp' }
+    ],
+    description: 'Cut from a solid 4mm thick strip of vegetable-tanned bridle leather. No fillers, no bonded cardboard — pure unyielding British leather craftsmanship.',
+    specs: {
+      Material: '100% Full Grain Vegetable-Tanned English Bridle Leather',
+      Width: '35mm (1.38 inches) - versatile for dress and denim',
+      Thickness: '3.8mm - 4.2mm full hide',
+      Buckle: 'Solid polished stainless steel / silver buckle',
+      Origin: 'Handcrafted in UK'
+    },
+    features: [
+      'Hand-beveled and burnished edges with natural beeswax',
+      'Solid brass screw rivets allow easy buckle swaps',
+      'Five precision teardrop adjustment holes'
+    ]
+  },
+  {
+    id: 'belt-classic-brown',
+    title: 'Classic Brown Leather Belt',
+    handle: 'classic-brown-leather-belt',
+    price: 30,
+    compareAtPrice: 40,
+    currency: 'GBP',
+    category: 'belts',
+    collectionHandles: ['belts', 'all'],
+    featured: false,
+    bestSeller: true,
+    images: ['/assets/products/Classic Brown Leather Belt.webp'],
+    colors: [
+      { name: 'Brown', hex: '#4A3222', image: '/assets/products/Classic Brown Leather Belt.webp' },
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Classic Black Leather Belt.webp' }
+    ],
+    description: 'An indispensable wardrobe pillar. The deep cognac brown finish complements navy, grey, and earth-toned trousers with understated luxury.',
+    specs: {
+      Material: '100% Full Grain Vegetable-Tanned Leather',
+      Width: '35mm',
+      Thickness: '4.0mm solid leather',
+      Buckle: 'Antiqued solid brass buckle',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Gains lustrous character and flexibility with daily wear',
+      'Double leather keeper loops to secure excess strap neatly'
+    ]
+  },
+
+  // 5. Wallets & Gift Sets
+  {
+    id: 'wallet-ultra-slim-black',
+    title: 'Ultra-Slim Black Leather Long Wallet & Keychain Gift Set',
+    handle: 'ultra-slim-black-leather-long-wallet-keychain-gift-set',
+    price: 35,
+    compareAtPrice: 45,
+    currency: 'GBP',
+    category: 'wallets',
+    collectionHandles: ['wallets', 'long-wallets', 'keychains', 'all'],
+    featured: false,
+    bestSeller: true,
+    images: ['/assets/products/Ultra-Slim Black Leather Long Wallet & Keychain Gift Set.webp'],
+    colors: [
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Ultra-Slim Black Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Brown', hex: '#4A3324', image: '/assets/products/Ultra-Slim Brown Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Olive Green', hex: '#3E4B37', image: '/assets/products/Ultra-Slim Olive Green Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Red', hex: '#872323', image: '/assets/products/Ultra-Slim Red Leather Long Wallet & Keychain Gift Set.webp' }
+    ],
+    description: 'Ultra-thin profile engineered to slide unnoticeably into suit jacket breast pockets. Accompanied by a matching handcrafted leather key loop in a luxury gift box.',
+    specs: {
+      Material: 'Full Grain Drum-Dyed Cowhide Leather',
+      WalletDimensions: '19cm x 9.5cm x 0.8cm (Ultra-Slim)',
+      CardCapacity: '8 dedicated card slots + 2 full-length banknotes slots',
+      SetIncludes: 'Ultra-Slim Long Wallet + Matching Hand-Stitched Leather Keychain',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Featherlight 0.8cm thickness prevents unsightly pocket bulges',
+      'Accommodates unfolded banknotes (GBP, EUR, USD)',
+      'Presented in a bespoke foil-embossed presentation gift box'
+    ]
+  },
+  {
+    id: 'wallet-ultra-slim-brown',
+    title: 'Ultra-Slim Brown Leather Long Wallet & Keychain Gift Set',
+    handle: 'ultra-slim-brown-leather-long-wallet-keychain-gift-set',
+    price: 35,
+    compareAtPrice: 45,
+    currency: 'GBP',
+    category: 'wallets',
+    collectionHandles: ['wallets', 'long-wallets', 'keychains', 'all'],
+    featured: false,
+    bestSeller: false,
+    images: ['/assets/products/Ultra-Slim Brown Leather Long Wallet & Keychain Gift Set.webp'],
+    colors: [
+      { name: 'Brown', hex: '#4A3324', image: '/assets/products/Ultra-Slim Brown Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Ultra-Slim Black Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Olive Green', hex: '#3E4B37', image: '/assets/products/Ultra-Slim Olive Green Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Red', hex: '#872323', image: '/assets/products/Ultra-Slim Red Leather Long Wallet & Keychain Gift Set.webp' }
+    ],
+    description: 'Earthy saddle brown tones elevate this ultra-slim silhouette. Hand-stitched with waxed linen thread for maximum seam resilience.',
+    specs: {
+      Material: 'Full Grain Cowhide Leather',
+      WalletDimensions: '19cm x 9.5cm x 0.8cm',
+      CardCapacity: '8 cards + cash notes',
+      SetIncludes: 'Long Wallet + Leather Keychain',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Hand-burnished edges sealed with protective wax',
+      'Supple touch that matures with handling'
+    ]
+  },
+  {
+    id: 'wallet-ultra-slim-olive',
+    title: 'Ultra-Slim Olive Green Leather Long Wallet & Keychain Gift Set',
+    handle: 'ultra-slim-olive-green-leather-long-wallet-keychain-gift-set',
+    price: 35,
+    compareAtPrice: 45,
+    currency: 'GBP',
+    category: 'wallets',
+    collectionHandles: ['wallets', 'long-wallets', 'keychains', 'all'],
+    featured: true,
+    bestSeller: false,
+    images: ['/assets/products/Ultra-Slim Olive Green Leather Long Wallet & Keychain Gift Set.webp'],
+    colors: [
+      { name: 'Olive Green', hex: '#3E4B37', image: '/assets/products/Ultra-Slim Olive Green Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Ultra-Slim Black Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Brown', hex: '#4A3324', image: '/assets/products/Ultra-Slim Brown Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Red', hex: '#872323', image: '/assets/products/Ultra-Slim Red Leather Long Wallet & Keychain Gift Set.webp' }
+    ],
+    description: 'An artisanal botanical shade of olive green. A unique, eye-catching luxury gift that stands out from typical black and tan leather accessories.',
+    specs: {
+      Material: 'Full Grain Botanical Dyed Leather',
+      WalletDimensions: '19cm x 9.5cm x 0.8cm',
+      CardCapacity: '8 cards + notes',
+      SetIncludes: 'Long Wallet + Matching Keychain',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Subtle earthy olive hue developed through gentle botanical dyes',
+      'Ultra-compact long design maintains formal coat lines'
+    ]
+  },
+  {
+    id: 'wallet-ultra-slim-red',
+    title: 'Ultra-Slim Red Leather Long Wallet & Keychain Gift Set',
+    handle: 'ultra-slim-red-leather-long-wallet',
+    price: 35,
+    compareAtPrice: 45,
+    currency: 'GBP',
+    category: 'wallets',
+    collectionHandles: ['wallets', 'long-wallets', 'keychains', 'all'],
+    featured: true,
+    bestSeller: true,
+    images: ['/assets/products/Ultra-Slim Red Leather Long Wallet & Keychain Gift Set.webp'],
+    colors: [
+      { name: 'Red', hex: '#872323', image: '/assets/products/Ultra-Slim Red Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Ultra-Slim Black Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Brown', hex: '#4A3324', image: '/assets/products/Ultra-Slim Brown Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Olive Green', hex: '#3E4B37', image: '/assets/products/Ultra-Slim Olive Green Leather Long Wallet & Keychain Gift Set.webp' }
+    ],
+    description: 'Rich scarlet crimson leather with deep visual depth. A passionate, confident statement piece paired with a matching artisan keychain.',
+    specs: {
+      Material: 'Full Grain Crimson Leather',
+      WalletDimensions: '19cm x 9.5cm x 0.8cm',
+      CardCapacity: '8 card slots + 2 note slots',
+      SetIncludes: 'Long Wallet + Leather Keychain',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Vibrant ruby red tone with natural grain texture',
+      'Dual compartment divider for multiple international currencies'
+    ]
+  },
+
+  // Thick Long Wallet Gift Sets (£40)
+  {
+    id: 'wallet-thick-black',
+    title: 'Thick Black Leather Long Wallet & Keychain Gift Set',
+    handle: 'thick-black-leather-long-wallet-keychain-gift-set',
+    price: 40,
+    compareAtPrice: 50,
+    currency: 'GBP',
+    category: 'wallets',
+    collectionHandles: ['wallets', 'long-wallets', 'keychains', 'all'],
+    featured: false,
+    bestSeller: false,
+    images: ['/assets/products/Thick Black Leather Long Wallet & Keychain Gift Set.webp'],
+    colors: [
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Thick Black Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Brown', hex: '#4A3324', image: '/assets/products/Thick Brown Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Forest Green', hex: '#263B2B', image: '/assets/products/Thick Forest Green Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Red', hex: '#872323', image: '/assets/products/Thick Red Genuine Leather Long Wallet & Keychain Gift Set.webp' }
+    ],
+    description: 'Heavyweight construction for those who appreciate substance and tactile heft. Features additional credit card sleeves and a zippered coin compartment.',
+    specs: {
+      Material: 'Heavyweight 2.2mm Full Grain Cowhide',
+      WalletDimensions: '19.5cm x 10cm x 2cm',
+      CardCapacity: '12 cards + zipped coin pouch + passport pocket',
+      SetIncludes: 'Thick Long Wallet + Heavy-duty Brass Keychain',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Heavy-duty internal metal zipper for coins and small keys',
+      'Accommodates international passports for seamless airport transit'
+    ]
+  },
+  {
+    id: 'wallet-thick-brown',
+    title: 'Thick Brown Leather Long Wallet & Keychain Gift Set',
+    handle: 'thick-brown-leather-long-wallet-keychain-gift-set',
+    price: 40,
+    compareAtPrice: 50,
+    currency: 'GBP',
+    category: 'wallets',
+    collectionHandles: ['wallets', 'long-wallets', 'keychains', 'all'],
+    featured: false,
+    bestSeller: true,
+    images: ['/assets/products/Thick Brown Leather Long Wallet & Keychain Gift Set.webp'],
+    colors: [
+      { name: 'Brown', hex: '#4A3324', image: '/assets/products/Thick Brown Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Thick Black Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Forest Green', hex: '#263B2B', image: '/assets/products/Thick Forest Green Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Red', hex: '#872323', image: '/assets/products/Thick Red Genuine Leather Long Wallet & Keychain Gift Set.webp' }
+    ],
+    description: 'Classic rustic brown with thick, tactile grain. Holds substantial cards, currencies, receipts, and coins in one organized heritage piece.',
+    specs: {
+      Material: 'Heavyweight Full Grain Cowhide Leather',
+      WalletDimensions: '19.5cm x 10cm x 2cm',
+      CardCapacity: '12 card slots',
+      SetIncludes: 'Long Wallet + Leather Keychain',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Deep brown waxed pull-up leather',
+      'Dual snap button retention straps'
+    ]
+  },
+  {
+    id: 'wallet-thick-forest-green',
+    title: 'Thick Forest Green Leather Long Wallet & Keychain Gift Set',
+    handle: 'thick-forest-green-leather-long-wallet-keychain-gift-set',
+    price: 40,
+    compareAtPrice: 50,
+    currency: 'GBP',
+    category: 'wallets',
+    collectionHandles: ['wallets', 'long-wallets', 'keychains', 'all'],
+    featured: true,
+    bestSeller: false,
+    images: ['/assets/products/Thick Forest Green Leather Long Wallet & Keychain Gift Set.webp'],
+    colors: [
+      { name: 'Forest Green', hex: '#263B2B', image: '/assets/products/Thick Forest Green Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Thick Black Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Brown', hex: '#4A3324', image: '/assets/products/Thick Brown Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Red', hex: '#872323', image: '/assets/products/Thick Red Genuine Leather Long Wallet & Keychain Gift Set.webp' }
+    ],
+    description: 'Deep British racing and forest green tones provide distinguished character. Complete with full zip security and matching leather keyring.',
+    specs: {
+      Material: 'Heavy Full Grain Cowhide Leather',
+      WalletDimensions: '19.5cm x 10cm x 2cm',
+      CardCapacity: '12 cards + coins',
+      SetIncludes: 'Long Wallet + Forest Green Keychain',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Deep emerald forest green tone with dark edge coating',
+      'Substantial weight and comforting handfeel'
+    ]
+  },
+  {
+    id: 'wallet-thick-red',
+    title: 'Thick Red Genuine Leather Long Wallet & Keychain Gift Set',
+    handle: 'thick-red-genuine-leather-long-wallet-keychain-gift-set',
+    price: 40,
+    compareAtPrice: 50,
+    currency: 'GBP',
+    category: 'wallets',
+    collectionHandles: ['wallets', 'long-wallets', 'keychains', 'all'],
+    featured: false,
+    bestSeller: false,
+    images: ['/assets/products/Thick Red Genuine Leather Long Wallet & Keychain Gift Set.webp'],
+    colors: [
+      { name: 'Red', hex: '#872323', image: '/assets/products/Thick Red Genuine Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Black', hex: '#1C1B1A', image: '/assets/products/Thick Black Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Brown', hex: '#4A3324', image: '/assets/products/Thick Brown Leather Long Wallet & Keychain Gift Set.webp' },
+      { name: 'Forest Green', hex: '#263B2B', image: '/assets/products/Thick Forest Green Leather Long Wallet & Keychain Gift Set.webp' }
+    ],
+    description: 'Commanding crimson tone in our most robust long wallet format. Generous interior volume with high-grade solid brass zipper.',
+    specs: {
+      Material: 'Full Grain Genuine Cow Leather',
+      WalletDimensions: '19.5cm x 10cm x 2cm',
+      CardCapacity: '12 cards',
+      SetIncludes: 'Long Wallet + Matching Red Keychain',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Vivid red exterior with contrasting midnight interior lining',
+      'Robust brass zipper pull'
+    ]
+  },
+
+  // Compact Gift Sets (£30)
+  {
+    id: 'wallet-compact-brown',
+    title: 'Brown Leather Wallet & Keychain Gift Set',
+    handle: 'brown-leather-wallet-keychain-gift-set',
+    price: 30,
+    compareAtPrice: 40,
+    currency: 'GBP',
+    category: 'wallets',
+    collectionHandles: ['wallets', 'card-holders-gift-sets', 'keychains', 'all'],
+    featured: false,
+    bestSeller: true,
+    images: ['/assets/products/Brown Leather Wallet & Keychain Gift Set.webp'],
+    colors: [
+      { name: 'Brown', hex: '#543725', image: '/assets/products/Brown Leather Wallet & Keychain Gift Set.webp' },
+      { name: 'Olive Green', hex: '#3E4B37', image: '/assets/products/Olive Green Leather Wallet & Keychain Gift Set.webp' },
+      { name: 'Red', hex: '#872323', image: '/assets/products/Red Leather Wallet & Keychain Gift Set.webp' }
+    ],
+    description: 'The quintessential everyday carry gift. Compact pocket bifold wallet matched with a robust leather keychain, crafted for daily journeys.',
+    specs: {
+      Material: 'Full Grain Cowhide Leather',
+      WalletDimensions: '11cm x 8.5cm x 1.2cm',
+      CardCapacity: '6 card slots + 1 banknote compartment',
+      SetIncludes: 'Compact Wallet + Handcrafted Keychain',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Compact bifold silhouette fits comfortably into front or back trousers pocket',
+      'Sturdy heavy-gauge edge stitching'
+    ]
+  },
+  {
+    id: 'wallet-compact-olive',
+    title: 'Olive Green Leather Wallet & Keychain Gift Set',
+    handle: 'olive-green-leather-wallet-keychain-gift-set',
+    price: 30,
+    compareAtPrice: 40,
+    currency: 'GBP',
+    category: 'wallets',
+    collectionHandles: ['wallets', 'card-holders-gift-sets', 'keychains', 'all'],
+    featured: false,
+    bestSeller: false,
+    images: ['/assets/products/Olive Green Leather Wallet & Keychain Gift Set.webp'],
+    colors: [
+      { name: 'Olive Green', hex: '#3E4B37', image: '/assets/products/Olive Green Leather Wallet & Keychain Gift Set.webp' },
+      { name: 'Brown', hex: '#543725', image: '/assets/products/Brown Leather Wallet & Keychain Gift Set.webp' },
+      { name: 'Red', hex: '#872323', image: '/assets/products/Red Leather Wallet & Keychain Gift Set.webp' }
+    ],
+    description: 'Understated olive green compact bifold set. Precision cut and hand-finished with natural wax for supple tactile satisfaction.',
+    specs: {
+      Material: 'Full Grain Cowhide Leather',
+      WalletDimensions: '11cm x 8.5cm x 1.2cm',
+      CardCapacity: '6 card slots',
+      SetIncludes: 'Compact Wallet + Keychain',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Slim pocket footprint',
+      'Includes brass split-ring key loop'
+    ]
+  },
+  {
+    id: 'wallet-compact-red',
+    title: 'Red Leather Wallet & Keychain Gift Set',
+    handle: 'red-leather-wallet-keychain-gift-set-1',
+    price: 30,
+    compareAtPrice: 40,
+    currency: 'GBP',
+    category: 'wallets',
+    collectionHandles: ['wallets', 'card-holders-gift-sets', 'keychains', 'all'],
+    featured: false,
+    bestSeller: false,
+    images: ['/assets/products/Red Leather Wallet & Keychain Gift Set.webp'],
+    colors: [
+      { name: 'Red', hex: '#872323', image: '/assets/products/Red Leather Wallet & Keychain Gift Set.webp' },
+      { name: 'Brown', hex: '#543725', image: '/assets/products/Brown Leather Wallet & Keychain Gift Set.webp' },
+      { name: 'Olive Green', hex: '#3E4B37', image: '/assets/products/Olive Green Leather Wallet & Keychain Gift Set.webp' }
+    ],
+    description: 'Vibrant red pocket wallet paired with matching leather loop keychain. Crafted from full grain leather that patinas beautifully over years of use.',
+    specs: {
+      Material: 'Full Grain Cowhide Leather',
+      WalletDimensions: '11cm x 8.5cm x 1.2cm',
+      CardCapacity: '6 card slots + note pocket',
+      SetIncludes: 'Compact Wallet + Matching Keychain',
+      Origin: 'Handcrafted'
+    },
+    features: [
+      'Bold scarlet tone with rich grain',
+      'Dual-function key loop with snap closure'
+    ]
+  }
+];
+
+fs.writeFileSync('data/products.json', JSON.stringify(products, null, 2));
+console.log(`Saved ${products.length} structured catalog products to data/products.json`);

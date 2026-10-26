@@ -1,0 +1,134 @@
+{
+  "collections": [
+    {
+      "id": 646888849773,
+      "title": "Bags",
+      "handle": "bags",
+      "description": null,
+      "published_at": "2026-09-07T06:29:56-04:00",
+      "updated_at": "2026-10-05T10:12:59-04:00",
+      "image": null,
+      "products_count": 24
+    },
+    {
+      "id": 646888882541,
+      "title": "Belts",
+      "handle": "belts",
+      "description": null,
+      "published_at": "2026-09-07T06:30:10-04:00",
+      "updated_at": "2026-10-05T10:12:59-04:00",
+      "image": null,
+      "products_count": 3
+    },
+    {
+      "id": 647802290541,
+      "title": "Bifold & Pocket Wallets",
+      "handle": "bifold-pocket-wallets",
+      "description": null,
+      "published_at": "2026-09-14T09:42:16-04:00",
+      "updated_at": "2026-10-09T07:21:40-04:00",
+      "image": null,
+      "products_count": 14
+    },
+    {
+      "id": 648496316781,
+      "title": "Bifold Wallets",
+      "handle": "bifold-wallets",
+      "description": null,
+      "published_at": "2026-09-24T09:53:59-04:00",
+      "updated_at": "2026-10-09T07:21:40-04:00",
+      "image": null,
+      "products_count": 12
+    },
+    {
+      "id": 647800291693,
+      "title": "Business & Work Bags",
+      "handle": "business-work-bags",
+      "description": null,
+      "published_at": "2026-09-14T08:48:19-04:00",
+      "updated_at": "2026-10-05T10:12:59-04:00",
+      "image": null,
+      "products_count": 6
+    },
+    {
+      "id": 648496415085,
+      "title": "Card Holder",
+      "handle": "card-holder",
+      "description": null,
+      "published_at": "2026-09-24T09:54:57-04:00",
+      "updated_at": "2026-10-19T07:19:30-04:00",
+      "image": null,
+      "products_count": 4
+    },
+    {
+      "id": 647802716525,
+      "title": "Card Holders & Gift Sets",
+      "handle": "card-holders-gift-sets",
+      "description": null,
+      "published_at": "2026-09-14T09:51:21-04:00",
+      "updated_at": "2026-10-19T07:19:30-04:00",
+      "image": null,
+      "products_count": 12
+    },
+    {
+      "id": 647800488301,
+      "title": "Crossbody & Everyday Bags",
+      "handle": "crossbody-everyday-bags",
+      "description": null,
+      "published_at": "2026-09-14T08:50:03-04:00",
+      "updated_at": "2026-10-05T10:12:59-04:00",
+      "image": null,
+      "products_count": 3
+    },
+    {
+      "id": 648496349549,
+      "title": "Full Options with Coin Pocket",
+      "handle": "full-options-with-coin-pocket",
+      "description": null,
+      "published_at": "2026-09-24T09:54:38-04:00",
+      "updated_at": "2026-10-05T10:13:00-04:00",
+      "image": null,
+      "products_count": 4
+    },
+    {
+      "id": 645148148077,
+      "title": "Home page",
+      "handle": "frontpage",
+      "description": null,
+      "published_at": "2026-08-25T10:08:35-04:00",
+      "updated_at": "2026-10-19T07:19:30-04:00",
+      "image": null,
+      "products_count": 74
+    },
+    {
+      "id": 647802028397,
+      "title": "Long Wallets",
+      "handle": "long-wallets",
+      "description": null,
+      "published_at": "2026-09-14T09:35:47-04:00",
+      "updated_at": "2026-10-14T07:22:48-04:00",
+      "image": null,
+      "products_count": 8
+    },
+    {
+      "id": 647800422765,
+      "title": "Travel & Duffle Bags",
+      "handle": "travel-duffle-bags",
+      "description": null,
+      "published_at": "2026-09-14T08:49:20-04:00",
+      "updated_at": "2026-10-05T10:12:59-04:00",
+      "image": null,
+      "products_count": 5
+    },
+    {
+      "id": 646888948077,
+      "title": "Wallets",
+      "handle": "wallets",
+      "description": null,
+      "published_at": "2026-09-07T06:30:23-04:00",
+      "updated_at": "2026-10-19T07:19:30-04:00",
+      "image": null,
+      "products_count": 41
+    }
+  ]
+}
