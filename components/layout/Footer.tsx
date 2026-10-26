@@ -87,34 +87,34 @@ export const Footer: React.FC = () => {
     });
   }, []);
 
-  // Idle wave animation every 6 seconds if no interaction
+  // Ambient wave lighting animation every 3.5 seconds if no interaction
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const interval = setInterval(() => {
       const now = Date.now();
-      if (now - lastInteractionTime.current > 4500) {
+      if (now - lastInteractionTime.current > 2500) {
         letterRefs.current.forEach((span, idx) => {
           if (!span) return;
           gsap.timeline()
             .to(span, {
               opacity: 0.85,
               y: -8,
-              textShadow: '0 0 25px rgba(255, 255, 255, 0.3)',
-              duration: 0.45,
-              delay: idx * 0.1,
+              textShadow: '0 0 25px rgba(255, 255, 255, 0.35)',
+              duration: 0.35,
+              delay: idx * 0.08,
               ease: 'power2.out',
             })
             .to(span, {
               opacity: 0.08,
               y: 0,
               textShadow: '0 0 0px rgba(255, 255, 255, 0)',
-              duration: 0.9,
+              duration: 0.6,
               ease: 'power2.out',
             });
         });
       }
-    }, 6000);
+    }, 3500);
 
     return () => clearInterval(interval);
   }, []);

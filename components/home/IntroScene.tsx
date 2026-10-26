@@ -53,30 +53,20 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
       if (onIntroProgress) onIntroProgress(1.0);
       if (onIntroComplete) onIntroComplete(true);
       const realHeader = document.querySelector('header') as HTMLElement | null;
-      const realHeaderLogo = document.querySelector('header a img') as HTMLElement | null;
       if (realHeader) {
         realHeader.style.visibility = 'visible';
         realHeader.style.opacity = '1';
-      }
-      if (realHeaderLogo) {
-        realHeaderLogo.style.visibility = 'visible';
-        realHeaderLogo.style.opacity = '1';
       }
       return;
     }
 
     if (!containerRef.current || !logoWrapperRef.current) return;
 
-    // Initially hide header & header logo to prevent duplicate logo or peek
+    // Initially hide header on home so intro logo screen plays first
     const realHeader = document.querySelector('header') as HTMLElement | null;
-    const realHeaderLogo = document.querySelector('header a img') as HTMLElement | null;
     if (realHeader) {
       realHeader.style.visibility = 'hidden';
       realHeader.style.opacity = '0';
-    }
-    if (realHeaderLogo) {
-      realHeaderLogo.style.visibility = 'hidden';
-      realHeaderLogo.style.opacity = '0';
     }
 
     const ctx = gsap.context(() => {
@@ -185,29 +175,20 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
 
             // Header fade in as user scrolls down
             const h = document.querySelector('header') as HTMLElement | null;
-            const logo = document.querySelector('header a[aria-label="Adehawk Leather Goods Home"]') as HTMLElement | null;
-
             if (h) {
-              if (p > 0.35) {
+              if (p > 0.25) {
                 h.style.visibility = 'visible';
-                h.style.opacity = String(Math.min(1, (p - 0.35) / 0.55));
+                h.style.opacity = String(Math.min(1, (p - 0.25) / 0.65));
               } else {
                 h.style.visibility = 'hidden';
                 h.style.opacity = '0';
               }
             }
 
-            // Real header logo cross-fade handoff between 0.88 and 1.0
-            if (logo) {
-              if (p >= 0.92) {
-                logo.style.visibility = 'visible';
-                logo.style.opacity = String(Math.min(1, (p - 0.92) / 0.08));
-                if (onIntroComplete) onIntroComplete(true);
-              } else {
-                logo.style.visibility = 'hidden';
-                logo.style.opacity = '0';
-                if (onIntroComplete) onIntroComplete(false);
-              }
+            if (p >= 0.9) {
+              if (onIntroComplete) onIntroComplete(true);
+            } else {
+              if (onIntroComplete) onIntroComplete(false);
             }
           },
         },
@@ -274,7 +255,14 @@ export const IntroScene: React.FC<IntroSceneProps> = ({
       );
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      const realHeader = document.querySelector('header') as HTMLElement | null;
+      if (realHeader) {
+        realHeader.style.visibility = 'visible';
+        realHeader.style.opacity = '1';
+      }
+    };
   }, [onIntroProgress, onIntroComplete]);
 
   if (isSkipped) {
