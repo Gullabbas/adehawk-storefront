@@ -360,7 +360,7 @@ export const SpotlightTour: React.FC = () => {
       </div>
 
       {/* Top Floating Kicker */}
-      <div className="absolute top-8 left-6 sm:left-12 z-30 pointer-events-none">
+      <div className="absolute top-24 sm:top-28 lg:top-32 left-6 sm:left-12 z-30 pointer-events-none">
         <span className="text-[10px] sm:text-xs uppercase tracking-widest text-cognac font-sans font-semibold block mb-1">
           Interactive Guided Tour · Scroll to Explore
         </span>

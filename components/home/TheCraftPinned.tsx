@@ -209,7 +209,7 @@ export const TheCraftPinned: React.FC = () => {
       id="craft-section"
       ref={containerRef}
       style={{ backgroundColor: bgColor }}
-      className="relative w-full min-h-[100svh] text-ink flex flex-col justify-between py-16 sm:py-20 overflow-hidden select-none rounded-t-[32px] border-t border-ink/10 shadow-[0_-20px_50px_rgba(0,0,0,0.12)] transition-colors duration-500"
+      className="relative w-full min-h-[100svh] text-ink flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32 pb-6 sm:pb-8 overflow-hidden select-none rounded-t-[32px] border-t border-ink/10 shadow-[0_-20px_50px_rgba(0,0,0,0.12)] transition-colors duration-500"
     >
       {/* Floating Ambient Cognac Light Drift BEHIND Product */}
       <div
@@ -260,12 +260,12 @@ export const TheCraftPinned: React.FC = () => {
       {/* Center Stage: Seamless Hero Briefcase Gallery Canvas */}
       <div
         ref={stageRef}
-        className="relative z-10 flex-1 flex items-center justify-center p-4 sm:p-8"
+        className="relative z-10 flex-1 flex items-center justify-center px-4 py-2 sm:px-8"
       >
-        <div className="relative w-[300px] sm:w-[420px] md:w-[480px] aspect-[4/5] flex items-center justify-center">
+        <div className="relative w-[280px] sm:w-[380px] md:w-[440px] h-[32vh] sm:h-[36vh] max-h-[350px] aspect-[4/3] flex items-center justify-center">
           {/* Soft Contact Shadow Placed BEHIND the Product */}
           <div
-            className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[85%] h-8 bg-ink/15 blur-xl rounded-full z-0"
+            className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[85%] h-8 bg-ink/15 blur-xl rounded-full z-0"
             aria-hidden="true"
           />
 
@@ -279,7 +279,7 @@ export const TheCraftPinned: React.FC = () => {
               alt="Black Leather Executive Briefcase - Artisanal Craftsmanship"
               fill
               priority
-              sizes="(max-width: 768px) 300px, 480px"
+              sizes="(max-width: 768px) 280px, 440px"
               className="object-contain"
             />
 
@@ -320,26 +320,26 @@ export const TheCraftPinned: React.FC = () => {
       </div>
 
       {/* Bottom Pinned Typography & Magnetic CTA - Dark Espresso Text on Light Gallery Surface */}
-      <div className="relative z-20 max-w-3xl mx-auto px-6 text-center space-y-3">
-        <span className="text-[11px] uppercase tracking-kicker text-cognac font-sans font-semibold block">
+      <div className="relative z-20 max-w-3xl mx-auto px-6 text-center space-y-1.5 sm:space-y-2 pb-1">
+        <span className="text-[10px] sm:text-[11px] uppercase tracking-kicker text-cognac font-sans font-semibold block">
           Chapter 0{activeStep} · Character & Form
         </span>
 
         {/* High-Contrast Chapter Heading (18.9:1 contrast against #FCFDFF) */}
-        <h3 className="font-serif text-2xl sm:text-4xl md:text-5xl font-light text-ink leading-tight transition-all duration-500">
+        <h3 className="font-serif text-xl sm:text-3xl md:text-4xl font-light text-ink leading-tight transition-all duration-500">
           {curChapter.title}
         </h3>
 
-        <p className="text-xs sm:text-sm text-ink-muted max-w-lg mx-auto font-sans leading-relaxed">
+        <p className="text-xs sm:text-sm text-ink-muted max-w-lg mx-auto font-sans leading-relaxed line-clamp-2">
           {curChapter.body}
         </p>
 
         {activeStep === 5 && (
-          <div className="pt-2 animate-fadeIn flex justify-center">
+          <div className="pt-1 animate-fadeIn flex justify-center">
             <Button
               href="/collections/all"
               variant="dark"
-              size="lg"
+              size="sm"
               magnetic
               icon="arrow-right"
             >

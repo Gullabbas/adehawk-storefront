@@ -151,7 +151,7 @@ export const CollectionShowcase3D: React.FC = () => {
       id="collection-section"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full h-[100svh] min-h-[640px] max-h-[100svh] bg-espresso text-ivory flex flex-col justify-between pt-8 sm:pt-12 pb-5 sm:pb-7 overflow-hidden select-none rounded-t-[32px] border-t border-ivory/15 shadow-[0_-20px_50px_rgba(0,0,0,0.3)]"
+      className="relative w-full h-[100svh] min-h-[640px] max-h-[100svh] bg-espresso text-ivory flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32 pb-4 sm:pb-6 overflow-hidden select-none rounded-t-[32px] border-t border-ivory/15 shadow-[0_-20px_50px_rgba(0,0,0,0.3)]"
     >
       {/* Film Grain on Dark Surface */}
       <div
@@ -209,7 +209,7 @@ export const CollectionShowcase3D: React.FC = () => {
         style={{ perspective: '1200px' }}
       >
         <div
-          className="relative w-full max-w-4xl h-[44vh] max-h-[430px] flex items-center justify-center will-change-transform transition-transform duration-500 ease-out"
+          className="relative w-full max-w-4xl h-[38vh] sm:h-[42vh] max-h-[390px] flex items-center justify-center will-change-transform transition-transform duration-500 ease-out"
           style={{
             transform: `rotateY(${mouseTilt.x * 0.4}deg) rotateX(${mouseTilt.y * 0.4}deg) ${
               isHoveringActive ? 'scale(1.02)' : 'scale(1)'
@@ -237,7 +237,7 @@ export const CollectionShowcase3D: React.FC = () => {
                 onClick={() => handleCardClick(idx, col.handle)}
                 onMouseEnter={() => isActive && setIsHoveringActive(true)}
                 onMouseLeave={() => isActive && setIsHoveringActive(false)}
-                className={`absolute w-[240px] sm:w-[280px] md:w-[320px] lg:w-[350px] h-[40vh] max-h-[400px] aspect-[4/5] rounded-[24px] overflow-hidden border transition-all duration-700 ease-luxury cursor-pointer shadow-2xl ${
+                className={`absolute w-[220px] sm:w-[270px] md:w-[310px] lg:w-[340px] h-[35vh] sm:h-[38vh] max-h-[360px] aspect-[4/5] rounded-[24px] overflow-hidden border transition-all duration-700 ease-luxury cursor-pointer shadow-2xl ${
                   isActive
                     ? 'border-ivory/30 shadow-[0_20px_50px_rgba(0,0,0,0.65)] ring-1 ring-ivory/20'
                     : 'border-ivory/10 shadow-[0_12px_35px_rgba(0,0,0,0.4)] hover:border-ivory/25'
