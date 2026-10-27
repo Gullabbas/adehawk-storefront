@@ -86,15 +86,16 @@ export const CollectionShowcase3D: React.FC = () => {
     if (!sectionRef.current) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isDesktop = window.innerWidth >= 768;
+    if (prefersReducedMotion) return;
 
-    if (prefersReducedMotion || !isDesktop) return;
+    const isMobile = window.innerWidth < 768;
+    const pinDistance = isMobile ? '+=180%' : '+=260%';
 
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: 'top top',
-        end: '+=260%',
+        end: pinDistance,
         pin: true,
         pinSpacing: true,
         scrub: 1.2,
@@ -108,6 +109,31 @@ export const CollectionShowcase3D: React.FC = () => {
 
     return () => ctx.revert();
   }, [total]);
+
+  // Touch swipe gesture physics for mobile & tablet
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+
+    if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX < 0) {
+        setActiveIndex((prev) => (prev + 1) % total);
+      } else {
+        setActiveIndex((prev) => (prev - 1 + total) % total);
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
 
   // Pointer tilt physics
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -205,9 +231,38 @@ export const CollectionShowcase3D: React.FC = () => {
       {/* 3D Curved Arc Stage Container */}
       <div
         ref={stageRef}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         className="relative z-10 w-full flex-1 flex items-center justify-center py-2"
         style={{ perspective: '1200px' }}
       >
+        {/* Mobile & Tablet Quick Nav Tap Buttons */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setActiveIndex((prev) => (prev - 1 + total) % total);
+          }}
+          className="md:hidden absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-espresso/80 backdrop-blur-md border border-ivory/20 flex items-center justify-center text-ivory text-base shadow-xl active:scale-95 transition-all cursor-pointer"
+          aria-label="Previous collection"
+        >
+          <svg className="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setActiveIndex((prev) => (prev + 1) % total);
+          }}
+          className="md:hidden absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-espresso/80 backdrop-blur-md border border-ivory/20 flex items-center justify-center text-ivory text-base shadow-xl active:scale-95 transition-all cursor-pointer"
+          aria-label="Next collection"
+        >
+          <svg className="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+
         <div
           className="relative w-full max-w-4xl h-[38vh] sm:h-[42vh] max-h-[390px] flex items-center justify-center will-change-transform transition-transform duration-500 ease-out"
           style={{
@@ -224,12 +279,13 @@ export const CollectionShowcase3D: React.FC = () => {
 
             if (!isVisible) return null;
 
-            // Compute 3D coverflow arc coordinates
-            const rotateY = offset * -32; // rotate on Y
-            const translateX = offset * 240; // spread apart
-            const translateZ = -Math.abs(offset) * 140 + (isActive ? 60 : 0); // recede in Z
-            const scale = isActive ? 1.02 : 0.82;
-            const opacity = isActive ? 1.0 : Math.max(0.45, 1 - Math.abs(offset) * 0.3);
+            // Compute 3D coverflow arc coordinates (responsive for mobile & desktop)
+            const isSmall = typeof window !== 'undefined' && window.innerWidth < 640;
+            const rotateY = offset * (isSmall ? -24 : -32);
+            const translateX = offset * (isSmall ? 180 : 240);
+            const translateZ = -Math.abs(offset) * (isSmall ? 100 : 140) + (isActive ? (isSmall ? 40 : 60) : 0);
+            const scale = isActive ? 1.02 : (isSmall ? 0.78 : 0.82);
+            const opacity = isActive ? 1.0 : Math.max(0.4, 1 - Math.abs(offset) * 0.35);
 
             return (
               <div

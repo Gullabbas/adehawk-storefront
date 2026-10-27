@@ -88,6 +88,9 @@ export function useHeroController({
       if (autoplayTweenRef.current) {
         autoplayTweenRef.current.pause();
       }
+      if (onAutoplayProgress) {
+        onAutoplayProgress(0);
+      }
 
       // Trigger text choreography callback
       if (onTextTransition) {
@@ -229,7 +232,10 @@ export function useHeroController({
     if (autoplayTweenRef.current) {
       autoplayTweenRef.current.pause();
     }
-  }, []);
+    if (onAutoplayProgress) {
+      onAutoplayProgress(0);
+    }
+  }, [onAutoplayProgress]);
 
   const onPointerMove = useCallback(
     (e: React.PointerEvent) => {

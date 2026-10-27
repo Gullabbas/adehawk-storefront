@@ -209,7 +209,7 @@ export const TheCraftPinned: React.FC = () => {
       id="craft-section"
       ref={containerRef}
       style={{ backgroundColor: bgColor }}
-      className="relative w-full min-h-[100svh] text-ink flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32 pb-6 sm:pb-8 overflow-hidden select-none rounded-t-[32px] border-t border-ink/10 shadow-[0_-20px_50px_rgba(0,0,0,0.12)] transition-colors duration-500"
+      className="relative w-full min-h-[100svh] text-ink flex flex-col justify-between pt-24 sm:pt-28 lg:pt-32 pb-6 sm:pb-8 overflow-hidden select-none rounded-[32px] border border-ink/10 shadow-[0_20px_50px_rgba(0,0,0,0.12)] transition-colors duration-500 mb-8 sm:mb-14"
     >
       {/* Floating Ambient Cognac Light Drift BEHIND Product */}
       <div

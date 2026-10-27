@@ -154,7 +154,7 @@ export const HeroStage: React.FC<HeroStageProps> = ({ isIntroComplete = true }) 
 
       {/* 4. Text Choreography in Liquid-Glass Panel */}
       <div
-        className={`absolute inset-0 pointer-events-none flex flex-col justify-end p-4 sm:p-8 md:p-12 lg:p-16 z-20 ${
+        className={`absolute inset-0 pointer-events-none flex flex-col justify-end p-4 pb-24 sm:pb-10 sm:p-8 md:p-12 lg:p-16 z-20 ${
           currentSlide.panelAnchor === 'bottom-right' ? 'items-end' : 'items-start'
         }`}
         style={{
@@ -163,7 +163,7 @@ export const HeroStage: React.FC<HeroStageProps> = ({ isIntroComplete = true }) 
         }}
       >
         {/* The Liquid-Glass Floating Card */}
-        <div className="w-full max-w-[calc(100vw-32px)] sm:max-w-[560px] lg:max-w-[520px] rounded-[24px] bg-[rgba(18,14,12,0.52)] backdrop-blur-[24px] backdrop-saturate-[140%] border border-[rgba(255,255,255,0.16)] p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.16)] space-y-4 pointer-events-auto overflow-hidden">
+        <div className="w-full max-w-[calc(100vw-32px)] sm:max-w-[560px] lg:max-w-[520px] rounded-[24px] bg-[rgba(18,14,12,0.52)] backdrop-blur-[24px] backdrop-saturate-[140%] border border-[rgba(255,255,255,0.16)] p-5 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.16)] space-y-3 sm:space-y-4 pointer-events-auto overflow-hidden">
           {/* Animated Kicker in High-Contrast Warm Cognac Gold */}
           <div className="overflow-hidden">
             <AnimatePresence mode="wait">
@@ -267,22 +267,22 @@ export const HeroStage: React.FC<HeroStageProps> = ({ isIntroComplete = true }) 
       </div>
 
       {/* 6. Mobile Horizontal 3-Segment Progress Bar */}
-      <div className="lg:hidden absolute bottom-3 left-4 right-4 flex items-center gap-2 z-20 pointer-events-none">
+      <div className="lg:hidden absolute bottom-5 left-4 right-32 sm:right-40 flex items-center gap-1.5 z-30 pointer-events-none">
         {HERO_CONFIG.slides.map((s, idx) => {
           const isActive = idx === index;
           return (
             <div
               key={s.id}
-              className="flex-1 h-[2px] bg-ivory/20 overflow-hidden rounded-full"
+              className="flex-1 h-[3px] bg-ivory/20 overflow-hidden rounded-full backdrop-blur-sm"
             >
               {isActive ? (
                 <div
-                  className="h-full bg-ivory transition-all duration-100 ease-linear"
+                  className="h-full bg-[#D9A066] transition-all duration-100 ease-linear rounded-full"
                   style={{ width: `${autoplayProgress * 100}%` }}
                 />
               ) : (
                 <div
-                  className={`h-full bg-ivory/30 ${idx < index ? 'w-full' : 'w-0'}`}
+                  className={`h-full bg-ivory/40 rounded-full ${idx < index ? 'w-full' : 'w-0'}`}
                 />
               )}
             </div>
@@ -291,11 +291,11 @@ export const HeroStage: React.FC<HeroStageProps> = ({ isIntroComplete = true }) 
       </div>
 
       {/* 7. Bottom-Right Controls: Glass Ring Next + Pause/Play Button */}
-      <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 z-20 flex items-center space-x-3 pointer-events-auto">
+      <div className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 md:bottom-10 md:right-10 z-30 flex items-center space-x-2.5 sm:space-x-3 pointer-events-auto">
         {/* Pause / Play Toggle (WCAG 2.2.2) */}
         <button
           onClick={togglePause}
-          className="w-11 h-11 rounded-full border border-ivory/20 bg-espresso/60 backdrop-blur-[20px] flex items-center justify-center text-ivory hover:border-ivory transition-colors cursor-pointer shadow-lg"
+          className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-ivory/20 bg-espresso/70 backdrop-blur-[20px] flex items-center justify-center text-ivory hover:border-ivory transition-colors cursor-pointer shadow-lg"
           aria-label={isPaused ? 'Resume autoplay' : 'Pause autoplay'}
         >
           {isPaused ? (
@@ -313,7 +313,7 @@ export const HeroStage: React.FC<HeroStageProps> = ({ isIntroComplete = true }) 
         {/* Circular Next Button with SVG Ring Progress */}
         <button
           onClick={next}
-          className="relative w-14 h-14 rounded-full flex items-center justify-center text-ivory group cursor-pointer shadow-xl"
+          className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-ivory group cursor-pointer shadow-xl"
           aria-label="Next slide"
         >
           {/* Background glass circle */}

@@ -284,7 +284,7 @@ export const WalletStudio: React.FC = () => {
   return (
     <section
       id="wallets-section"
-      className="relative bg-ivory text-ink py-24 sm:py-32 overflow-hidden border-t border-ink/10 rounded-t-[32px] shadow-[0_-25px_60px_rgba(0,0,0,0.12)] transition-colors duration-700"
+      className="relative bg-ivory text-ink py-20 sm:py-28 overflow-hidden border border-ink/10 rounded-[32px] shadow-[0_25px_60px_rgba(0,0,0,0.12)] transition-colors duration-700 mb-8 sm:mb-14"
       style={{
         backgroundColor: '#FBF9F5',
       }}
