@@ -16,7 +16,7 @@ export const Header: React.FC = () => {
 
   const { openCart, totalItems } = useCartStore();
   const { totalItems: wishlistTotal } = useWishlistStore();
-  const { openSearch, isMenuOpen, toggleMenu, closeMenu } = useUIStore();
+  const { openSearch, isMenuOpen, toggleMenu, closeMenu, open3DViewer } = useUIStore();
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -69,7 +69,7 @@ export const Header: React.FC = () => {
         >
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between min-h-[44px] sm:min-h-[48px]">
             {/* Left Nav (Desktop) */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-7 lg:space-x-8">
               {navLinks.map(link => {
                 const isActive = pathname === link.href;
                 return (
@@ -87,6 +87,19 @@ export const Header: React.FC = () => {
                   </Link>
                 );
               })}
+
+              {/* 3D View Interactive 360 Studio Trigger */}
+              <button
+                onClick={open3DViewer}
+                className="relative group py-1 text-xs font-sans uppercase tracking-kicker transition-colors hover:text-[#D9A066] flex items-center gap-1.5 cursor-pointer text-ivory/90"
+                aria-label="Open 3D 360 degree product view"
+              >
+                <span>3D View</span>
+                <span className="px-1.5 py-0.5 rounded-full bg-[#D9A066]/20 border border-[#D9A066]/50 text-[9px] font-sans font-bold text-[#D9A066] tracking-normal leading-none group-hover:bg-[#D9A066] group-hover:text-ink transition-colors">
+                  360°
+                </span>
+                <span className="absolute bottom-0 left-0 h-[1.5px] bg-[#D9A066] transition-all duration-300 w-0 group-hover:w-full" />
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -233,6 +246,27 @@ export const Header: React.FC = () => {
                   >
                     Keychains & Gifts
                   </Link>
+                </motion.div>
+
+                {/* Mobile 3D View Trigger */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <button
+                    onClick={() => {
+                      closeMenu();
+                      open3DViewer();
+                    }}
+                    className="flex items-center gap-3 font-serif text-3xl font-light text-[#D9A066] hover:text-ivory transition-colors cursor-pointer text-left w-full"
+                    aria-label="Open 3D 360 degree product view"
+                  >
+                    <span>3D View</span>
+                    <span className="px-2 py-0.5 rounded-full bg-[#D9A066]/20 border border-[#D9A066]/50 text-xs font-sans font-bold text-[#D9A066] tracking-wider">
+                      360°
+                    </span>
+                  </button>
                 </motion.div>
               </nav>
             </div>

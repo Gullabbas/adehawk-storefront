@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { SearchOverlay } from '@/components/search/SearchOverlay';
+import { Product360ViewerModal } from '@/components/product/Product360ViewerModal';
 import { CustomCursor } from '@/components/ui/CustomCursor';
 import { Preloader } from '@/components/ui/Preloader';
 
@@ -101,6 +102,7 @@ export default function RootLayout({
           <Header />
           <CartDrawer />
           <SearchOverlay />
+          <Product360ViewerModal />
           <main className="min-h-screen">{children}</main>
           <Footer />
         </SmoothScrollProvider>
