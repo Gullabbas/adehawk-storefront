@@ -21,7 +21,7 @@ interface FrameConfig {
   }[];
 }
 
-const FRAMES: FrameConfig[] = [
+const TURNTABLE_FRAMES: FrameConfig[] = [
   {
     idx: 0,
     deg: 0,
@@ -31,22 +31,22 @@ const FRAMES: FrameConfig[] = [
     hotspots: [
       {
         id: 'h0-1',
-        x: 22,
-        y: 60,
+        x: 24,
+        y: 62,
         title: 'Genuine Hair-on-Hide',
         description: 'Selected black and ivory natural cowhide fur. Unbleached, water-shedding, and tactilely dense.',
       },
       {
         id: 'h0-2',
         x: 48,
-        y: 50,
+        y: 52,
         title: 'Front Passport Pocket',
         description: 'Antique brass zipper with hand-cut full-grain harness leather pull tab for quick-reach travel items.',
       },
       {
         id: 'h0-3',
         x: 64,
-        y: 38,
+        y: 40,
         title: 'Double-Riveted Harness Straps',
         description: 'Vegetable-tanned saddle leather straps anchored through heavy solid brass rivets and double-stitching.',
       },
@@ -54,22 +54,22 @@ const FRAMES: FrameConfig[] = [
   },
   {
     idx: 1,
-    deg: 60,
-    label: 'Front-Left Three-Quarter',
-    shortLabel: '60° 3/4 Left',
+    deg: 45,
+    label: 'Front-Right Three-Quarter',
+    shortLabel: '45° 3/4 Right',
     src: '/images/360/frames/frame-1.webp',
     hotspots: [
       {
         id: 'h1-1',
-        x: 35,
-        y: 36,
+        x: 42,
+        y: 35,
         title: 'Dual Brass Top Zippers',
         description: 'Smooth-glide heavy gauge brass zips running the entire barrel length for unobstructed packing.',
       },
       {
         id: 'h1-2',
-        x: 75,
-        y: 65,
+        x: 78,
+        y: 64,
         title: 'Structured Barrel End',
         description: 'Reinforced circular piping protects corners against luggage compartment friction.',
       },
@@ -77,22 +77,22 @@ const FRAMES: FrameConfig[] = [
   },
   {
     idx: 2,
-    deg: 120,
-    label: 'Side Profile (Shoe Pocket)',
-    shortLabel: '120° Profile',
+    deg: 90,
+    label: 'Side Profile (Shoe Compartment)',
+    shortLabel: '90° Profile',
     src: '/images/360/frames/frame-2.webp',
     hotspots: [
       {
         id: 'h2-1',
         x: 50,
-        y: 64,
+        y: 66,
         title: 'Dedicated Shoe Compartment',
         description: 'Curved zipped pouch separating footwear or laundry from the main garment interior.',
       },
       {
         id: 'h2-2',
         x: 50,
-        y: 40,
+        y: 38,
         title: 'Cast Solid Brass D-Ring',
         description: 'Drop-forged antique brass ring rated for 50kg+ tensile weight with the detachable shoulder strap.',
       },
@@ -100,37 +100,21 @@ const FRAMES: FrameConfig[] = [
   },
   {
     idx: 3,
-    deg: 180,
-    label: 'Top-Down Architecture',
-    shortLabel: '180° Top',
+    deg: 135,
+    label: 'Rear-Right Three-Quarter',
+    shortLabel: '135° 3/4 Rear',
     src: '/images/360/frames/frame-3.webp',
     hotspots: [
       {
         id: 'h3-1',
-        x: 50,
-        y: 48,
-        title: 'Dual Main Zippers',
-        description: 'Symmetrical brass sliders allowing the duffle to be opened from either side or locked with a travel padlock.',
+        x: 60,
+        y: 42,
+        title: 'Cylindrical Barrel Form',
+        description: 'Ergonomically balanced weight distribution engineered for overhead cabin compartments.',
       },
       {
         id: 'h3-2',
-        x: 50,
-        y: 22,
-        title: 'Rolled Leather Carry Handles',
-        description: 'Ergonomic cushioned core wrapped in supple full-grain leather for comfortable hand carry.',
-      },
-    ],
-  },
-  {
-    idx: 4,
-    deg: 240,
-    label: 'Rear-Right Three-Quarter',
-    shortLabel: '240° 3/4 Rear',
-    src: '/images/360/frames/frame-4.webp',
-    hotspots: [
-      {
-        id: 'h4-1',
-        x: 65,
+        x: 35,
         y: 65,
         title: 'Reinforced Base Construction',
         description: 'Heavy duty internal leather stiffener keeps duffle shape intact even when partially packed.',
@@ -138,14 +122,69 @@ const FRAMES: FrameConfig[] = [
     ],
   },
   {
+    idx: 4,
+    deg: 180,
+    label: 'Rear Elevation',
+    shortLabel: '180° Rear',
+    src: '/images/360/frames/frame-4.webp',
+    hotspots: [
+      {
+        id: 'h4-1',
+        x: 50,
+        y: 52,
+        title: 'Continuous Hair-on-Hide Back',
+        description: 'Seamless natural cowhide pattern with unbroken hair grain and double-stitched harness saddle straps.',
+      },
+      {
+        id: 'h4-2',
+        x: 50,
+        y: 24,
+        title: 'Rolled Leather Carry Handles',
+        description: 'Cushioned leather core wrapped in supple full-grain harness leather for hand comfort under heavy loads.',
+      },
+    ],
+  },
+  {
     idx: 5,
-    deg: 300,
-    label: 'Front-Right Three-Quarter',
-    shortLabel: '300° 3/4 Right',
+    deg: 225,
+    label: 'Rear-Left Three-Quarter',
+    shortLabel: '225° 3/4 Left',
     src: '/images/360/frames/frame-5.webp',
     hotspots: [
       {
         id: 'h5-1',
+        x: 65,
+        y: 62,
+        title: 'Saddle Leather Corner Piping',
+        description: 'Hand-burnished leather piping reinforcing the circumference seam against travel wear.',
+      },
+    ],
+  },
+  {
+    idx: 6,
+    deg: 270,
+    label: 'Left Side Profile',
+    shortLabel: '270° Profile',
+    src: '/images/360/frames/frame-6.webp',
+    hotspots: [
+      {
+        id: 'h6-1',
+        x: 50,
+        y: 38,
+        title: 'Heavy Drop-Forged Hardware',
+        description: 'Solid brass anchor plate riveted through dual leather layers for maximum strap security.',
+      },
+    ],
+  },
+  {
+    idx: 7,
+    deg: 315,
+    label: 'Front-Left Three-Quarter',
+    shortLabel: '315° 3/4 Front',
+    src: '/images/360/frames/frame-7.webp',
+    hotspots: [
+      {
+        id: 'h7-1',
         x: 35,
         y: 45,
         title: 'Detachable Shoulder Strap',
@@ -155,32 +194,125 @@ const FRAMES: FrameConfig[] = [
   },
 ];
 
+const TOP_VIEW_CONFIG: FrameConfig = {
+  idx: 8,
+  deg: 999,
+  label: 'Top-Down Architecture View',
+  shortLabel: 'Top View',
+  src: '/images/360/frames/top-architecture.webp',
+  hotspots: [
+    {
+      id: 'htop-1',
+      x: 50,
+      y: 48,
+      title: 'Dual Heavy Brass Zippers',
+      description: 'Symmetrical antique brass sliders running full length allowing the bag to open wide from either side.',
+    },
+    {
+      id: 'htop-2',
+      x: 50,
+      y: 22,
+      title: 'Ergonomic Rolled Handles',
+      description: 'Comfortably contoured twin carry handles stitched with heavy rot-resistant bonded thread.',
+    },
+  ],
+};
+
 export const Product360ViewerModal: React.FC = () => {
   const { is3DViewerOpen, close3DViewer } = useUIStore();
   const { addItem } = useCartStore();
 
-  const [currentFrame, setCurrentFrame] = useState(0);
-  const [isAutoSpinning, setIsAutoSpinning] = useState(true);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isZoomMode, setIsZoomMode] = useState(false);
-  const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
+  // Rotational state: angle is a continuous float from 0 to 360
+  const [angle, setAngle] = useState<number>(0);
+  const [isAutoSpinning, setIsAutoSpinning] = useState<boolean>(true);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [isTopView, setIsTopView] = useState<boolean>(false);
+  const [isZoomMode, setIsZoomMode] = useState<boolean>(false);
+  const [zoomPos, setZoomPos] = useState<{ x: number; y: number }>({ x: 50, y: 50 });
+
+  // 3D Spatial Tilt state (Pitch & Yaw)
+  const [tilt, setTilt] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [activeHotspotId, setActiveHotspotId] = useState<string | null>(null);
-  const [addedToast, setAddedToast] = useState(false);
+  const [addedToast, setAddedToast] = useState<boolean>(false);
 
-  const dragStartX = useRef<number>(0);
-  const dragStartFrame = useRef<number>(0);
+  // Turntable physics refs
+  const angleRef = useRef<number>(0);
+  const velocityRef = useRef<number>(0);
+  const isDraggingRef = useRef<boolean>(false);
+  const isAutoSpinningRef = useRef<boolean>(true);
+  const isTopViewRef = useRef<boolean>(false);
+  const isZoomModeRef = useRef<boolean>(false);
+  const lastPointerXRef = useRef<number>(0);
+  const lastPointerTimeRef = useRef<number>(0);
+
   const turntableRef = useRef<HTMLDivElement>(null);
-  const totalFrames = FRAMES.length;
+  const animFrameIdRef = useRef<number | null>(null);
 
-  // Preload all 6 images immediately into browser cache
+  const totalTurntableFrames = TURNTABLE_FRAMES.length; // 8
+
+  // Synchronize refs with state
   useEffect(() => {
-    FRAMES.forEach(f => {
+    isAutoSpinningRef.current = isAutoSpinning;
+  }, [isAutoSpinning]);
+
+  useEffect(() => {
+    isTopViewRef.current = isTopView;
+  }, [isTopView]);
+
+  useEffect(() => {
+    isZoomModeRef.current = isZoomMode;
+  }, [isZoomMode]);
+
+  // Preload all 8 turntable frames + top view immediately into browser cache
+  useEffect(() => {
+    TURNTABLE_FRAMES.forEach(f => {
       const img = new window.Image();
       img.src = f.src;
     });
+    const topImg = new window.Image();
+    topImg.src = TOP_VIEW_CONFIG.src;
   }, []);
 
-  // Keyboard navigation (Esc to close, Left/Right to spin, Space to toggle auto-spin)
+  // 60FPS Continuous Turntable Physics & Inertia Engine
+  useEffect(() => {
+    if (!is3DViewerOpen) return;
+
+    let lastTimestamp = performance.now();
+
+    const renderLoop = (timestamp: number) => {
+      const deltaMs = Math.min(32, timestamp - lastTimestamp);
+      lastTimestamp = timestamp;
+
+      if (!isTopViewRef.current && !isZoomModeRef.current) {
+        if (isDraggingRef.current) {
+          // While dragging, velocity is tracked in pointer move
+        } else if (Math.abs(velocityRef.current) > 0.02) {
+          // Inertial momentum glide with smooth exponential decay
+          angleRef.current = (angleRef.current + velocityRef.current) % 360;
+          if (angleRef.current < 0) angleRef.current += 360;
+          velocityRef.current *= 0.94; // friction
+          setAngle(angleRef.current);
+        } else if (isAutoSpinningRef.current) {
+          // Silky continuous 60fps auto-rotation (approx. 0.35 deg per frame)
+          const spinStep = 0.32 * (deltaMs / 16.66);
+          angleRef.current = (angleRef.current + spinStep) % 360;
+          setAngle(angleRef.current);
+        }
+      }
+
+      animFrameIdRef.current = requestAnimationFrame(renderLoop);
+    };
+
+    animFrameIdRef.current = requestAnimationFrame(renderLoop);
+
+    return () => {
+      if (animFrameIdRef.current) {
+        cancelAnimationFrame(animFrameIdRef.current);
+      }
+    };
+  }, [is3DViewerOpen]);
+
+  // Keyboard navigation
   useEffect(() => {
     if (!is3DViewerOpen) return;
 
@@ -189,10 +321,14 @@ export const Product360ViewerModal: React.FC = () => {
         close3DViewer();
       } else if (e.key === 'ArrowRight') {
         setIsAutoSpinning(false);
-        setCurrentFrame(prev => (prev + 1) % totalFrames);
+        setIsTopView(false);
+        angleRef.current = (angleRef.current + 45) % 360;
+        setAngle(angleRef.current);
       } else if (e.key === 'ArrowLeft') {
         setIsAutoSpinning(false);
-        setCurrentFrame(prev => (prev - 1 + totalFrames) % totalFrames);
+        setIsTopView(false);
+        angleRef.current = (angleRef.current - 45 + 360) % 360;
+        setAngle(angleRef.current);
       } else if (e.key === ' ') {
         e.preventDefault();
         setIsAutoSpinning(prev => !prev);
@@ -201,71 +337,112 @@ export const Product360ViewerModal: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [is3DViewerOpen, close3DViewer, totalFrames]);
+  }, [is3DViewerOpen, close3DViewer]);
 
-  // Lock background scroll when open
+  // Body scroll lock
   useEffect(() => {
     if (is3DViewerOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
       setIsAutoSpinning(true);
+      setIsTopView(false);
       setIsZoomMode(false);
       setActiveHotspotId(null);
+      setTilt({ x: 0, y: 0 });
+      velocityRef.current = 0;
     }
     return () => {
       document.body.style.overflow = '';
     };
   }, [is3DViewerOpen]);
 
-  // Smooth Auto-Spin Turntable Loop
-  useEffect(() => {
-    if (!is3DViewerOpen || !isAutoSpinning || isDragging || isZoomMode) return;
+  // Pointer drag gestures with sub-pixel resolution and momentum
+  const handlePointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      if (isZoomMode) return;
+      setIsDragging(true);
+      isDraggingRef.current = true;
+      setIsAutoSpinning(false);
+      velocityRef.current = 0;
 
-    const interval = setInterval(() => {
-      setCurrentFrame(prev => (prev + 1) % totalFrames);
-    }, 1800);
+      lastPointerXRef.current = e.clientX;
+      lastPointerTimeRef.current = performance.now();
 
-    return () => clearInterval(interval);
-  }, [is3DViewerOpen, isAutoSpinning, isDragging, isZoomMode, totalFrames]);
-
-  // Pointer drag gestures (mouse + touch)
-  const handlePointerDown = useCallback((e: React.PointerEvent) => {
-    if (isZoomMode) return;
-    setIsDragging(true);
-    setIsAutoSpinning(false);
-    dragStartX.current = e.clientX;
-    dragStartFrame.current = currentFrame;
-    if (turntableRef.current) {
-      turntableRef.current.setPointerCapture(e.pointerId);
-    }
-  }, [currentFrame, isZoomMode]);
-
-  const handlePointerMove = useCallback((e: React.PointerEvent) => {
-    if (isZoomMode && turntableRef.current) {
-      const rect = turntableRef.current.getBoundingClientRect();
-      const x = Math.min(100, Math.max(0, ((e.clientX - rect.left) / rect.width) * 100));
-      const y = Math.min(100, Math.max(0, ((e.clientY - rect.top) / rect.height) * 100));
-      setZoomPos({ x, y });
-      return;
-    }
-
-    if (!isDragging) return;
-    const deltaX = e.clientX - dragStartX.current;
-    // Every 45px of drag moves one frame
-    const frameOffset = Math.round(deltaX / 45);
-    const newFrame = (dragStartFrame.current - frameOffset) % totalFrames;
-    setCurrentFrame(newFrame >= 0 ? newFrame : newFrame + totalFrames);
-  }, [isDragging, isZoomMode, totalFrames]);
-
-  const handlePointerUp = useCallback((e: React.PointerEvent) => {
-    if (isDragging) {
-      setIsDragging(false);
-      if (turntableRef.current && turntableRef.current.hasPointerCapture(e.pointerId)) {
-        turntableRef.current.releasePointerCapture(e.pointerId);
+      if (turntableRef.current) {
+        turntableRef.current.setPointerCapture(e.pointerId);
       }
+    },
+    [isZoomMode]
+  );
+
+  const handlePointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (!turntableRef.current) return;
+
+      const rect = turntableRef.current.getBoundingClientRect();
+      const normX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      const normY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+
+      if (isZoomMode) {
+        const x = Math.min(100, Math.max(0, ((e.clientX - rect.left) / rect.width) * 100));
+        const y = Math.min(100, Math.max(0, ((e.clientY - rect.top) / rect.height) * 100));
+        setZoomPos({ x, y });
+        return;
+      }
+
+      // 3D Spatial Tilt response (subtle pitch & yaw)
+      if (!isTopView) {
+        setTilt({
+          x: Math.min(8, Math.max(-8, normY * -8)), // pitch
+          y: Math.min(12, Math.max(-12, normX * 12)), // yaw
+        });
+      }
+
+      if (!isDraggingRef.current) return;
+
+      const deltaX = e.clientX - lastPointerXRef.current;
+      const now = performance.now();
+      const dt = Math.max(1, now - lastPointerTimeRef.current);
+
+      // Sensitivity: 360 degrees across 750px of drag
+      const degreesPerPixel = 360 / 750;
+      const angleDelta = -deltaX * degreesPerPixel;
+
+      angleRef.current = (angleRef.current + angleDelta) % 360;
+      if (angleRef.current < 0) angleRef.current += 360;
+      setAngle(angleRef.current);
+
+      // Velocity calculation (degrees per frame)
+      velocityRef.current = (angleDelta / dt) * 16.66;
+      velocityRef.current = Math.min(15, Math.max(-15, velocityRef.current));
+
+      lastPointerXRef.current = e.clientX;
+      lastPointerTimeRef.current = now;
+    },
+    [isZoomMode, isTopView]
+  );
+
+  const handlePointerUp = useCallback(
+    (e: React.PointerEvent) => {
+      if (isDraggingRef.current) {
+        setIsDragging(false);
+        isDraggingRef.current = false;
+        if (turntableRef.current && turntableRef.current.hasPointerCapture(e.pointerId)) {
+          turntableRef.current.releasePointerCapture(e.pointerId);
+        }
+      }
+    },
+    []
+  );
+
+  const handlePointerLeave = useCallback(() => {
+    setTilt({ x: 0, y: 0 });
+    if (isDraggingRef.current) {
+      setIsDragging(false);
+      isDraggingRef.current = false;
     }
-  }, [isDragging]);
+  }, []);
 
   const handleAddToCart = () => {
     addItem({
@@ -273,14 +450,27 @@ export const Product360ViewerModal: React.FC = () => {
       title: 'Handmade Cowhide & Harness Leather Travel Duffle',
       handle: 'handmade-cowhide-harness-leather-travel-duffle',
       price: 145,
-      image: FRAMES[0].src,
+      image: TURNTABLE_FRAMES[0].src,
       colorName: 'Black & Ivory Cowhide / Tan Harness Leather',
     });
     setAddedToast(true);
     setTimeout(() => setAddedToast(false), 2400);
   };
 
-  const currentConfig = FRAMES[currentFrame];
+  // Active display index (nearest 45-degree angle)
+  const nearestIdx = Math.round(angle / 45) % totalTurntableFrames;
+  const currentConfig = isTopView ? TOP_VIEW_CONFIG : TURNTABLE_FRAMES[nearestIdx];
+
+  // Dynamic 3D perspective micro-yaw between angles (-10deg to +10deg)
+  const subAngleYaw = ((angle % 45) - 22.5) * 0.45;
+
+  // Dynamic Specular Light Glint Position (sweeps with angle and tilt)
+  const lightX = 50 + 40 * Math.sin((angle * Math.PI) / 180) + tilt.y * 1.5;
+  const lightY = 35 + tilt.x * 2.0;
+
+  // Dynamic Ground Shadow aspect scale (wide on front/back, narrow on profile)
+  const shadowWidthPct = 58 + 26 * Math.abs(Math.cos((angle * Math.PI) / 180));
+  const shadowOpacity = 0.75 - 0.15 * Math.abs(Math.sin((angle * Math.PI) / 180));
 
   return (
     <AnimatePresence>
@@ -307,7 +497,7 @@ export const Product360ViewerModal: React.FC = () => {
               <div className="flex items-center space-x-3">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cognac/20 border border-cognac/40 text-[10px] font-sans font-semibold tracking-wider text-[#D9A066] uppercase">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D9A066] animate-pulse" />
-                  Interactive 360° Studio
+                  Interactive 3D Studio
                 </span>
                 <span className="hidden sm:inline-block text-xs text-ivory/60 font-sans tracking-wide">
                   Signature Cowhide Weekender Duffle
@@ -332,11 +522,11 @@ export const Product360ViewerModal: React.FC = () => {
               {/* 360 Turntable Interactive Stage */}
               <div className="relative flex-1 flex flex-col justify-between p-4 sm:p-6 min-h-[380px] sm:min-h-[460px] lg:min-h-[520px] select-none bg-[radial-gradient(ellipse_at_center,rgba(40,30,24,0.7)_0%,rgba(14,11,9,0.95)_100%)]">
                 {/* Turntable Top Controls Bar */}
-                <div className="relative z-20 flex items-center justify-between gap-2">
+                <div className="relative z-20 flex items-center justify-between gap-2 flex-wrap">
                   {/* Current Angle Badge & Degree Dial */}
                   <div className="flex items-center space-x-2 bg-espresso/70 backdrop-blur-md border border-ivory/15 rounded-full px-3 py-1 text-xs">
                     <span className="text-[#D9A066] font-mono font-bold tracking-tight">
-                      {currentConfig.deg}°
+                      {isTopView ? '180° Aerial' : `${Math.round(angle)}°`}
                     </span>
                     <span className="text-ivory/30">|</span>
                     <span className="text-ivory/80 text-[11px] font-sans">
@@ -344,18 +534,22 @@ export const Product360ViewerModal: React.FC = () => {
                     </span>
                   </div>
 
-                  {/* Actions: Auto-Spin Toggle & Zoom Magnifier Toggle */}
+                  {/* Actions: Auto-Spin Toggle, Top Architecture View, & Zoom Magnifier Toggle */}
                   <div className="flex items-center space-x-2">
+                    {/* Auto-Spin Toggle */}
                     <button
-                      onClick={() => setIsAutoSpinning(prev => !prev)}
+                      onClick={() => {
+                        setIsTopView(false);
+                        setIsAutoSpinning(prev => !prev);
+                      }}
                       className={`px-3 py-1 rounded-full text-xs font-sans tracking-wide border transition-all cursor-pointer flex items-center gap-1.5 ${
-                        isAutoSpinning
+                        isAutoSpinning && !isTopView
                           ? 'bg-[#D9A066]/20 border-[#D9A066] text-[#D9A066]'
                           : 'bg-ivory/10 border-ivory/20 text-ivory/70 hover:text-ivory'
                       }`}
                       aria-label={isAutoSpinning ? 'Pause 360 rotation' : 'Auto rotate 360'}
                     >
-                      {isAutoSpinning ? (
+                      {isAutoSpinning && !isTopView ? (
                         <>
                           <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                             <rect x="6" y="4" width="4" height="16" />
@@ -373,6 +567,29 @@ export const Product360ViewerModal: React.FC = () => {
                       )}
                     </button>
 
+                    {/* Top Architecture Toggle */}
+                    <button
+                      onClick={() => {
+                        setIsTopView(prev => !prev);
+                        setIsAutoSpinning(false);
+                        setIsZoomMode(false);
+                      }}
+                      className={`px-3 py-1 rounded-full text-xs font-sans tracking-wide border transition-all cursor-pointer flex items-center gap-1.5 ${
+                        isTopView
+                          ? 'bg-[#D9A066] text-ink font-semibold border-[#D9A066]'
+                          : 'bg-ivory/10 border-ivory/20 text-ivory/70 hover:text-ivory'
+                      }`}
+                      aria-label="View Top Architecture"
+                    >
+                      <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                        <polyline points="2 17 12 22 22 17" />
+                        <polyline points="2 12 12 17 22 12" />
+                      </svg>
+                      <span>Top View</span>
+                    </button>
+
+                    {/* Zoom Inspector Toggle */}
                     <button
                       onClick={() => {
                         setIsZoomMode(prev => !prev);
@@ -396,46 +613,88 @@ export const Product360ViewerModal: React.FC = () => {
                   </div>
                 </div>
 
-                {/* The Interactive Turntable Viewport */}
+                {/* The Interactive 3D Turntable Viewport */}
                 <div
                   ref={turntableRef}
                   onPointerDown={handlePointerDown}
                   onPointerMove={handlePointerMove}
                   onPointerUp={handlePointerUp}
-                  onPointerLeave={handlePointerUp}
+                  onPointerLeave={handlePointerLeave}
                   className={`relative flex-1 w-full flex items-center justify-center my-2 cursor-grab active:cursor-grabbing overflow-hidden rounded-2xl ${
                     isZoomMode ? 'cursor-crosshair' : ''
                   }`}
                   style={{ touchAction: 'none' }}
                 >
-                  {/* Studio Pedestal Ambient Cognac Glow & Ground Shadow */}
-                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%] max-w-[560px] h-12 bg-[#D9A066]/15 rounded-full blur-2xl pointer-events-none" />
-                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[70%] max-w-[460px] h-8 bg-black/70 rounded-full blur-xl pointer-events-none" />
+                  {/* Dynamic Studio Ambient Cognac Glow & Floor Ground Shadow */}
+                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%] max-w-[560px] h-14 bg-[#D9A066]/15 rounded-full blur-2xl pointer-events-none" />
+                  
+                  {/* Dynamic Deforming Ground Shadow */}
+                  <div
+                    className="absolute bottom-10 left-1/2 -translate-x-1/2 max-w-[480px] h-8 bg-black/85 rounded-full blur-xl pointer-events-none transition-all duration-100 ease-out"
+                    style={{
+                      width: `${shadowWidthPct}%`,
+                      opacity: shadowOpacity,
+                      transform: `translateX(-50%) scale(${1 + tilt.y * 0.01})`,
+                    }}
+                  />
 
-                  {/* Preloaded Layered Frames with Instantaneous Cross-Frame Render */}
-                  <div className="relative w-full max-w-[620px] aspect-[4/3] flex items-center justify-center">
-                    {FRAMES.map((f, i) => (
-                      <div
-                        key={f.idx}
-                        className="absolute inset-0 flex items-center justify-center transition-opacity duration-150 ease-out pointer-events-none"
-                        style={{
-                          opacity: i === currentFrame ? 1 : 0,
-                          transform: isZoomMode
-                            ? `scale(2.2) translate(${50 - zoomPos.x}%, ${50 - zoomPos.y}%)`
-                            : 'scale(1)',
-                          transition: isZoomMode ? 'transform 0.1s ease-out, opacity 0.15s ease-out' : 'opacity 0.15s ease-out',
-                        }}
-                      >
+                  {/* 3D Volumetric Canvas & Frame Container */}
+                  <div
+                    className="relative w-full max-w-[620px] aspect-[4/3] flex items-center justify-center transition-transform duration-100 ease-out"
+                    style={{
+                      perspective: '1200px',
+                      transform: isZoomMode
+                        ? `scale(2.2) translate(${50 - zoomPos.x}%, ${50 - zoomPos.y}%)`
+                        : `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y + (isTopView ? 0 : subAngleYaw)}deg)`,
+                      transformStyle: 'preserve-3d',
+                    }}
+                  >
+                    {/* Top Architecture Single Frame (when in Top View Mode) */}
+                    {isTopView ? (
+                      <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-200 pointer-events-none">
                         <Image
-                          src={f.src}
-                          alt={`Adehawk Duffle Bag - ${f.label}`}
+                          src={TOP_VIEW_CONFIG.src}
+                          alt="Adehawk Duffle Bag - Top View"
                           fill
                           sizes="(max-width: 1024px) 100vw, 620px"
                           priority
-                          className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]"
+                          className="object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.65)]"
                         />
                       </div>
-                    ))}
+                    ) : (
+                      /* 360 Turntable Active Frame with 3D Spatial Transform */
+                      TURNTABLE_FRAMES.map((f, i) => {
+                        if (i !== nearestIdx) return null;
+
+                        return (
+                          <div
+                            key={f.idx}
+                            className="absolute inset-0 flex items-center justify-center pointer-events-none will-change-[transform]"
+                          >
+                            <Image
+                              src={f.src}
+                              alt={`Adehawk Duffle Bag - ${f.label}`}
+                              fill
+                              sizes="(max-width: 1024px) 100vw, 620px"
+                              priority
+                              className="object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.65)]"
+                            />
+                          </div>
+                        );
+                      })
+                    )}
+
+                    {/* Dynamic Studio Specular Lighting Glint Overlay */}
+                    {!isZoomMode && (
+                      <div
+                        className="absolute inset-0 pointer-events-none rounded-full transition-opacity duration-300"
+                        style={{
+                          background: `radial-gradient(circle at ${lightX}% ${lightY}%, rgba(255,245,225,0.35) 0%, rgba(217,160,102,0.12) 32%, transparent 64%)`,
+                          mixBlendMode: 'screen',
+                          opacity: isTopView ? 0.3 : 0.6,
+                        }}
+                      />
+                    )}
 
                     {/* Interactive Craftsmanship Hotspots (visible when not zoomed) */}
                     {!isZoomMode &&
@@ -492,13 +751,13 @@ export const Product360ViewerModal: React.FC = () => {
                       })}
                   </div>
 
-                  {/* Drag Gesture Hint (fades out after first interaction) */}
+                  {/* Drag Gesture Hint */}
                   {!isZoomMode && (
                     <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex items-center gap-2 px-3 py-1 rounded-full bg-espresso/60 backdrop-blur-md border border-ivory/10 text-[11px] text-ivory/60 font-sans">
                       <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                         <polyline points="15 18 9 12 15 6" />
                       </svg>
-                      <span>Drag to spin 360°</span>
+                      <span>Drag to spin 360° · Move cursor to tilt 3D</span>
                       <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
@@ -513,16 +772,19 @@ export const Product360ViewerModal: React.FC = () => {
                   )}
                 </div>
 
-                {/* Turntable Quick Navigation: 6 Angle Pills */}
+                {/* Turntable Quick Navigation: 8 Angle Pills + Top Architecture */}
                 <div className="relative z-20 flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap pt-2 border-t border-ivory/10">
-                  {FRAMES.map((f, i) => {
-                    const isActive = i === currentFrame;
+                  {TURNTABLE_FRAMES.map((f, i) => {
+                    const isActive = !isTopView && nearestIdx === i;
                     return (
                       <button
                         key={f.idx}
                         onClick={() => {
+                          setIsTopView(false);
                           setIsAutoSpinning(false);
-                          setCurrentFrame(i);
+                          velocityRef.current = 0;
+                          angleRef.current = f.deg;
+                          setAngle(f.deg);
                         }}
                         className={`px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-sans transition-all cursor-pointer ${
                           isActive
@@ -534,6 +796,23 @@ export const Product360ViewerModal: React.FC = () => {
                       </button>
                     );
                   })}
+
+                  {/* Top View Pill */}
+                  <button
+                    onClick={() => {
+                      setIsTopView(true);
+                      setIsAutoSpinning(false);
+                      setIsZoomMode(false);
+                      velocityRef.current = 0;
+                    }}
+                    className={`px-2.5 sm:px-3 py-1 rounded-full text-[11px] font-sans transition-all cursor-pointer ${
+                      isTopView
+                        ? 'bg-[#D9A066] text-ink font-bold shadow-[0_0_15px_rgba(217,160,102,0.4)] scale-105'
+                        : 'bg-ivory/5 border border-ivory/10 text-ivory/60 hover:text-ivory hover:border-ivory/30'
+                    }`}
+                  >
+                    Top Aerial
+                  </button>
                 </div>
               </div>
 
