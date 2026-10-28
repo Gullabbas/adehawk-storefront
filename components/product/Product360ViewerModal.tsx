@@ -405,8 +405,8 @@ export const Product360ViewerModal: React.FC = () => {
       const now = performance.now();
       const dt = Math.max(1, now - lastPointerTimeRef.current);
 
-      // Sensitivity: 360 degrees across 750px of drag
-      const degreesPerPixel = 360 / 750;
+      // Sensitivity: 360 degrees across 720px of drag
+      const degreesPerPixel = 360 / 720;
       const angleDelta = -deltaX * degreesPerPixel;
 
       angleRef.current = (angleRef.current + angleDelta) % 360;
@@ -457,12 +457,31 @@ export const Product360ViewerModal: React.FC = () => {
     setTimeout(() => setAddedToast(false), 2400);
   };
 
-  // Active display index (nearest 45-degree angle)
-  const nearestIdx = Math.round(angle / 45) % totalTurntableFrames;
-  const currentConfig = isTopView ? TOP_VIEW_CONFIG : TURNTABLE_FRAMES[nearestIdx];
+  // Active frame calculation:
+  // Each frame covers 45 degrees.
+  // To avoid any sudden jumps or ghosting, we compute the primary active frame
+  // and a subtle cross-dissolve only in a narrow 6-degree transition band around the boundary.
+  const normAngle = ((angle % 360) + 360) % 360;
+  const sector = normAngle / 45; // 0.0 to 8.0
+  const baseIdx = Math.floor(sector) % totalTurntableFrames;
+  const nextIdx = (baseIdx + 1) % totalTurntableFrames;
+  const sectorFrac = sector - Math.floor(sector); // 0.0 to 1.0
 
-  // Dynamic 3D perspective micro-yaw between angles (-10deg to +10deg)
-  const subAngleYaw = ((angle % 45) - 22.5) * 0.45;
+  // Transition band: 0.85 to 1.0 (last 6.75 degrees of each 45-degree sector)
+  let primaryIdx = baseIdx;
+  let secondaryIdx = nextIdx;
+  let blendOpacity = 0; // opacity of secondary frame
+
+  if (sectorFrac > 0.82) {
+    // Smooth cosine dissolve between outgoing and incoming frame
+    const t = (sectorFrac - 0.82) / 0.18; // 0 to 1
+    blendOpacity = 0.5 * (1 - Math.cos(t * Math.PI));
+  } else {
+    blendOpacity = 0;
+  }
+
+  const nearestIdx = Math.round(sector) % totalTurntableFrames;
+  const currentConfig = isTopView ? TOP_VIEW_CONFIG : TURNTABLE_FRAMES[nearestIdx];
 
   // Dynamic Specular Light Glint Position (sweeps with angle and tilt)
   const lightX = 50 + 40 * Math.sin((angle * Math.PI) / 180) + tilt.y * 1.5;
@@ -625,9 +644,48 @@ export const Product360ViewerModal: React.FC = () => {
                   }`}
                   style={{ touchAction: 'none' }}
                 >
-                  {/* Dynamic Studio Ambient Cognac Glow & Floor Ground Shadow */}
+                  {/* Studio Ambient Cognac Glow */}
                   <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%] max-w-[560px] h-14 bg-[#D9A066]/15 rounded-full blur-2xl pointer-events-none" />
-                  
+
+                  {/* 3D Perspective Turntable Platter on Floor */}
+                  <div
+                    className="absolute bottom-5 left-1/2 -translate-x-1/2 pointer-events-none transition-transform duration-100 ease-out"
+                    style={{
+                      width: '460px',
+                      height: '130px',
+                      perspective: '800px',
+                    }}
+                  >
+                    {/* Rotating 3D Platter Disc */}
+                    <div
+                      className="relative w-full h-full rounded-[50%] border border-[#D9A066]/35"
+                      style={{
+                        background: 'radial-gradient(ellipse at center, rgba(50,38,30,0.85) 0%, rgba(20,15,12,0.95) 70%, rgba(10,8,6,1) 100%)',
+                        boxShadow: 'inset 0 2px 10px rgba(217,160,102,0.35), 0 20px 45px rgba(0,0,0,0.95)',
+                        transform: `rotateX(64deg) rotateZ(${isTopView ? 0 : -angle}deg)`,
+                        transformStyle: 'preserve-3d',
+                      }}
+                    >
+                      {/* Concentric Brushed Brass Rings */}
+                      <div className="absolute inset-3 rounded-[50%] border border-[#D9A066]/20 border-dashed pointer-events-none" />
+                      <div className="absolute inset-7 rounded-[50%] border border-[#D9A066]/10 pointer-events-none" />
+
+                      {/* 8 Cardinal Degree Indicator Ticks on Turntable Platter */}
+                      {[0, 45, 90, 135, 180, 225, 270, 315].map(deg => {
+                        const rad = (deg * Math.PI) / 180;
+                        const x = 50 + 45 * Math.sin(rad);
+                        const y = 50 - 45 * Math.cos(rad);
+                        return (
+                          <div
+                            key={deg}
+                            className="absolute w-2 h-2 rounded-full bg-[#D9A066] -translate-x-1/2 -translate-y-1/2 shadow-[0_0_6px_#D9A066]"
+                            style={{ left: `${x}%`, top: `${y}%` }}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+
                   {/* Dynamic Deforming Ground Shadow */}
                   <div
                     className="absolute bottom-10 left-1/2 -translate-x-1/2 max-w-[480px] h-8 bg-black/85 rounded-full blur-xl pointer-events-none transition-all duration-100 ease-out"
@@ -638,14 +696,14 @@ export const Product360ViewerModal: React.FC = () => {
                     }}
                   />
 
-                  {/* 3D Volumetric Canvas & Frame Container */}
+                  {/* 3D Volumetric Product Container */}
                   <div
                     className="relative w-full max-w-[620px] aspect-[4/3] flex items-center justify-center transition-transform duration-100 ease-out"
                     style={{
                       perspective: '1200px',
                       transform: isZoomMode
                         ? `scale(2.2) translate(${50 - zoomPos.x}%, ${50 - zoomPos.y}%)`
-                        : `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y + (isTopView ? 0 : subAngleYaw)}deg)`,
+                        : `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
                       transformStyle: 'preserve-3d',
                     }}
                   >
@@ -662,26 +720,46 @@ export const Product360ViewerModal: React.FC = () => {
                         />
                       </div>
                     ) : (
-                      /* 360 Turntable Active Frame with 3D Spatial Transform */
-                      TURNTABLE_FRAMES.map((f, i) => {
-                        if (i !== nearestIdx) return null;
+                      /* 360 Turntable Frame Rendering with Soft Dissolve Boundary */
+                      <>
+                        {/* Primary Frame */}
+                        <div
+                          key={`primary-${primaryIdx}`}
+                          className="absolute inset-0 flex items-center justify-center pointer-events-none will-change-[opacity]"
+                          style={{
+                            opacity: 1 - blendOpacity,
+                          }}
+                        >
+                          <Image
+                            src={TURNTABLE_FRAMES[primaryIdx].src}
+                            alt={`Adehawk Duffle Bag - ${TURNTABLE_FRAMES[primaryIdx].label}`}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 620px"
+                            priority
+                            className="object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.65)]"
+                          />
+                        </div>
 
-                        return (
+                        {/* Secondary Frame (only visible during the soft boundary dissolve) */}
+                        {blendOpacity > 0 && (
                           <div
-                            key={f.idx}
-                            className="absolute inset-0 flex items-center justify-center pointer-events-none will-change-[transform]"
+                            key={`secondary-${secondaryIdx}`}
+                            className="absolute inset-0 flex items-center justify-center pointer-events-none will-change-[opacity]"
+                            style={{
+                              opacity: blendOpacity,
+                            }}
                           >
                             <Image
-                              src={f.src}
-                              alt={`Adehawk Duffle Bag - ${f.label}`}
+                              src={TURNTABLE_FRAMES[secondaryIdx].src}
+                              alt={`Adehawk Duffle Bag - ${TURNTABLE_FRAMES[secondaryIdx].label}`}
                               fill
                               sizes="(max-width: 1024px) 100vw, 620px"
                               priority
                               className="object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.65)]"
                             />
                           </div>
-                        );
-                      })
+                        )}
+                      </>
                     )}
 
                     {/* Dynamic Studio Specular Lighting Glint Overlay */}

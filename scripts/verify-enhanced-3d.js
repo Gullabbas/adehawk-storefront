@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const BASE_URL = 'http://127.0.0.1:3003';
+const BASE_URL = 'http://127.0.0.1:3004';
 const OUT_DIR = path.join(__dirname, '..', 'docs', 'qa_3d_viewer');
 
 async function verifyEnhanced3D() {
